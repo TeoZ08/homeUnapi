@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conhecendo o Mouse - UnAPI UFMS</title>
+    <style>
+      :root {
+        --unapi-fundo: #fff8dc;
+        --unapi-roxo: #542a58;
+        --unapi-amarelo: #ddb622;
+        --unapi-amarelo-hover: #e6c543;
+        --unapi-sombra: 0 8px 20px rgba(0, 0, 0, 0.15);
+        --unapi-borda: 20px;
+        --unapi-fonte: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        --game-scale: 1;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        background-color: var(--unapi-fundo);
+        background-image: url("../img/background-unapi.svg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: var(--unapi-roxo);
+        font-family: var(--unapi-fonte);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        user-select: none;
+        padding: 20px;
+      }
+
+      .btn-voltar-home {
+        position: fixed;
+        top: 18px;
+        left: 18px;
+        z-index: 999;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 16px;
+        border-radius: 12px;
+        background: var(--unapi-roxo);
+        color: var(--unapi-fundo);
+        text-decoration: none;
+        font-family: var(--unapi-fonte);
+        font-size: 15px;
+        font-weight: 800;
+        box-shadow: var(--unapi-sombra);
+        border: 1px solid rgba(221, 182, 34, 0.45);
+        transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+      }
+
+      .btn-voltar-home:hover {
+        background: #6b3b6f;
+        color: var(--unapi-amarelo);
+        transform: translateY(-2px);
+      }
+
+      .header-panel {
+        background-color: var(--unapi-roxo);
+        padding: 20px 40px;
+        border-radius: var(--unapi-borda);
+        box-shadow: var(--unapi-sombra);
+        z-index: 50;
+        min-width: 500px;
+        margin-bottom: 20px;
+        border: none;
+      }
+
+      .header-panel h1 {
+        color: var(--unapi-amarelo);
+        font-size: 26px;
+        margin-bottom: 15px;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .instructions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-size: 16px;
+        color: var(--unapi-fundo);
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 15px 25px;
+        border-radius: 12px;
+        text-align: left;
+      }
+
+      .instructions span { line-height: 1.4; }
+      .instructions strong { color: var(--unapi-amarelo); margin-right: 5px; }
+
+      .game-scale-area {
+        width: 100%;
+        max-width: 1100px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        overflow: visible;
+        position: relative;
+        z-index: 2;
+      }
+
+      #game-board {
+        width: 1100px;
+        height: 700px;
+        position: relative;
+        touch-action: none;
+        transform: scale(var(--game-scale));
+        transform-origin: top center;
+        flex: 0 0 auto;
+      }
+
+      .trunk-img {
+        position: absolute;
+        bottom: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 420px;
+        width: auto;
+        pointer-events: none;
+        filter: drop-shadow(0 15px 15px rgba(0, 0, 0, 0.1));
+      }
+
+      .leaves-base {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 850px;
+        height: 95px;
+        background: rgba(0, 0, 0, 0.78);
+        border: 2px solid rgba(255, 248, 220, 0.35);
+        border-radius: 18px;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+        z-index: 1;
+      }
+
+      .drop-zone {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        border: 3px dashed rgba(84, 42, 88, 0.4);
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        transition: all 0.3s ease;
+      }
+
+      .drop-zone.hover {
+        border-color: #4caf50;
+        background-color: rgba(76, 175, 80, 0.2);
+        transform: scale(1.15);
+      }
+
+      .drop-zone.filled { opacity: 0; }
+
+      .leaf {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        cursor: grab;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        transition: transform 0.1s, background-color 0.3s, left 0.15s, top 0.15s;
+        z-index: 10;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+      }
+
+      .leaf:active { cursor: grabbing; transform: scale(1.15); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); }
+      .leaf.purple { background-color: var(--unapi-roxo); }
+      .leaf.yellow { background-color: var(--unapi-amarelo); }
+      .leaf.snapped { cursor: default; box-shadow: none; }
+
+      #success-message {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--unapi-fundo);
+        padding: 50px 70px;
+        border-radius: var(--unapi-borda);
+        border: 1px solid rgba(84, 42, 88, 0.2);
+        text-align: center;
+        z-index: 100;
+        box-shadow: var(--unapi-sombra);
+      }
+
+      #success-message h2 { color: #4caf50; font-size: 42px; margin: 0 0 15px 0; }
+      #success-message p { font-size: 22px; color: var(--unapi-roxo); }
+
+      .btn-restart {
+        font-size: 20px;
+        padding: 12px 35px;
+        background-color: var(--unapi-roxo);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+        margin-top: 25px;
+        font-weight: bold;
+      }
+
+      .btn-restart:hover { background-color: rgba(84, 42, 88, 0.85); transform: translateY(-2px); }
+
+      #zone1 { top: 30px; left: 240px; }
+      #zone2 { top: 100px; left: 360px; }
+      #zone3 { top: 30px; left: 480px; }
+      #zone4 { top: 100px; left: 620px; }
+      #zone5 { top: 30px; left: 740px; }
+      #zone6 { top: 100px; left: 860px; }
+
+      #leaf1 { top: 625px; left: 180px; }
+      #leaf2 { top: 625px; left: 320px; }
+      #leaf3 { top: 625px; left: 460px; }
+      #leaf4 { top: 625px; left: 600px; }
+      #leaf5 { top: 625px; left: 740px; }
+      #leaf6 { top: 625px; left: 880px; }
+
+      .logos-footer {
+        width: min(100%, 1100px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(14px, 2vw, 28px);
+        padding: 12px 18px;
+        margin-top: 12px;
+        background: rgba(255, 248, 220, 0.86);
+        border: 1px solid rgba(84, 42, 88, 0.16);
+        border-radius: 16px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        z-index: 60;
+        position: relative;
+        flex-wrap: wrap;
+      }
+
+      .logos-footer img { max-height: clamp(28px, 4vh, 44px); max-width: 150px; width: auto; object-fit: contain; }
+
+      @media (max-height: 820px) {
+        body { justify-content: flex-start; padding: 12px 16px; }
+        .header-panel { padding: 14px 28px; margin-bottom: 10px; }
+        .header-panel h1 { font-size: 22px; margin-bottom: 10px; }
+        .instructions { font-size: 14px; gap: 6px; padding: 10px 18px; }
+      }
+
+      @media (max-width: 720px) {
+        .btn-voltar-home { top: 10px; left: 10px; padding: 8px 12px; font-size: 13px; }
+      }
+
+      @media (max-width: 680px) {
+        .header-panel { min-width: unset; width: 100%; }
+        .logos-footer { gap: 12px; }
+        .logos-footer img { max-width: 105px; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="btn-voltar-home" href="../">← Home</a>
+
+    <div class="header-panel">
+      <h1>Conhecendo o Mouse</h1>
+      <div class="instructions">
+        <span><strong>Passo 1:</strong> Clique e arraste para encaixar as folhas na árvore.</span>
+        <span><strong>Passo 2:</strong> Use o botão direito do mouse para mudar a cor da folha.</span>
+        <span><strong>Passo 3:</strong> Gire a rodinha do mouse sobre a folha para devolvê-la.</span>
+      </div>
+    </div>
+
+    <div class="game-scale-area">
+      <div id="game-board">
+        <svg class="trunk-img" width="531" height="375" viewBox="0 0 531 375" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Árvore">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M138.337 1.59598C133.716 4.83198 134.508 11.287 141.149 24.505C146.389 34.935 158.715 54.316 167.614 66.119C175.866 77.063 192.908 94.769 201.153 100.965L206.807 105.213L207.984 113.916C211.19 137.618 217.418 162.75 224.019 178.619C230.094 193.222 234.37 198.119 241.046 198.119H244.822L247.317 195.154C252.066 189.51 251.646 182.402 245.392 162.619C240.895 148.396 235.035 123.052 233.031 109.163C229.85 87.112 228.857 65.283 229.613 33.975L230.304 5.332L227.638 2.66599L224.972 0L221.268 0.30899L217.564 0.618988L215.386 3.86298C211.648 9.42898 209.029 29.753 208.916 54.075C208.875 62.899 208.603 70.119 208.312 70.119C206.969 70.119 194.709 59.448 187.428 51.941C174.826 38.95 160.472 21.006 154.58 10.88C148.716 0.800974 143.625 -2.10802 138.337 1.59598ZM454.589 47.439C453.313 48.715 447.723 58.728 442.168 69.689C431.875 89.999 423.397 104.426 417.513 111.646L414.231 115.673L403.866 120.018C389.619 125.989 378.371 132.179 369.169 139.112C343.552 158.416 326.291 188.017 313.77 234.119L310.647 245.619L310.596 254.815L310.545 264.011L313.536 268.315C315.255 270.789 318.434 273.603 321.013 274.933L325.5 277.247L331.543 276.899L337.585 276.551L340.919 274.177C345.443 270.956 347.783 265.148 349.487 252.915C350.276 247.252 352.119 234.069 353.582 223.619C357.664 194.465 361.934 181.765 371.733 169.63C382.773 155.96 403.343 144.183 440.5 130.259C474.545 117.502 492.829 109.191 509.419 98.935C524.83 89.408 531 83.601 531 78.623C531 77.746 529.895 75.924 528.545 74.574C524.848 70.876 521.14 71.385 513.274 76.67C502.318 84.03 480.717 94.455 463 100.933C453.925 104.251 445.681 107.286 444.681 107.676C443.5 108.137 445.03 105.091 449.035 99.003C460.136 82.131 469 61.994 469 53.647C469 46.099 459.864 42.164 454.589 47.439ZM305.562 64.485C301.39 68.908 295.912 78.264 286.746 96.619C274.412 121.318 268.801 138.79 265.872 161.619C264.145 175.075 264.367 206.68 266.38 234.11C268.141 258.111 268.753 269.974 269.854 301.476L270.549 321.334L273.33 323.726L276.112 326.119H280.521H284.93L288.45 323.029L291.97 319.938L294.413 312.204C297.999 300.855 298.877 292.127 300.01 256.619C301.279 216.84 302.32 201.397 306.11 166.119C309.483 134.722 312.805 110.024 318.09 77.043C319.569 67.814 318.895 64.633 315.035 62.637C310.74 60.416 309.097 60.736 305.562 64.485ZM72.625 65.981C69.903 68.989 69.235 73.13 70.182 81.119C72.091 97.229 84.606 127.256 97.688 147.119C106.631 160.696 106.567 160.587 105.117 159.691C104.462 159.286 99.779 157.846 94.713 156.491C66.093 148.838 43.226 135.949 21.917 115.458L10.126 104.119H7.517C4.006 104.119 0 108.275 0 111.919C0 118.537 14.794 136.309 30.652 148.741C57.068 169.45 92.767 182.069 106.5 175.552C110.965 173.433 111.494 170.638 108.422 165.396C105.478 160.372 106.442 159.71 109.903 164.378C111.224 166.161 119.83 175.044 129.027 184.119C149.749 204.567 155.576 213.012 161.85 231.692C166.787 246.39 170.571 285.374 171.549 331.619L172.227 363.619L174.064 366.657C180.155 376.73 197.782 376.45 204.583 366.173C208.219 360.678 208.52 356.062 206.641 334.585C205.777 324.704 204.597 308.294 204.02 298.119C200.253 231.745 196.92 216.342 181.948 196.119C176.13 188.26 171.069 183.346 156 170.92C132.584 151.611 122.012 140.294 109.273 120.897C101.468 109.014 94.483 94.307 89.553 79.379L85.841 68.139L83.286 66.129C80.061 63.592 74.852 63.52 72.625 65.981ZM180.971 169.654C180.271 170.498 179.737 172.573 179.785 174.266L179.873 177.345L187.296 184.982C196.033 193.971 200.862 201.202 204.875 211.305C215.281 237.5 221.465 301.274 217.875 345.365L216.751 359.178L218.465 363.666C219.495 366.363 221.608 369.244 223.761 370.886L227.344 373.619H234.501H241.657L246.578 370.59C252.446 366.978 257.227 360.26 259.555 352.357L261.245 346.619L260.677 329.119C260.082 310.797 256.004 266.043 253.522 250.607C250.464 231.587 244.111 214.618 235.589 202.708C226.347 189.792 209.229 175.46 197.068 170.457C190.541 167.772 182.852 167.388 180.971 169.654Z" fill="black" />
+        </svg>
+
+        <div class="leaves-base"></div>
+        <div class="drop-zone" id="zone1"></div>
+        <div class="drop-zone" id="zone2"></div>
+        <div class="drop-zone" id="zone3"></div>
+        <div class="drop-zone" id="zone4"></div>
+        <div class="drop-zone" id="zone5"></div>
+        <div class="drop-zone" id="zone6"></div>
+        <div class="leaf purple" id="leaf1"></div>
+        <div class="leaf yellow" id="leaf2"></div>
+        <div class="leaf purple" id="leaf3"></div>
+        <div class="leaf yellow" id="leaf4"></div>
+        <div class="leaf purple" id="leaf5"></div>
+        <div class="leaf yellow" id="leaf6"></div>
+        <div id="success-message">
+          <h2>Parabéns!</h2>
+          <p>Você completou a árvore perfeitamente!</p>
+          <button class="btn-restart" id="btn-retry">Jogar Novamente</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="logos-footer" aria-label="Logos institucionais">
+      <img src="../img/ufms.png" alt="UFMS" />
+      <img src="../img/unapi.png" alt="UnAPI" />
+      <img src="../img/gov-federal.png" alt="Governo Federal" />
+      <img src="../img/facom.png" alt="FACOM" />
+      <img src="../img/pet-sistemas.png" alt="PET Sistemas" />
+      <img src="../img/pet-computacao.png" alt="PET Computação" />
+    </footer>
+
+    <script>
+      const board = document.getElementById("game-board");
+      const leaves = [...document.querySelectorAll(".leaf")];
+      const zones = [...document.querySelectorAll(".drop-zone")];
+      const successMessage = document.getElementById("success-message");
+      const retryButton = document.getElementById("btn-retry");
+      const initialPositions = new Map();
+      let draggedLeaf = null;
+      let offsetX = 0;
+      let offsetY = 0;
+
+      leaves.forEach((leaf) => {
+        initialPositions.set(leaf.id, { left: leaf.style.left || getComputedStyle(leaf).left, top: leaf.style.top || getComputedStyle(leaf).top });
+
+        leaf.addEventListener("pointerdown", startDrag);
+        leaf.addEventListener("contextmenu", toggleLeafColor);
+        leaf.addEventListener("wheel", returnLeaf, { passive: false });
+      });
+
+      retryButton.addEventListener("click", resetGame);
+      window.addEventListener("resize", adjustGameScale);
+      window.addEventListener("load", adjustGameScale);
+
+      function getScale() {
+        return parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--game-scale")) || 1;
+      }
+
+      function startDrag(event) {
+        if (successMessage.style.display === "block") return;
+        draggedLeaf = event.currentTarget;
+        draggedLeaf.setPointerCapture(event.pointerId);
+        draggedLeaf.classList.remove("snapped");
+        zones.forEach((zone) => zone.classList.remove("filled"));
+
+        const scale = getScale();
+        const boardRect = board.getBoundingClientRect();
+        const leafRect = draggedLeaf.getBoundingClientRect();
+        offsetX = (event.clientX - leafRect.left) / scale;
+        offsetY = (event.clientY - leafRect.top) / scale;
+        draggedLeaf.style.zIndex = "50";
+
+        document.addEventListener("pointermove", dragLeaf);
+        document.addEventListener("pointerup", endDrag, { once: true });
+      }
+
+      function dragLeaf(event) {
+        if (!draggedLeaf) return;
+        const scale = getScale();
+        const boardRect = board.getBoundingClientRect();
+        const x = (event.clientX - boardRect.left) / scale - offsetX;
+        const y = (event.clientY - boardRect.top) / scale - offsetY;
+        draggedLeaf.style.left = `${Math.max(0, Math.min(1040, x))}px`;
+        draggedLeaf.style.top = `${Math.max(0, Math.min(640, y))}px`;
+        highlightClosestZone(draggedLeaf);
+      }
+
+      function endDrag() {
+        if (!draggedLeaf) return;
+        const targetZone = getClosestZone(draggedLeaf);
+        zones.forEach((zone) => zone.classList.remove("hover"));
+
+        if (targetZone && !targetZone.dataset.leaf) {
+          const zoneRect = targetZone.getBoundingClientRect();
+          const boardRect = board.getBoundingClientRect();
+          const scale = getScale();
+          draggedLeaf.style.left = `${(zoneRect.left - boardRect.left) / scale}px`;
+          draggedLeaf.style.top = `${(zoneRect.top - boardRect.top) / scale}px`;
+          draggedLeaf.classList.add("snapped");
+          draggedLeaf.dataset.zone = targetZone.id;
+          targetZone.dataset.leaf = draggedLeaf.id;
+          targetZone.classList.add("filled");
+        }
+
+        draggedLeaf.style.zIndex = "10";
+        draggedLeaf = null;
+        document.removeEventListener("pointermove", dragLeaf);
+        checkSuccess();
+      }
+
+      function getClosestZone(leaf) {
+        const leafRect = leaf.getBoundingClientRect();
+        const leafCenterX = leafRect.left + leafRect.width / 2;
+        const leafCenterY = leafRect.top + leafRect.height / 2;
+        let closest = null;
+        let closestDistance = Infinity;
+
+        zones.forEach((zone) => {
+          if (zone.dataset.leaf && zone.dataset.leaf !== leaf.id) return;
+          const zoneRect = zone.getBoundingClientRect();
+          const zoneCenterX = zoneRect.left + zoneRect.width / 2;
+          const zoneCenterY = zoneRect.top + zoneRect.height / 2;
+          const distance = Math.hypot(leafCenterX - zoneCenterX, leafCenterY - zoneCenterY);
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closest = zone;
+          }
+        });
+
+        return closestDistance < 55 ? closest : null;
+      }
+
+      function highlightClosestZone(leaf) {
+        zones.forEach((zone) => zone.classList.remove("hover"));
+        const closest = getClosestZone(leaf);
+        if (closest) closest.classList.add("hover");
+      }
+
+      function toggleLeafColor(event) {
+        event.preventDefault();
+        const leaf = event.currentTarget;
+        leaf.classList.toggle("purple");
+        leaf.classList.toggle("yellow");
+      }
+
+      function returnLeaf(event) {
+        event.preventDefault();
+        const leaf = event.currentTarget;
+        const position = initialPositions.get(leaf.id);
+        if (!position) return;
+        if (leaf.dataset.zone) {
+          const zone = document.getElementById(leaf.dataset.zone);
+          if (zone) {
+            delete zone.dataset.leaf;
+            zone.classList.remove("filled", "hover");
+          }
+        }
+        delete leaf.dataset.zone;
+        leaf.classList.remove("snapped");
+        leaf.style.left = position.left;
+        leaf.style.top = position.top;
+        successMessage.style.display = "none";
+      }
+
+      function checkSuccess() {
+        const snappedCount = leaves.filter((leaf) => leaf.classList.contains("snapped")).length;
+        if (snappedCount === leaves.length) {
+          successMessage.style.display = "block";
+        }
+      }
+
+      function resetGame() {
+        successMessage.style.display = "none";
+        zones.forEach((zone) => {
+          delete zone.dataset.leaf;
+          zone.classList.remove("filled", "hover");
+        });
+        leaves.forEach((leaf) => {
+          const position = initialPositions.get(leaf.id);
+          delete leaf.dataset.zone;
+          leaf.classList.remove("snapped");
+          leaf.style.left = position.left;
+          leaf.style.top = position.top;
+          leaf.style.zIndex = "10";
+        });
+      }
+
+      function adjustGameScale() {
+        document.documentElement.style.setProperty("--game-scale", 1);
+        const scaleArea = document.querySelector(".game-scale-area");
+        const footer = document.querySelector(".logos-footer");
+        const boardTop = board.getBoundingClientRect().top;
+        const footerHeight = footer ? footer.offsetHeight : 0;
+        const availableWidth = Math.max(320, window.innerWidth - 40);
+        const availableHeight = Math.max(300, window.innerHeight - boardTop - footerHeight - 48);
+        const scaleByWidth = availableWidth / board.offsetWidth;
+        const scaleByHeight = availableHeight / board.offsetHeight;
+        const scale = Math.max(0.38, Math.min(1, scaleByWidth, scaleByHeight));
+        document.documentElement.style.setProperty("--game-scale", scale);
+        scaleArea.style.height = `${board.offsetHeight * scale}px`;
+      }
+    </script>
+  </body>
+</html>

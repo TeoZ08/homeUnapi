@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vídeos e Registros - UnAPI UFMS</title>
+    <style>
+      :root {
+        --unapi-fundo: #fff8dc;
+        --unapi-roxo: #542a58;
+        --unapi-roxo-escuro: #2f1238;
+        --unapi-amarelo: #ddb622;
+        --unapi-amarelo-hover: #e6c543;
+        --unapi-sombra: 0 8px 20px rgba(0, 0, 0, 0.15);
+        --unapi-borda: 20px;
+        --unapi-fonte: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        background-color: var(--unapi-fundo);
+        background-image: url("../img/background-unapi.svg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: var(--unapi-roxo);
+        font-family: var(--unapi-fonte);
+        padding: 48px 20px;
+        overflow-x: hidden;
+      }
+
+      .page-shell {
+        width: 100%;
+        max-width: 1120px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 34px;
+      }
+
+      .top-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .btn-home {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 16px;
+        border-radius: 12px;
+        background: var(--unapi-roxo);
+        color: var(--unapi-fundo);
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 800;
+        box-shadow: var(--unapi-sombra);
+        border: 1px solid rgba(221, 182, 34, 0.45);
+        transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease;
+      }
+
+      .btn-home:hover {
+        background: #6b3b6f;
+        color: var(--unapi-amarelo);
+        transform: translateY(-2px);
+      }
+
+      .page-hero {
+        background: rgba(84, 42, 88, 0.96);
+        color: var(--unapi-fundo);
+        padding: 34px 44px;
+        border-radius: var(--unapi-borda);
+        box-shadow: var(--unapi-sombra);
+        border: 1px solid rgba(221, 182, 34, 0.32);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .page-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 18% 18%, rgba(221, 182, 34, 0.22), transparent 28%),
+          linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 50%);
+        pointer-events: none;
+      }
+
+      .page-hero > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .intro-label {
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 14px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        background: rgba(221, 182, 34, 0.16);
+        color: var(--unapi-amarelo);
+        font-size: 14px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .page-hero h1 {
+        color: var(--unapi-amarelo);
+        font-size: clamp(30px, 4vw, 46px);
+        margin-bottom: 10px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+      }
+
+      .page-hero p {
+        max-width: 780px;
+        color: var(--unapi-fundo);
+        font-size: clamp(17px, 2vw, 20px);
+        line-height: 1.45;
+      }
+
+      .videos-area {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .video-gallery {
+        width: 100%;
+        max-width: 920px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 260px));
+        gap: 28px;
+        align-items: stretch;
+        justify-content: center;
+      }
+
+      .video-card {
+        width: 100%;
+        min-height: 420px;
+        aspect-ratio: 9 / 16;
+        display: flex;
+        position: relative;
+        overflow: hidden;
+        border-radius: 22px;
+        border: 1px solid rgba(84, 42, 88, 0.28);
+        text-decoration: none;
+        color: var(--unapi-fundo);
+        box-shadow: var(--unapi-sombra);
+        background: var(--unapi-roxo-escuro);
+        transform: translateY(0);
+        transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+      }
+
+      .video-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(84, 42, 88, 0.55);
+        box-shadow: 0 16px 34px rgba(84, 42, 88, 0.22);
+      }
+
+      .video-card img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.02);
+        transition: transform 0.3s ease;
+      }
+
+      .video-card:hover img {
+        transform: scale(1.06);
+      }
+
+      .video-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(to top, rgba(47, 18, 56, 0.95), rgba(47, 18, 56, 0.4) 42%, rgba(47, 18, 56, 0.08) 70%),
+          linear-gradient(to bottom, rgba(0, 0, 0, 0.15), transparent 35%);
+        z-index: 1;
+      }
+
+      .play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 2;
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 248, 220, 0.9);
+        background: rgba(47, 18, 56, 0.42);
+        color: var(--unapi-fundo);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translate(-50%, -50%);
+        font-size: 23px;
+        padding-left: 4px;
+        backdrop-filter: blur(4px);
+        transition: transform 0.24s ease, background 0.24s ease;
+      }
+
+      .video-card:hover .play-button {
+        transform: translate(-50%, -50%) scale(1.06);
+        background: rgba(84, 42, 88, 0.56);
+      }
+
+      .video-info {
+        position: relative;
+        z-index: 2;
+        margin-top: auto;
+        width: 100%;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .video-tag {
+        display: inline-flex;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(221, 182, 34, 0.94);
+        color: var(--unapi-roxo-escuro);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+      }
+
+      .video-info h3 {
+        font-size: 22px;
+        line-height: 1.15;
+        color: var(--unapi-fundo);
+      }
+
+      .video-info p {
+        color: rgba(255, 248, 220, 0.86);
+        font-size: 15px;
+        line-height: 1.45;
+      }
+
+      .institutional-footer {
+        width: 100%;
+        margin-top: 4px;
+        padding: 18px 22px;
+        border-radius: var(--unapi-borda);
+        background: rgba(255, 248, 220, 0.92);
+        border: 1px solid rgba(84, 42, 88, 0.16);
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .footer-note {
+        color: rgba(84, 42, 88, 0.78);
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .logos-footer {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(14px, 2.3vw, 28px);
+        flex-wrap: wrap;
+      }
+
+      .logos-footer img {
+        max-height: 44px;
+        max-width: 150px;
+        width: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.08));
+      }
+
+      .logos-footer img.logo-gov {
+        max-height: 38px;
+        max-width: 170px;
+      }
+
+      .logos-footer img.logo-unapi,
+      .logos-footer img.logo-pet-computacao {
+        max-height: 50px;
+      }
+
+      @media (max-width: 720px) {
+        body {
+          padding: 30px 16px;
+          background-attachment: scroll;
+        }
+
+        .page-hero {
+          padding: 26px 24px;
+        }
+
+        .video-gallery {
+          grid-template-columns: 1fr;
+          justify-items: center;
+        }
+
+        .video-card {
+          width: min(100%, 290px);
+        }
+
+        .institutional-footer {
+          padding: 16px 14px;
+          gap: 10px;
+        }
+
+        .logos-footer {
+          gap: 12px 16px;
+        }
+
+        .logos-footer img {
+          max-height: 34px;
+          max-width: 118px;
+        }
+
+        .logos-footer img.logo-gov {
+          max-height: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell">
+      <nav class="top-nav" aria-label="Navegação principal">
+        <a class="btn-home" href="../">← Home</a>
+      </nav>
+
+      <header class="page-hero">
+        <div class="intro-label">Vídeos e Registros</div>
+        <h1>Momentos das Oficinas</h1>
+        <p>Assista aos registros publicados das oficinas de informática da UnAPI UFMS.</p>
+      </header>
+
+      <section class="videos-area" aria-label="Galeria de vídeos das oficinas">
+        <div class="video-gallery" id="video-gallery"></div>
+      </section>
+
+      <footer class="institutional-footer" aria-label="Logos institucionais">
+        <div class="logos-footer">
+          <img src="../img/ufms.png" alt="UFMS" />
+          <img class="logo-unapi" src="../img/unapi.png" alt="UnAPI" />
+          <img class="logo-gov" src="../img/gov-federal.png" alt="Governo Federal" />
+          <img src="../img/facom.png" alt="FACOM" />
+          <img src="../img/pet-sistemas.png" alt="PET Sistemas" />
+          <img class="logo-pet-computacao" src="../img/pet-computacao.png" alt="PET Computação" />
+        </div>
+        <div class="footer-note">Portal das Oficinas de Informática • UNAPI UFMS</div>
+      </footer>
+    </main>
+
+    <script>
+      const videos = [
+        {
+          tag: "Short 01",
+          titulo: "Primeira Oficina UnAPI",
+          descricao: "Registro da oficina Conhecendo Teclado e Mouse.",
+          youtubeId: "-jH6xlBCN_o",
+          url: "https://youtube.com/shorts/-jH6xlBCN_o?si=tamyI9VxZL70dKnA",
+        },
+        {
+          tag: "Short 02",
+          titulo: "Participantes em atividade",
+          descricao: "Mais um momento da primeira oficina de informática.",
+          youtubeId: "lQYpWqZ3yww",
+          url: "https://youtube.com/shorts/lQYpWqZ3yww?si=OILJJdqehTFEfZaW",
+        },
+      ];
+
+      const gallery = document.getElementById("video-gallery");
+
+      videos.forEach((video) => {
+        const card = document.createElement("a");
+        card.className = "video-card";
+        card.href = video.url;
+        card.target = "_blank";
+        card.rel = "noopener noreferrer";
+        card.innerHTML = `
+          <img src="https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg" alt="${video.titulo}" loading="lazy" />
+          <div class="play-button" aria-hidden="true">▶</div>
+          <div class="video-info">
+            <span class="video-tag">${video.tag}</span>
+            <h3>${video.titulo}</h3>
+            <p>${video.descricao}</p>
+          </div>
+        `;
+        gallery.appendChild(card);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Treino de Teclado - UnAPI UFMS</title>
+    <style>
+      :root {
+        --unapi-fundo: #fff8dc;
+        --unapi-roxo: #542a58;
+        --unapi-amarelo: #ddb622;
+        --unapi-amarelo-hover: #e6c543;
+        --unapi-sombra: 0 8px 20px rgba(0, 0, 0, 0.15);
+        --unapi-borda: 20px;
+        --unapi-fonte: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        --keyboard-scale: 1;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        background-color: var(--unapi-fundo);
+        background-image: url("../img/background-unapi.svg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        font-family: var(--unapi-fonte);
+        padding: 20px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: relative;
+      }
+
+      .btn-voltar-home {
+        position: fixed;
+        top: 18px;
+        left: 18px;
+        z-index: 999;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 16px;
+        border-radius: 12px;
+        background: var(--unapi-roxo);
+        color: var(--unapi-fundo);
+        text-decoration: none;
+        font-family: var(--unapi-fonte);
+        font-size: 15px;
+        font-weight: 800;
+        box-shadow: var(--unapi-sombra);
+        border: 1px solid rgba(221, 182, 34, 0.45);
+        transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+      }
+
+      .btn-voltar-home:hover {
+        background: #6b3b6f;
+        color: var(--unapi-amarelo);
+        transform: translateY(-2px);
+      }
+
+      .logo-watermark {
+        width: 100%;
+        max-width: 900px;
+        height: clamp(120px, 20vh, 240px);
+        background-image: url("../img/unapi.png");
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        background-size: contain;
+        opacity: 0.82;
+        margin-bottom: clamp(-10px, -1vh, -4px);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .input-container {
+        width: 100%;
+        max-width: 900px;
+        margin-bottom: 30px;
+        z-index: 2;
+        position: relative;
+      }
+
+      #practice-input {
+        width: 100%;
+        font-size: 28px;
+        padding: 20px;
+        border-radius: 12px;
+        background-color: #2b2b2b;
+        color: #ffffff;
+        border: 3px solid #c49a29;
+        outline: none;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease;
+      }
+
+      #practice-input::placeholder { color: #777; }
+
+      .keyboard-scale-area {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        margin-bottom: 22px;
+        overflow: visible;
+        position: relative;
+        z-index: 1;
+      }
+
+      .keyboard-board {
+        display: flex;
+        gap: 15px;
+        background-color: rgba(43, 43, 43, 0.95);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        border: 1px solid #3d3d3d;
+        transform: scale(var(--keyboard-scale));
+        will-change: transform;
+        transform-origin: top center;
+        z-index: 1;
+      }
+
+      .main-block, .nav-block, .numpad-block { display: flex; flex-direction: column; gap: 5px; }
+      .row { display: flex; gap: 5px; }
+
+      .key {
+        background-color: #383838;
+        color: #ffffff;
+        font-size: 14px;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border-radius: 4px;
+        border-bottom: 4px solid #1f1f1f;
+        border-top: 1px solid #505050;
+        transition: background-color 0.1s, transform 0.1s, border-bottom-width 0.1s, opacity 0.3s, filter 0.3s;
+        user-select: none;
+        line-height: 1.2;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .key.active, .key.caps-on {
+        background-color: #c49a29;
+        color: #111;
+        border-bottom-width: 0;
+        transform: translateY(4px);
+        box-shadow: none;
+      }
+
+      .key.highlight-active {
+        opacity: 1 !important;
+        filter: grayscale(0) !important;
+        box-shadow: 0 0 15px rgba(196, 154, 41, 0.6);
+        border: 2px solid #c49a29 !important;
+        z-index: 2;
+      }
+
+      .mode-families-active .key { opacity: 0.2; filter: grayscale(1); }
+
+      .spacer { width: 45px; }
+      .spacer-small { width: 22.5px; }
+      .spacer-nav { height: 5px; }
+      .numpad-top-spacer { height: 45px; }
+      .f-key, .esc { height: 35px; font-size: 12px; }
+      .vol-key { font-size: 18px; }
+      .backspace { width: 95px; font-size: 18px; }
+      .tab { width: 65px; text-align: left; padding-left: 10px; justify-content: flex-start; }
+      .enter-top { width: 75px; text-align: right; padding-right: 10px; justify-content: flex-end; }
+      .capslock { width: 85px; text-align: left; padding-left: 10px; justify-content: flex-start; }
+      .shift-left { width: 60px; text-align: left; padding-left: 10px; justify-content: flex-start; }
+      .shift-right { width: 125px; text-align: right; padding-right: 10px; justify-content: flex-end; }
+      .ctrl, .alt, .win, .menu { width: 60px; font-size: 13px; }
+      .space { width: 285px; }
+      .nav-grid { display: grid; grid-template-columns: repeat(3, 45px); gap: 5px; margin-bottom: 45px; }
+      .arrows-grid { display: grid; grid-template-columns: repeat(3, 45px); gap: 5px; }
+      .numpad-grid { display: grid; grid-template-columns: repeat(4, 45px); grid-template-rows: repeat(5, 45px); gap: 5px; }
+      .num-enter { grid-column: 4; grid-row: 4 / 6; height: 95px; }
+      .num-zero { grid-column: 1 / 3; width: 95px; }
+
+      #controls-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        width: 100%;
+        max-width: 1100px;
+        min-height: 60px;
+        flex-wrap: wrap;
+        z-index: 1;
+      }
+
+      .btn-mode {
+        padding: 10px 20px;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 8px;
+        border: 1px solid #505050;
+        background-color: #383838;
+        color: white;
+        transition: all 0.2s;
+        font-size: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        white-space: nowrap;
+      }
+
+      .btn-mode:hover { background-color: #c49a29; color: black; border-color: #c49a29; }
+
+      #family-menu {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: #2b2b2b;
+        padding: 10px 15px;
+        border-radius: 12px;
+        border: 1px solid #3d3d3d;
+        color: white;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        animation: slideIn 0.3s ease-out;
+      }
+
+      @keyframes slideIn {
+        from { opacity: 0; transform: translateX(-20px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+
+      .menu-label { margin-right: 15px; font-weight: bold; color: #ccc; }
+
+      #family-menu button {
+        margin: 0 5px;
+        padding: 8px 15px;
+        cursor: pointer;
+        border-radius: 6px;
+        border: 1px solid #505050;
+        background-color: #383838;
+        color: white;
+        transition: all 0.2s;
+        font-weight: bold;
+      }
+
+      #family-menu button:hover { background-color: #c49a29; color: black; border-color: #c49a29; }
+      #family-menu .btn-clear { background-color: #444; margin-left: 15px; }
+      .hidden { display: none !important; }
+
+      :fullscreen #btn-fullscreen { display: none; }
+      :-webkit-full-screen #btn-fullscreen { display: none; }
+      :-moz-full-screen #btn-fullscreen { display: none; }
+
+      .logos-footer {
+        width: min(100%, 1100px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(14px, 2vw, 28px);
+        padding: 12px 18px;
+        margin-top: 12px;
+        background: rgba(255, 248, 220, 0.86);
+        border: 1px solid rgba(84, 42, 88, 0.16);
+        border-radius: 16px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        z-index: 60;
+        position: relative;
+        flex-wrap: wrap;
+      }
+
+      .logos-footer img { max-height: clamp(28px, 4vh, 44px); max-width: 150px; width: auto; object-fit: contain; }
+
+      @media (max-height: 820px) {
+        body { justify-content: flex-start; padding-top: 12px; }
+        .input-container { margin-bottom: 18px; }
+      }
+
+      @media (max-width: 900px) {
+        #controls-wrapper { gap: 10px; }
+        .btn-mode, #family-menu button { font-size: 13px; padding: 8px 12px; }
+      }
+
+      @media (max-width: 720px) {
+        .btn-voltar-home { top: 10px; left: 10px; padding: 8px 12px; font-size: 13px; }
+        .logos-footer { gap: 12px; }
+        .logos-footer img { max-width: 105px; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="btn-voltar-home" href="../">← Home</a>
+
+    <div class="logo-watermark"></div>
+
+    <div class="input-container">
+      <input type="text" id="practice-input" placeholder="Digite:" autocomplete="off" spellcheck="false" />
+    </div>
+
+    <div class="keyboard-scale-area">
+      <div class="keyboard-board" id="keyboard-container">
+        <div class="main-block">
+          <div class="row">
+            <div class="key esc" data-key="Escape" data-family="comandos">Esc</div><div class="spacer"></div>
+            <div class="key f-key" data-key="F1" data-family="comandos">F1</div><div class="key f-key" data-key="F2" data-family="comandos">F2</div><div class="key f-key" data-key="F3" data-family="comandos">F3</div><div class="key f-key" data-key="F4" data-family="comandos">F4</div><div class="spacer-small"></div>
+            <div class="key f-key" data-key="F5" data-family="comandos">F5</div><div class="key f-key" data-key="F6" data-family="comandos">F6</div><div class="key f-key" data-key="F7" data-family="comandos">F7</div><div class="key f-key" data-key="F8" data-family="comandos">F8</div><div class="spacer-small"></div>
+            <div class="key f-key" data-key="F9" data-family="comandos">F9</div><div class="key f-key" data-key="F10" data-family="comandos">F10</div><div class="key f-key" data-key="F11" data-family="comandos">F11</div><div class="key f-key" data-key="F12" data-family="comandos">F12</div>
+          </div>
+          <div class="row">
+            <div class="key" data-key="Backquote" data-family="numeros">"<br>'</div><div class="key" data-key="Digit1" data-family="numeros">!<br>1</div><div class="key" data-key="Digit2" data-family="numeros">@<br>2</div><div class="key" data-key="Digit3" data-family="numeros">#<br>3</div><div class="key" data-key="Digit4" data-family="numeros">$<br>4</div><div class="key" data-key="Digit5" data-family="numeros">%<br>5</div><div class="key" data-key="Digit6" data-family="numeros">¨<br>6</div><div class="key" data-key="Digit7" data-family="numeros">&<br>7</div><div class="key" data-key="Digit8" data-family="numeros">*<br>8</div><div class="key" data-key="Digit9" data-family="numeros">(<br>9</div><div class="key" data-key="Digit0" data-family="numeros">)<br>0</div><div class="key" data-key="Minus" data-family="numeros">_<br>-</div><div class="key" data-key="Equal" data-family="numeros">+<br>=</div><div class="key backspace" data-key="Backspace" data-family="comandos">←</div>
+          </div>
+          <div class="row">
+            <div class="key tab" data-key="Tab" data-family="comandos">Tab</div><div class="key" data-key="KeyQ" data-family="escrita">Q</div><div class="key" data-key="KeyW" data-family="escrita">W</div><div class="key" data-key="KeyE" data-family="escrita">E</div><div class="key" data-key="KeyR" data-family="escrita">R</div><div class="key" data-key="KeyT" data-family="escrita">T</div><div class="key" data-key="KeyY" data-family="escrita">Y</div><div class="key" data-key="KeyU" data-family="escrita">U</div><div class="key" data-key="KeyI" data-family="escrita">I</div><div class="key" data-key="KeyO" data-family="escrita">O</div><div class="key" data-key="KeyP" data-family="escrita">P</div><div class="key" data-key="BracketLeft" data-family="escrita">`<br>´</div><div class="key" data-key="BracketRight" data-family="escrita">{<br>[</div><div class="key enter-top" data-key="Enter" data-family="comandos">Enter</div>
+          </div>
+          <div class="row">
+            <div class="key capslock" data-key="CapsLock" data-family="comandos">Caps Lock</div><div class="key" data-key="KeyA" data-family="escrita">A</div><div class="key" data-key="KeyS" data-family="escrita">S</div><div class="key" data-key="KeyD" data-family="escrita">D</div><div class="key" data-key="KeyF" data-family="escrita">F</div><div class="key" data-key="KeyG" data-family="escrita">G</div><div class="key" data-key="KeyH" data-family="escrita">H</div><div class="key" data-key="KeyJ" data-family="escrita">J</div><div class="key" data-key="KeyK" data-family="escrita">K</div><div class="key" data-key="KeyL" data-family="escrita">L</div><div class="key" data-key="Semicolon" data-family="escrita">Ç</div><div class="key" data-key="Quote" data-family="escrita">^<br>~</div><div class="key" data-key="Backslash" data-family="escrita">}<br>]</div>
+          </div>
+          <div class="row">
+            <div class="key shift-left" data-key="ShiftLeft" data-family="comandos">Shift</div><div class="key" data-key="IntlBackslash" data-family="escrita">|<br>\</div><div class="key" data-key="KeyZ" data-family="escrita">Z</div><div class="key" data-key="KeyX" data-family="escrita">X</div><div class="key" data-key="KeyC" data-family="escrita">C</div><div class="key" data-key="KeyV" data-family="escrita">V</div><div class="key" data-key="KeyB" data-family="escrita">B</div><div class="key" data-key="KeyN" data-family="escrita">N</div><div class="key" data-key="KeyM" data-family="escrita">M</div><div class="key" data-key="Comma" data-family="escrita">&lt;<br>,</div><div class="key" data-key="Period" data-family="escrita">&gt;<br>.</div><div class="key" data-key="Slash" data-family="escrita">:<br>;</div><div class="key shift-right" data-key="ShiftRight" data-family="comandos">Shift</div>
+          </div>
+          <div class="row">
+            <div class="key ctrl" data-key="ControlLeft" data-family="comandos">Ctrl</div><div class="key win" data-key="MetaLeft" data-family="comandos">Win</div><div class="key alt" data-key="AltLeft" data-family="comandos">Alt</div><div class="key space" data-key="Space" data-family="comandos">Espaço</div><div class="key alt" data-key="AltRight" data-family="comandos">Alt Gr</div><div class="key win" data-key="MetaRight" data-family="comandos">Win</div><div class="key menu" data-key="ContextMenu" data-family="comandos">Menu</div><div class="key ctrl" data-key="ControlRight" data-family="comandos">Ctrl</div>
+          </div>
+        </div>
+
+        <div class="nav-block">
+          <div class="numpad-top-spacer"></div>
+          <div class="nav-grid">
+            <div class="key" data-key="Insert" data-family="navegacao">Ins</div><div class="key" data-key="Home" data-family="navegacao">Home</div><div class="key" data-key="PageUp" data-family="navegacao">PgUp</div>
+            <div class="key" data-key="Delete" data-family="navegacao">Del</div><div class="key" data-key="End" data-family="navegacao">End</div><div class="key" data-key="PageDown" data-family="navegacao">PgDn</div>
+          </div>
+          <div class="arrows-grid">
+            <div></div><div class="key" data-key="ArrowUp" data-family="navegacao">↑</div><div></div>
+            <div class="key" data-key="ArrowLeft" data-family="navegacao">←</div><div class="key" data-key="ArrowDown" data-family="navegacao">↓</div><div class="key" data-key="ArrowRight" data-family="navegacao">→</div>
+          </div>
+        </div>
+
+        <div class="numpad-block">
+          <div class="numpad-top-spacer"></div>
+          <div class="numpad-grid">
+            <div class="key" data-key="NumLock" data-family="numeros">Num</div><div class="key" data-key="NumpadDivide" data-family="numeros">/</div><div class="key" data-key="NumpadMultiply" data-family="numeros">*</div><div class="key" data-key="NumpadSubtract" data-family="numeros">-</div>
+            <div class="key" data-key="Numpad7" data-family="numeros">7</div><div class="key" data-key="Numpad8" data-family="numeros">8</div><div class="key" data-key="Numpad9" data-family="numeros">9</div><div class="key" data-key="NumpadAdd" data-family="numeros">+</div>
+            <div class="key" data-key="Numpad4" data-family="numeros">4</div><div class="key" data-key="Numpad5" data-family="numeros">5</div><div class="key" data-key="Numpad6" data-family="numeros">6</div><div class="key" data-key="NumpadDecimal" data-family="numeros">.</div>
+            <div class="key" data-key="Numpad1" data-family="numeros">1</div><div class="key" data-key="Numpad2" data-family="numeros">2</div><div class="key" data-key="Numpad3" data-family="numeros">3</div><div class="key num-enter" data-key="NumpadEnter" data-family="comandos">Enter</div>
+            <div class="key num-zero" data-key="Numpad0" data-family="numeros">0</div><div class="key" data-key="NumpadComma" data-family="numeros">,</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="controls-wrapper">
+      <button id="btn-fullscreen" class="btn-mode">🖥️ Tela Cheia</button>
+      <button id="toggle-families" class="btn-mode">Ver Famílias</button>
+      <div id="family-menu" class="hidden">
+        <span class="menu-label">Destacar:</span>
+        <button type="button" data-family-button="escrita">Letras</button>
+        <button type="button" data-family-button="numeros">Números</button>
+        <button type="button" data-family-button="comandos">Comandos</button>
+        <button type="button" data-family-button="navegacao">Navegação</button>
+        <button type="button" id="clear-highlights" class="btn-clear">Limpar</button>
+      </div>
+    </div>
+
+    <footer class="logos-footer" aria-label="Logos institucionais">
+      <img src="../img/ufms.png" alt="UFMS" />
+      <img src="../img/unapi.png" alt="UnAPI" />
+      <img src="../img/gov-federal.png" alt="Governo Federal" />
+      <img src="../img/facom.png" alt="FACOM" />
+      <img src="../img/pet-sistemas.png" alt="PET Sistemas" />
+      <img src="../img/pet-computacao.png" alt="PET Computação" />
+    </footer>
+
+    <script>
+      const inputField = document.getElementById("practice-input");
+      const keyboardContainer = document.getElementById("keyboard-container");
+      const keyElements = [...document.querySelectorAll(".key")];
+      const keyMap = new Map(keyElements.map((key) => [key.dataset.key, key]));
+
+      function ajustarEscalaTeclado() {
+        const boardElement = document.getElementById("keyboard-container");
+        const scaleArea = document.querySelector(".keyboard-scale-area");
+        const controlsWrapper = document.getElementById("controls-wrapper");
+        const footer = document.querySelector(".logos-footer");
+        if (!boardElement || !scaleArea) return;
+
+        document.documentElement.style.setProperty("--keyboard-scale", 1);
+        scaleArea.style.height = "auto";
+        const availableWidth = Math.max(320, window.innerWidth - 40);
+        const footerHeight = footer ? footer.offsetHeight : 0;
+        const controlsHeight = controlsWrapper ? controlsWrapper.offsetHeight : 0;
+        const boardTop = boardElement.getBoundingClientRect().top;
+        const availableHeight = Math.max(260, window.innerHeight - boardTop - controlsHeight - footerHeight - 56);
+        const scaleByWidth = availableWidth / boardElement.offsetWidth;
+        const scaleByHeight = availableHeight / boardElement.offsetHeight;
+        const scale = Math.max(0.52, Math.min(1, scaleByWidth, scaleByHeight));
+        document.documentElement.style.setProperty("--keyboard-scale", scale);
+        scaleArea.style.height = boardElement.offsetHeight * scale + "px";
+      }
+
+      function activateKey(code) {
+        const key = keyMap.get(code);
+        if (!key) return;
+        key.classList.add("active");
+      }
+
+      function deactivateKey(code) {
+        const key = keyMap.get(code);
+        if (!key) return;
+        key.classList.remove("active");
+      }
+
+      document.addEventListener("keydown", (event) => {
+        if (["Tab", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12"].includes(event.key)) {
+          event.preventDefault();
+        }
+        activateKey(event.code);
+        if (event.code === "CapsLock") keyMap.get("CapsLock")?.classList.toggle("caps-on");
+      });
+
+      document.addEventListener("keyup", (event) => deactivateKey(event.code));
+
+      keyElements.forEach((key) => {
+        key.addEventListener("mousedown", () => key.classList.add("active"));
+        key.addEventListener("mouseup", () => key.classList.remove("active"));
+        key.addEventListener("mouseleave", () => key.classList.remove("active"));
+      });
+
+      document.getElementById("btn-fullscreen").addEventListener("click", () => {
+        const element = document.documentElement;
+        if (!document.fullscreenElement) element.requestFullscreen?.();
+      });
+
+      document.getElementById("toggle-families").addEventListener("click", () => {
+        document.getElementById("family-menu").classList.toggle("hidden");
+        keyboardContainer.classList.toggle("mode-families-active");
+      });
+
+      document.querySelectorAll("[data-family-button]").forEach((button) => {
+        button.addEventListener("click", () => highlightFamily(button.dataset.familyButton));
+      });
+
+      document.getElementById("clear-highlights").addEventListener("click", resetHighlights);
+
+      function highlightFamily(family) {
+        keyboardContainer.classList.add("mode-families-active");
+        keyElements.forEach((key) => {
+          key.classList.toggle("highlight-active", key.dataset.family === family);
+        });
+      }
+
+      function resetHighlights() {
+        keyboardContainer.classList.remove("mode-families-active");
+        keyElements.forEach((key) => key.classList.remove("highlight-active"));
+      }
+
+      window.addEventListener("resize", ajustarEscalaTeclado);
+      window.addEventListener("load", () => {
+        inputField.focus();
+        ajustarEscalaTeclado();
+      });
+    </script>
+  </body>
+</html>

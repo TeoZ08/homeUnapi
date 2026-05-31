@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal UnAPI - Oficinas de Informática</title>
+    <style>
+      :root {
+        --unapi-fundo: #fff8dc;
+        --unapi-roxo: #542a58;
+        --unapi-roxo-escuro: #3f1748;
+        --unapi-roxo-livro: #7b2f88;
+        --unapi-amarelo: #ddb622;
+        --unapi-amarelo-hover: #e6c543;
+        --unapi-card: #fff8dc;
+        --unapi-texto-suave: rgba(84, 42, 88, 0.76);
+        --unapi-sombra: 0 18px 38px rgba(63, 23, 72, 0.14);
+        --unapi-borda: 20px;
+        --unapi-fonte: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      ::selection {
+        background: rgba(221, 182, 34, 0.55);
+        color: var(--unapi-roxo-escuro);
+      }
+
+      ::-moz-selection {
+        background: rgba(221, 182, 34, 0.55);
+        color: var(--unapi-roxo-escuro);
+      }
+
+      body {
+        min-height: 100vh;
+        background-color: var(--unapi-fundo);
+        background-image: url("img/background-unapi.svg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: var(--unapi-roxo);
+        font-family: var(--unapi-fonte);
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: rgba(255, 248, 220, 0.34);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .page-shell {
+        position: relative;
+        z-index: 1;
+        width: min(100%, 1280px);
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 32px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .topbar {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 16px 22px;
+        border-radius: var(--unapi-borda);
+        background: rgba(84, 42, 88, 0.96);
+        box-shadow: var(--unapi-sombra);
+        border: 1px solid rgba(221, 182, 34, 0.35);
+      }
+
+      .brand {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+
+      .brand small {
+        color: var(--unapi-amarelo);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .brand strong {
+        color: var(--unapi-fundo);
+        font-size: clamp(20px, 2.8vw, 28px);
+        line-height: 1.1;
+      }
+
+      .topnav {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .topnav a {
+        color: var(--unapi-fundo);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 800;
+        padding: 9px 13px;
+        border-radius: 999px;
+        background: rgba(255, 248, 220, 0.1);
+        border: 1px solid rgba(255, 248, 220, 0.16);
+        transition: all 0.2s ease;
+      }
+
+      .topnav a:hover {
+        color: var(--unapi-roxo);
+        background: var(--unapi-amarelo);
+      }
+
+      .topnav a:focus-visible,
+      .hub-card:focus-visible {
+        outline: 3px solid var(--unapi-amarelo);
+        outline-offset: 4px;
+      }
+
+      .hero {
+        position: relative;
+        min-height: clamp(470px, 48vw, 570px);
+        border-radius: 10px;
+        overflow: hidden;
+        isolation: isolate;
+        box-shadow:
+          0 30px 58px rgba(63, 23, 72, 0.15),
+          0 14px 26px rgba(63, 23, 72, 0.1),
+          inset 0 0 0 1px rgba(84, 42, 88, 0.12);
+        border: none;
+        background-color: var(--unapi-card);
+        display: flex;
+        align-items: center;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        z-index: 0;
+        background-image: url("img/hero-mascote-unapi.jpeg");
+        background-size: cover;
+        background-position: center right;
+        background-repeat: no-repeat;
+        pointer-events: none;
+      }
+
+      .hero::after {
+        content: none;
+        display: none;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        width: min(42%, 430px);
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: clamp(34px, 5vw, 62px);
+        padding-right: 26px;
+        background:
+          linear-gradient(
+            180deg,
+            rgba(255, 248, 220, 0.94) 0%,
+            rgba(255, 248, 220, 0.94) 78%,
+            rgba(123, 47, 136, 0.18) 78%,
+            rgba(123, 47, 136, 0.18) 100%
+          );
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        width: fit-content;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(221, 182, 34, 0.22);
+        color: var(--unapi-roxo);
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 18px;
+      }
+
+      .hero h1 {
+        color: var(--unapi-roxo);
+        font-size: clamp(36px, 5.1vw, 64px);
+        line-height: 0.94;
+        letter-spacing: -1.5px;
+        max-width: 320px;
+        margin-bottom: 0;
+      }
+
+      .title-highlight {
+        color: var(--unapi-amarelo);
+      }
+
+      .hero .title-end {
+        display: inline-block;
+        max-width: 295px;
+      }
+
+      .hub-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(280px, 1fr));
+        gap: 24px;
+      }
+
+      .hub-card {
+        position: relative;
+        min-height: 230px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 22px;
+        text-decoration: none;
+        border-radius: var(--unapi-borda);
+        box-shadow: var(--unapi-sombra);
+        overflow: hidden;
+        transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      }
+
+      .hub-card::before {
+        content: "";
+        position: absolute;
+        left: 30px;
+        top: 0;
+        width: 78px;
+        height: 5px;
+        border-radius: 999px;
+        background: var(--unapi-amarelo);
+        z-index: 1;
+      }
+
+      .hub-card::after {
+        content: "";
+        position: absolute;
+        width: 116px;
+        height: 116px;
+        right: -36px;
+        top: -34px;
+        border-radius: 50%;
+        background: rgba(221, 182, 34, 0.2);
+      }
+
+      .hub-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 18px 38px rgba(84, 42, 88, 0.22);
+      }
+
+      .hub-card.primary {
+        background: var(--unapi-roxo);
+        color: var(--unapi-fundo);
+        border: 2px solid rgba(221, 182, 34, 0.28);
+      }
+
+      .hub-card.secondary {
+        background: var(--unapi-card);
+        color: var(--unapi-roxo);
+        border: 2px solid rgba(84, 42, 88, 0.22);
+      }
+
+      .hub-card-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .tag {
+        display: inline-flex;
+        width: fit-content;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(221, 182, 34, 0.18);
+        color: var(--unapi-amarelo);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+      }
+
+      .hub-card.secondary .tag {
+        color: var(--unapi-roxo);
+        background: rgba(84, 42, 88, 0.08);
+      }
+
+      .hub-card h2 {
+        font-size: clamp(25px, 3vw, 34px);
+        line-height: 1.05;
+        margin-bottom: 12px;
+      }
+
+      .hub-card p {
+        max-width: 460px;
+        font-size: 17px;
+        line-height: 1.5;
+      }
+
+      .hub-card.primary p {
+        color: rgba(255, 248, 220, 0.9);
+      }
+
+      .hub-card.secondary p {
+        color: var(--unapi-texto-suave);
+      }
+
+      .btn-visual {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--unapi-amarelo);
+        color: var(--unapi-roxo);
+        padding: 13px 22px;
+        border-radius: 12px;
+        font-weight: 900;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        box-shadow: 0 7px 16px rgba(84, 42, 88, 0.15);
+        transition: all 0.2s ease;
+      }
+
+      .hub-card:hover .btn-visual {
+        background-color: var(--unapi-amarelo-hover);
+        transform: translateX(3px);
+      }
+
+      .institutional-footer {
+        width: 100%;
+        padding: 18px 22px;
+        border-radius: var(--unapi-borda);
+        background: rgba(255, 248, 220, 0.94);
+        border: 1px solid rgba(84, 42, 88, 0.16);
+        box-shadow: var(--unapi-sombra);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .logos-footer {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(14px, 2.3vw, 28px);
+        flex-wrap: wrap;
+      }
+
+      .logos-footer img {
+        max-height: 44px;
+        max-width: 150px;
+        width: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.08));
+      }
+
+      .logos-footer img.logo-gov {
+        max-height: 38px;
+        max-width: 170px;
+      }
+
+      .logos-footer img.logo-unapi,
+      .logos-footer img.logo-pet-computacao {
+        max-height: 50px;
+      }
+
+      .footer-note {
+        color: var(--unapi-texto-suave);
+        font-size: 14px;
+        text-align: center;
+      }
+
+      @media (max-width: 900px) {
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .topnav {
+          justify-content: flex-start;
+        }
+
+        .hero::before {
+          background-size: cover;
+          background-position: center right;
+        }
+
+        .hero::after {
+          content: none;
+          display: none;
+        }
+
+        .hub-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 720px) {
+        body {
+          background-attachment: scroll;
+        }
+
+        .page-shell {
+          padding: 20px 14px 24px;
+          gap: 20px;
+        }
+
+        .topbar,
+        .hub-card,
+        .institutional-footer {
+          border-radius: 18px;
+        }
+
+        .hero {
+          border-radius: 12px;
+        }
+
+        .hero {
+          min-height: auto;
+          background: var(--unapi-card);
+        }
+
+        .hero::before,
+        .hero::after {
+          display: none;
+        }
+
+        .hero-content,
+        .hub-card {
+          padding: 24px;
+        }
+
+        .hero-content {
+          width: 100%;
+          background: var(--unapi-card);
+        }
+
+        .hero h1 {
+          font-size: clamp(34px, 12vw, 48px);
+        }
+
+        .institutional-footer {
+          padding: 16px 14px;
+          gap: 10px;
+        }
+
+        .logos-footer {
+          gap: 12px 16px;
+        }
+
+        .logos-footer img {
+          max-height: 34px;
+          max-width: 118px;
+        }
+
+        .logos-footer img.logo-gov {
+          max-height: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="topbar" aria-label="Cabeçalho do portal">
+        <div class="brand">
+          <small>UNAPI UFMS</small>
+          <strong>Oficinas de Informática</strong>
+        </div>
+
+        <nav class="topnav" aria-label="Navegação principal">
+          <a href="ferramentas/">Ferramentas</a>
+          <a href="videos/">Vídeos</a>
+        </nav>
+      </header>
+
+      <section class="hero" aria-label="Apresentação do portal">
+        <div class="hero-content">
+          <span class="eyebrow">Ambiente de aprendizagem</span>
+          <h1><span class="title-highlight">Pratique,</span><br />revise e<br /><span class="title-highlight">acompanhe</span><br /><span class="title-end">as oficinas.</span></h1>
+        </div>
+      </section>
+
+      <section class="hub-grid" aria-label="Áreas do portal">
+        <a class="hub-card primary" href="ferramentas/">
+          <div class="hub-card-content">
+            <span class="tag">Praticar</span>
+            <h2>Ferramentas e Materiais</h2>
+            <p>Entre nas atividades de teclado e mouse ou acesse materiais de apoio da oficina.</p>
+          </div>
+          <span class="btn-visual">Acessar</span>
+        </a>
+
+        <a class="hub-card secondary" href="videos/">
+          <div class="hub-card-content">
+            <span class="tag">Registros</span>
+            <h2>Vídeos das Oficinas</h2>
+            <p>Veja os Shorts e registros publicados dos encontros realizados com os participantes.</p>
+          </div>
+          <span class="btn-visual">Ver vídeos</span>
+        </a>
+      </section>
+
+      <footer class="institutional-footer" aria-label="Logos institucionais">
+        <div class="logos-footer">
+          <img src="img/ufms.png" alt="UFMS" />
+          <img class="logo-unapi" src="img/unapi.png" alt="UnAPI" />
+          <img class="logo-gov" src="img/gov-federal.png" alt="Governo Federal" />
+          <img src="img/facom.png" alt="FACOM" />
+          <img src="img/pet-sistemas.png" alt="PET Sistemas" />
+          <img class="logo-pet-computacao" src="img/pet-computacao.png" alt="PET Computação" />
+        </div>
+        <div class="footer-note">Portal das Oficinas de Informática • UNAPI UFMS</div>
+      </footer>
+    </main>
+  </body>
+</html>
