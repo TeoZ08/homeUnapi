@@ -161,29 +161,17 @@
         pointer-events: none;
       }
 
-      .hero::after {
-        content: none;
-        display: none;
-      }
-
       .hero-content {
         position: relative;
         z-index: 1;
-        width: min(42%, 430px);
+        width: min(40%, 410px);
         min-height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         padding: clamp(34px, 5vw, 62px);
-        padding-right: 26px;
-        background:
-          linear-gradient(
-            180deg,
-            rgba(255, 248, 220, 0.94) 0%,
-            rgba(255, 248, 220, 0.94) 78%,
-            rgba(123, 47, 136, 0.18) 78%,
-            rgba(123, 47, 136, 0.18) 100%
-          );
+        padding-right: 24px;
+        background: rgba(255, 248, 220, 0.94);
       }
 
       .eyebrow {
@@ -202,10 +190,10 @@
 
       .hero h1 {
         color: var(--unapi-roxo);
-        font-size: clamp(36px, 5.1vw, 64px);
+        font-size: clamp(36px, 5vw, 62px);
         line-height: 0.94;
         letter-spacing: -1.5px;
-        max-width: 320px;
+        max-width: 300px;
         margin-bottom: 0;
       }
 
@@ -215,7 +203,7 @@
 
       .hero .title-end {
         display: inline-block;
-        max-width: 295px;
+        max-width: 285px;
       }
 
       .hub-grid {
@@ -403,14 +391,8 @@
           justify-content: flex-start;
         }
 
-        .hero::before {
-          background-size: cover;
-          background-position: center right;
-        }
-
-        .hero::after {
-          content: none;
-          display: none;
+        .hero-content {
+          width: min(48%, 410px);
         }
 
         .hub-grid {
@@ -435,16 +417,12 @@
         }
 
         .hero {
-          border-radius: 12px;
-        }
-
-        .hero {
           min-height: auto;
+          border-radius: 12px;
           background: var(--unapi-card);
         }
 
-        .hero::before,
-        .hero::after {
+        .hero::before {
           display: none;
         }
 
