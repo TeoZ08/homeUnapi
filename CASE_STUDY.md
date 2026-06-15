@@ -2,7 +2,7 @@
 
 ## Problema
 
-Oficinas de informatica para pessoas idosas precisam de materiais claros, acessiveis e praticos, com apoio visual para atividades como teclado, mouse, videos e criacao de conta GOV.BR.
+Oficinas de informatica para pessoas idosas precisam de materiais claros, acessiveis e praticos, com apoio visual para atividades como teclado, mouse, videos, criacao de conta GOV.BR, Prova de Vida e Assinatura Eletronica.
 
 ## Publico-alvo
 
@@ -10,11 +10,11 @@ Pessoas idosas participantes da UnAPI UFMS e instrutores que conduzem oficinas d
 
 ## Solucao
 
-Portal estatico com pagina inicial, ferramentas praticas, galeria de videos, atividades interativas de teclado e mouse e mockup educativo GOV.BR sem coleta de dados.
+Portal estatico com pagina inicial, ferramentas praticas, galeria de videos, atividades interativas de teclado e mouse e mockups educativos GOV.BR sem coleta de dados.
 
 ## Minha contribuicao
 
-A confirmar no detalhe. Pelo repositorio, o projeto inclui estrutura HTML/CSS/JS, identidade visual UnAPI, atividades interativas, guia GOV.BR e documentacao de seguranca do mockup.
+A confirmar no detalhe. Pelo repositorio, o projeto inclui estrutura HTML/CSS/JS, identidade visual UnAPI, atividades interativas, guias GOV.BR e documentacao de seguranca dos mockups.
 
 ## Stack
 
@@ -26,7 +26,7 @@ A confirmar no detalhe. Pelo repositorio, o projeto inclui estrutura HTML/CSS/JS
 
 ## Arquitetura
 
-Site estatico organizado por paginas independentes. CSS comum fica em `css/base.css`, estilos especificos em `css/*.css` e interacoes em `js/teclado.js`, `js/mouse.js` e `js/gov.js`.
+Site estatico organizado por paginas independentes. CSS comum fica em `css/base.css`, estilos especificos em `css/*.css` e interacoes em arquivos JavaScript dedicados por atividade.
 
 ## Funcionalidades principais
 
@@ -36,12 +36,16 @@ Site estatico organizado por paginas independentes. CSS comum fica em `css/base.
 - Atividade de teclado.
 - Atividade de mouse.
 - Mockup GOV.BR passo a passo para uso em oficina.
+- Simulacao da Prova de Vida digital sem camera, dados reais ou integracao externa.
+- Simulacao da Assinatura Eletronica sem upload, login, codigo ou documento real.
 
 ## Decisoes tecnicas
 
 - Manter site estatico para facilitar publicacao e uso em laboratorio.
 - Usar linguagem visual clara, com botoes grandes e contraste.
 - Nao coletar dados no mockup GOV.BR.
+- Diferenciar treinamentos GOV.BR de servicos oficiais com avisos permanentes e dados ficticios.
+- Simular arquivos e autorizacoes apenas em memoria, sem gerar ou baixar documentos.
 - Converter imagens institucionais para WebP para reduzir peso.
 
 ## Desafios

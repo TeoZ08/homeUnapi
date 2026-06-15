@@ -4,13 +4,13 @@
 
 Usuario: pessoas idosas em oficinas de informatica e instrutores da UnAPI UFMS.
 
-Tarefa principal: acessar ferramentas educativas, praticar teclado/mouse, assistir videos e acompanhar o guia GOV.BR.
+Tarefa principal: acessar ferramentas educativas, praticar teclado/mouse, assistir videos e acompanhar guias GOV.BR.
 
 Sensacao desejada: acessivel, claro, acolhedor e institucional.
 
 ## Domain
 
-Oficina, informatica basica, teclado, mouse, videos, GOV.BR, seguranca digital, aprendizagem, instrutor, pessoa idosa.
+Oficina, informatica basica, teclado, mouse, videos, GOV.BR, prova de vida, assinatura eletronica, documento digital, seguranca digital, aprendizagem, instrutor, pessoa idosa.
 
 ## Color World
 
@@ -23,6 +23,8 @@ Oficina, informatica basica, teclado, mouse, videos, GOV.BR, seguranca digital, 
 ## Signature
 
 Mascote/identidade UnAPI + ferramentas educativas com controles grandes e linguagem direta.
+
+Nos treinamentos GOV.BR, usar mockup central com aviso permanente de simulacao e explicacao didatica ao lado ou abaixo. O mockup pode alternar entre celular e navegador quando o fluxo real muda de dispositivo.
 
 ## Defaults a rejeitar
 
@@ -44,6 +46,7 @@ Mascote/identidade UnAPI + ferramentas educativas com controles grandes e lingua
 - Foco visivel com outline amarelo.
 - Hover em navegacao deve aumentar contraste, nao depender apenas de movimento.
 - Botoes de avancar/voltar no GOV.BR devem permanecer grandes e legiveis.
+- Simulacoes GOV.BR devem permitir setas esquerda/direita e apresentar progresso textual.
 - Atividades de teclado e mouse devem ter reset/retorno claro.
 
 ## Acessibilidade e responsividade
@@ -56,4 +59,4 @@ Mascote/identidade UnAPI + ferramentas educativas com controles grandes e lingua
 
 ## Limites
 
-Nao remover os avisos de seguranca do GOV.BR. O mockup nao coleta, salva, envia formularios, usa cookies ou localStorage.
+Nao remover os avisos de seguranca do GOV.BR. Os mockups nao coletam, salvam, enviam formularios, usam cookies ou localStorage. Simulacoes de reconhecimento facial nao podem abrir a camera. Simulacoes de assinatura nao podem enviar, modificar, gerar ou baixar documentos reais.

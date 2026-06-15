@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Simulação educativa da Assinatura Eletrônica gov.br para as oficinas de informática da UnAPI UFMS."
+    />
+    <title>Assinatura Eletrônica gov.br - Treinamento UnAPI</title>
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/assinatura-eletronica.css" />
+  </head>
+  <body class="signature-page">
+    <a class="signature-skip-link" href="#simulador">Ir para a simulação</a>
+
+    <main class="signature-shell">
+      <header class="signature-topbar" aria-label="Cabeçalho do treinamento">
+        <div class="signature-brand">
+          <small>UNAPI UFMS</small>
+          <strong>Assinatura Eletrônica gov.br</strong>
+        </div>
+
+        <nav class="signature-nav" aria-label="Navegação da página">
+          <a href="../ferramentas/">Ferramentas</a>
+          <a href="../">Home</a>
+        </nav>
+      </header>
+
+      <aside class="signature-alert" role="note" aria-label="Aviso de segurança">
+        <span class="signature-alert-mark" aria-hidden="true">!</span>
+        <div>
+          <strong>Ambiente de treinamento — não use dados reais.</strong>
+          <p>Esta página não faz login, não envia arquivos e não assina documentos.</p>
+        </div>
+      </aside>
+
+      <section id="simulador" class="signature-layout" aria-label="Simulador de assinatura eletrônica">
+        <div class="signature-demo-column">
+          <div class="signature-browser">
+            <div class="browser-toolbar" aria-hidden="true">
+              <span class="browser-dot"></span>
+              <span class="browser-dot"></span>
+              <span class="browser-dot"></span>
+              <span class="browser-address">treinamento.unapi/assinatura</span>
+            </div>
+            <section
+              id="signature-screen"
+              class="signature-screen"
+              aria-label="Tela simulada da assinatura eletrônica"
+            ></section>
+          </div>
+          <p class="signature-caption">
+            Arquivo e informações fictícios. Esta demonstração não possui valor legal.
+          </p>
+        </div>
+
+        <aside class="signature-lesson" aria-labelledby="signature-step-title">
+          <div class="signature-lesson-heading">
+            <span class="signature-lesson-label">Guia da oficina</span>
+            <span id="signature-step-counter" class="signature-step-counter" aria-live="polite"></span>
+          </div>
+
+          <h1 id="signature-step-title"></h1>
+          <p id="signature-step-explanation" class="signature-step-explanation"></p>
+          <div id="signature-step-tip" class="signature-step-tip"></div>
+
+          <nav class="signature-controls" aria-label="Controles da simulação">
+            <button type="button" id="signature-prev-step" class="signature-button secondary">
+              Anterior
+            </button>
+            <div
+              id="signature-progress"
+              class="signature-progress"
+              role="progressbar"
+              aria-label="Progresso da simulação"
+              aria-valuemin="1"
+              aria-valuemax="10"
+            ></div>
+            <button type="button" id="signature-next-step" class="signature-button primary">
+              Próximo
+            </button>
+          </nav>
+
+          <p class="signature-keyboard-hint">
+            Dica: use as setas esquerda e direita do teclado para mudar de etapa.
+          </p>
+        </aside>
+      </section>
+    </main>
+
+    <script src="../js/assinatura-eletronica.js" defer></script>
+  </body>
+</html>

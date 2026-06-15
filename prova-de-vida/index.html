@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Simulação educativa da Prova de Vida digital para as oficinas de informática da UnAPI UFMS."
+    />
+    <title>Prova de Vida Digital - Treinamento UnAPI</title>
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/prova-vida.css" />
+  </head>
+  <body class="proof-page">
+    <a class="skip-link" href="#simulador">Ir para a simulação</a>
+
+    <main class="proof-shell">
+      <header class="proof-topbar" aria-label="Cabeçalho do treinamento">
+        <div class="proof-brand">
+          <small>UNAPI UFMS</small>
+          <strong>Prova de Vida Digital</strong>
+        </div>
+
+        <nav class="proof-nav" aria-label="Navegação da página">
+          <a href="../ferramentas/">Ferramentas</a>
+          <a href="../">Home</a>
+        </nav>
+      </header>
+
+      <aside class="training-alert" role="note" aria-label="Aviso de segurança">
+        <span class="training-alert-mark" aria-hidden="true">!</span>
+        <div>
+          <strong>Ambiente de treinamento — não use dados reais.</strong>
+          <p>Esta simulação não acessa o gov.br, não envia informações e não usa câmera.</p>
+        </div>
+      </aside>
+
+      <section id="simulador" class="simulator-layout" aria-label="Simulador de Prova de Vida">
+        <div class="phone-column">
+          <div class="phone-frame">
+            <div class="phone-speaker" aria-hidden="true"></div>
+            <section
+              id="proof-screen"
+              class="phone-screen"
+              aria-label="Tela simulada do aplicativo gov.br"
+            ></section>
+          </div>
+          <p class="phone-caption">
+            Tela ilustrativa. Os nomes, datas e órgãos exibidos são exemplos fictícios.
+          </p>
+        </div>
+
+        <aside class="lesson-panel" aria-labelledby="step-title">
+          <div class="lesson-heading">
+            <span class="lesson-label">Guia da oficina</span>
+            <span id="step-counter" class="step-counter" aria-live="polite"></span>
+          </div>
+
+          <h1 id="step-title"></h1>
+          <p id="step-explanation" class="step-explanation"></p>
+
+          <div id="step-tip" class="step-tip"></div>
+
+          <nav class="step-controls" aria-label="Controles da simulação">
+            <button type="button" id="prev-step" class="step-button secondary">
+              Anterior
+            </button>
+            <div
+              id="step-progress"
+              class="step-progress"
+              role="progressbar"
+              aria-label="Progresso da simulação"
+              aria-valuemin="1"
+              aria-valuemax="9"
+            ></div>
+            <button type="button" id="next-step" class="step-button primary">
+              Próximo
+            </button>
+          </nav>
+
+          <p class="keyboard-hint">
+            Dica: use as setas esquerda e direita do teclado para mudar de etapa.
+          </p>
+        </aside>
+      </section>
+    </main>
+
+    <script src="../js/prova-vida.js" defer></script>
+  </body>
+</html>
