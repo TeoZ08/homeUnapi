@@ -21,6 +21,8 @@ Site estatico para apoiar as oficinas de informatica da UnAPI UFMS. O portal reu
 │   └── index.html
 ├── assinatura-eletronica/
 │   └── index.html
+├── seguranca-digital/
+│   └── index.html
 ├── css/
 │   ├── base.css
 │   ├── home.css
@@ -30,13 +32,15 @@ Site estatico para apoiar as oficinas de informatica da UnAPI UFMS. O portal reu
 │   ├── mouse.css
 │   ├── gov.css
 │   ├── prova-vida.css
-│   └── assinatura-eletronica.css
+│   ├── assinatura-eletronica.css
+│   └── seguranca-digital.css
 ├── js/
 │   ├── teclado.js
 │   ├── mouse.js
 │   ├── gov.js
 │   ├── prova-vida.js
-│   └── assinatura-eletronica.js
+│   ├── assinatura-eletronica.js
+│   └── seguranca-digital.js
 └── img/
     └── imagens compartilhadas em WebP e SVG
 ```
@@ -69,6 +73,8 @@ http://localhost:8000
 - `js/prova-vida.js` controla as nove etapas, os avisos de seguranca e a navegacao da simulacao.
 - `assinatura-eletronica/` contem uma simulacao educativa da Assinatura Eletronica gov.br.
 - `js/assinatura-eletronica.js` controla as dez etapas, o arquivo ficticio e a posicao visual da assinatura.
+- `seguranca-digital/` contem o Desafio Antigolpe, um simulador de decisoes para WhatsApp, e-mail e SMS.
+- `js/seguranca-digital.js` controla todos os dialogos pre-programados, as ramificacoes e o progresso temporario dos cenarios.
 - As imagens institucionais foram convertidas para WebP para reduzir o peso do carregamento.
 
 ## Guia GOV.BR
@@ -88,6 +94,12 @@ O aviso `Ambiente de treinamento — não use dados reais` permanece visivel dur
 A pagina `assinatura-eletronica/` apresenta o fluxo de escolha, conferencia, assinatura e download de um documento digital ficticio. Ela nao faz login, nao permite upload real, nao pede codigos reais, nao gera arquivos e nao integra com gov.br ou ITI.
 
 O documento `documento-treinamento.pdf`, o codigo `000000` e o selo final existem somente na tela da simulacao.
+
+## Desafio Antigolpe
+
+A pagina `seguranca-digital/` ensina a regra `PARE -> CONFIRA -> DECIDA` por meio de conversas e mensagens ficticias. Os tres cenarios usam somente respostas pre-programadas e ficam inteiramente no navegador durante a sessao atual.
+
+O desafio nao coleta dados, nao abre links externos, nao usa inteligencia artificial, nao chama APIs, nao usa cookies nem `localStorage` e nao aceita senhas, codigos, cartoes ou documentos.
 
 ## Publicacao
 
