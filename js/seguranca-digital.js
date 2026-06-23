@@ -12,6 +12,7 @@ let emailLinkExpanded = false;
 const scenarioData = {
   whatsapp: {
     label: "WhatsApp",
+    cardTitle: "Número novo",
     summary: "Um familiar aparece com um número novo e pede dinheiro.",
     signals: [
       "número desconhecido",
@@ -26,6 +27,7 @@ const scenarioData = {
   },
   email: {
     label: "E-mail",
+    cardTitle: "Conta bloqueada",
     summary: "Uma mensagem diz que sua conta será bloqueada.",
     signals: [
       "ameaça de bloqueio",
@@ -40,6 +42,7 @@ const scenarioData = {
   },
   sms: {
     label: "SMS",
+    cardTitle: "Taxa de entrega",
     summary: "Uma encomenda está retida e exige uma pequena taxa.",
     signals: [
       "número desconhecido",
@@ -100,11 +103,9 @@ function render(content, announcement = "", options = {}) {
 
 function ruleBanner() {
   return `
-    <div class="rule-banner" aria-label="Regra de segurança: Pare, confira, decida">
-      <span>PARE</span>
-      <span>CONFIRA</span>
-      <span>DECIDA</span>
-    </div>
+    <p class="rule-line" aria-label="Regra de segurança: Pare, confira, decida">
+      <strong>Pare. Confira. Decida.</strong> Confirme por um contato, aplicativo ou site oficial.
+    </p>
   `;
 }
 
@@ -157,9 +158,9 @@ function renderSelection() {
     <section class="challenge-view">
       <div class="challenge-selection-header">
         <div>
-          <span class="challenge-eyebrow">Escolha um canal</span>
-          <h1 class="challenge-selection-title" data-challenge-title>Qual desafio você quer praticar?</h1>
-          <p class="challenge-selection-copy">Você pode fazer os três desafios em qualquer ordem.</p>
+          <span class="challenge-eyebrow">Escolha uma situação</span>
+          <h1 class="challenge-selection-title" data-challenge-title>Por onde você quer começar?</h1>
+          <p class="challenge-selection-copy">Você pode praticar as três situações em qualquer ordem.</p>
         </div>
         ${progressCard()}
       </div>
@@ -172,7 +173,7 @@ function renderSelection() {
               <button type="button" class="scenario-card ${className} ${completed ? "completed" : ""}" data-action="start-scenario" data-scenario="${id}">
                 <span class="channel-label ${id}">${scenario.label}</span>
                 <div>
-                  <h3>${scenario.label}</h3>
+                  <h3>${scenario.cardTitle}</h3>
                   <p>${scenario.summary}</p>
                 </div>
                 ${
@@ -189,7 +190,7 @@ function renderSelection() {
   `, "Escolha um desafio para praticar.");
 }
 
-function scenarioLayout(channel, title, summary, content, decisionTitle, decisions, feedback = "") {
+function scenarioLayout(channel, title, summary, content, decisionTitle, decisions, feedback = "", sideContent = "") {
   return `
     <section class="challenge-view scenario-view">
       <header class="scenario-header">
@@ -207,6 +208,7 @@ function scenarioLayout(channel, title, summary, content, decisionTitle, decisio
         <section class="scenario-content">${content}</section>
         <aside class="scenario-decision">
           ${feedback}
+          ${sideContent}
           ${
             decisions.length
               ? `
@@ -245,27 +247,27 @@ function renderWhatsapp() {
 
   if (scenarioStage === "decision") {
     decisions = [
-      decisionButton("Qual é a chave Pix?", "whatsapp-choice", "pix"),
-      decisionButton("Me envie um áudio para confirmar.", "whatsapp-choice", "audio"),
-      decisionButton("Vou ligar para o seu número antigo.", "whatsapp-choice", "old-phone"),
-      decisionButton("Vou confirmar com outro familiar.", "whatsapp-choice", "family"),
+      decisionButton("Pedir a chave Pix", "whatsapp-choice", "pix"),
+      decisionButton("Pedir um áudio para confirmar", "whatsapp-choice", "audio"),
+      decisionButton("Ligar para o número antigo", "whatsapp-choice", "old-phone"),
+      decisionButton("Confirmar com outro familiar", "whatsapp-choice", "family"),
     ];
   }
 
   if (scenarioStage === "pix") {
     responses.push(messageBubble("Pode mandar para esta conta. Ela está no nome de um amigo meu porque meu banco está com problema.", "incoming", "10:15", true));
-    feedback = '<div class="feedback-card caution"><strong>Sinal de golpe encontrado</strong>A conversa avançou para o pagamento. Conta em nome de outra pessoa é um sinal importante de alerta.</div>';
+    feedback = '<div class="feedback-card caution"><strong>Conta de terceiro</strong>O pedido mudou para uma conta em nome de outra pessoa.</div>';
     decisions = [
-      decisionButton("Fazer o pagamento", "whatsapp-choice", "pay"),
-      decisionButton("Parar e confirmar por outro contato", "whatsapp-choice", "confirm"),
+      decisionButton("Fazer o Pix para a conta indicada", "whatsapp-choice", "pay"),
+      decisionButton("Encerrar a conversa e confirmar", "whatsapp-choice", "confirm"),
     ];
   }
 
   if (scenarioStage === "audio") {
     responses.push(messageBubble("Agora não consigo falar. O microfone deste celular está quebrado. É urgente!", "incoming", "10:15", true));
-    feedback = '<div class="feedback-card caution"><strong>Atenção</strong>O golpista criou uma desculpa e manteve a urgência. Um áudio também pode ser falso ou reaproveitado.</div>';
+    feedback = '<div class="feedback-card caution"><strong>A urgência continua</strong>O contato evitou uma confirmação simples e manteve a pressão.</div>';
     decisions = [
-      decisionButton("Continuar acreditando", "whatsapp-choice", "believe"),
+      decisionButton("Fazer o Pix mesmo assim", "whatsapp-choice", "believe"),
       decisionButton("Ligar para o número antigo", "whatsapp-choice", "old-phone"),
       decisionButton("Confirmar com outro familiar", "whatsapp-choice", "family"),
     ];
@@ -323,35 +325,28 @@ function renderEmail(renderOptions = {}) {
   const showLinkAddress = emailLinkExpanded;
   const isReply = scenarioStage === "reply";
   const feedback = isReply
-    ? '<div class="feedback-card caution"><strong>Atenção</strong>Responder manteve o contato e trouxe mais pressão para usar o link.</div>'
+    ? '<div class="feedback-card caution"><strong>A pressão voltou</strong>O contato insiste no botão em vez de oferecer outro canal.</div>'
     : "";
   const decisions = isReply
     ? [
-        decisionButton("Usar o botão enviado", "email-choice", "link"),
-        decisionButton("Abrir o serviço pelo endereço oficial", "email-choice", "official"),
-        decisionButton("Denunciar phishing", "email-choice", "report"),
+        decisionButton("Usar o botão do e-mail", "email-choice", "link"),
+        decisionButton("Abrir o serviço oficial", "email-choice", "official"),
+        decisionButton("Denunciar como phishing", "email-choice", "report"),
       ]
     : [
-        decisionButton("Clicar em “Verificar conta agora”", "email-choice", "link"),
-        decisionButton("Responder perguntando se a mensagem é verdadeira", "email-choice", "reply"),
-        decisionButton("Abrir o serviço pelo endereço oficial", "email-choice", "official"),
-        decisionButton("Denunciar phishing", "email-choice", "report"),
+        decisionButton("Usar o botão do e-mail", "email-choice", "link"),
+        decisionButton("Responder a mensagem", "email-choice", "reply"),
+        decisionButton("Abrir o serviço oficial", "email-choice", "official"),
+        decisionButton("Denunciar como phishing", "email-choice", "report"),
       ];
 
   const emailSimulation = `
     <section class="email-sim" aria-label="E-mail simulado">
       <header class="email-topbar">
-        <span class="email-wordmark">e-mail</span>
+        <span class="email-wordmark">Caixa de entrada</span>
       </header>
-      <div class="email-layout">
-        <aside class="email-sidebar" aria-label="Pastas ilustrativas">
-          <span class="active">Caixa de entrada</span>
-          <span>Favoritos</span>
-          <span>Enviados</span>
-          <span>Lixeira</span>
-        </aside>
-        <article class="email-message">
-          <h2 class="email-subject">AÇÃO NECESSÁRIA: sua conta será bloqueada hoje</h2>
+      <article class="email-message">
+          <h2 class="email-subject">Sua conta será bloqueada hoje</h2>
           <div class="sender-row">
             <span class="sender-avatar" aria-hidden="true">S</span>
             <div>
@@ -364,22 +359,21 @@ function renderEmail(renderOptions = {}) {
             <p>Detectamos uma atividade suspeita em sua conta.</p>
             <p>Para evitar o bloqueio, confirme seus dados imediatamente.</p>
             <p>Você tem 30 minutos para concluir a verificação.</p>
-            <button type="button" class="fake-email-link" data-action="email-choice" data-value="link">VERIFICAR CONTA AGORA</button>
+            <button type="button" class="fake-email-link" data-action="email-choice" data-value="link">VERIFICAR CONTA</button>
             <button type="button" class="link-address-toggle" data-action="email-link-address" aria-expanded="${showLinkAddress}" aria-controls="email-link-address">
               ${showLinkAddress ? "Ocultar endereço do link" : "Ver endereço do link"}
             </button>
             <span id="email-link-address" class="link-preview ${showLinkAddress ? "visible" : ""}" aria-live="polite">Destino simulado: conta-segura.example/verificar</span>
-            ${isReply ? '<p class="email-reply" data-new-message><strong>Resposta simulada:</strong> Para evitar o bloqueio, use somente o botão enviado. Não podemos confirmar sua conta por outro canal.</p>' : ""}
+            ${isReply ? '<p class="email-reply" data-new-message><strong>Resposta simulada:</strong> Para evitar o bloqueio, use somente o botão enviado. Não podemos confirmar por outro canal.</p>' : ""}
           </div>
         </article>
-      </div>
     </section>
   `;
 
   render(
     scenarioLayout(
       "email",
-      "E-mail importante ou ameaça falsa?",
+      "E-mail importante ou ameaça?",
       "O bloqueio e o prazo curto tentam apressar sua decisão.",
       emailSimulation,
       isReply ? "E agora, o que você faria?" : "O que você faria?",
@@ -401,11 +395,11 @@ function renderEmailFakePage() {
       <span class="fake-site-logo">conta segura</span>
       <h2>Confirme sua conta</h2>
       <p>A página imita uma área de segurança e tentaria recolher seus dados.</p>
-      <div class="fake-field-list" aria-label="Campos bloqueados e apenas ilustrativos">
-        <div class="fake-field">E-mail</div>
-        <div class="fake-field">Senha</div>
-        <div class="fake-field">Telefone</div>
-        <div class="fake-field">Código de segurança</div>
+      <p class="fake-data-label">Dados que a página pediria</p>
+      <div class="fake-data-list" aria-label="Dados ilustrativos que uma página falsa pediria">
+        <span>Senha</span>
+        <span>Telefone</span>
+        <span>Código de segurança</span>
       </div>
       <div class="interruption-overlay" data-risk-alert>
         <strong>Cuidado: esta página é falsa.</strong>
@@ -420,8 +414,10 @@ function renderEmailFakePage() {
       "O link levou a uma página falsa",
       "A simulação parou antes de qualquer preenchimento.",
       fakePage,
-      "O que você aprendeu?",
-      [decisionButton("Concluir este desafio", "complete-scenario", "risk")]
+      "",
+      [],
+      "",
+      '<section class="scenario-next"><h2>Próximo passo</h2><button type="button" class="decision-button" data-action="complete-scenario" data-value="risk">Ver resultado do desafio</button></section>'
     ),
     "Página falsa simulada. Nenhuma informação pode ser digitada.",
     { focusSelector: "[data-risk-alert]", scrollSelector: "[data-risk-alert]" }
@@ -431,7 +427,7 @@ function renderEmailFakePage() {
 function renderSms() {
   const isReply = scenarioStage === "reply";
   const feedback = isReply
-    ? '<div class="feedback-card caution"><strong>Atenção</strong>A resposta aumentou a pressão e criou um prazo ainda menor.</div>'
+    ? '<div class="feedback-card caution"><strong>Prazo ainda menor</strong>O contato aumentou a pressão para evitar uma conferência.</div>'
     : "";
   const decisions = isReply
     ? [
@@ -473,7 +469,7 @@ function renderSms() {
     scenarioLayout(
       "sms",
       "Entrega retida ou cobrança falsa?",
-      "Uma cobrança pequena pede ação imediata por um link.",
+      "A mensagem pede R$ 4,98 por um link.",
       smsSimulation,
       isReply ? "E agora, o que você faria?" : "O que você faria?",
       decisions,
@@ -493,11 +489,11 @@ function renderSmsFakePage() {
       <span class="fake-site-logo">entrega rápida</span>
       <h2>Taxa de liberação</h2>
       <p>O valor pequeno era uma isca para levar você a uma página que pediria dados pessoais e bancários.</p>
-      <div class="fake-field-list" aria-label="Campos bloqueados e apenas ilustrativos">
-        <div class="fake-field">CPF</div>
-        <div class="fake-field">Endereço</div>
-        <div class="fake-field">Número do cartão</div>
-        <div class="fake-field">Validade e código de segurança</div>
+      <p class="fake-data-label">Dados que a página pediria</p>
+      <div class="fake-data-list" aria-label="Dados ilustrativos que uma página falsa pediria">
+        <span>CPF</span>
+        <span>Número do cartão</span>
+        <span>Código de segurança</span>
       </div>
       <div class="interruption-overlay" data-risk-alert>
         <strong>O valor pequeno era uma isca.</strong>
@@ -512,15 +508,17 @@ function renderSmsFakePage() {
       "A cobrança levou a uma página falsa",
       "A simulação parou antes de qualquer dado.",
       fakePage,
-      "O que você aprendeu?",
-      [decisionButton("Concluir este desafio", "complete-scenario", "risk")]
+      "",
+      [],
+      "",
+      '<section class="scenario-next"><h2>Próximo passo</h2><button type="button" class="decision-button" data-action="complete-scenario" data-value="risk">Ver resultado do desafio</button></section>'
     ),
     "Página falsa simulada. Nenhum dado pode ser informado.",
     { focusSelector: "[data-risk-alert]", scrollSelector: "[data-risk-alert]" }
   );
 }
 
-function renderScenarioResult(kind, isSafe, title, text) {
+function renderScenarioResult(isSafe, title, text) {
   const scenario = scenarioData[activeScenario];
   const isComplete = completedScenarios.size === Object.keys(scenarioData).length;
 
@@ -529,24 +527,16 @@ function renderScenarioResult(kind, isSafe, title, text) {
       <div class="result-topline">
         <div>
           <span class="channel-label ${activeScenario}">${scenario.label}</span>
-          <div class="result-symbol ${isSafe ? "safe" : "risk"}" aria-hidden="true">${isSafe ? "✓" : "!"}</div>
+          <p class="result-status ${isSafe ? "safe" : "risk"}">${isSafe ? "Decisão segura" : "Caminho de risco"}</p>
           <h1 class="result-title" data-challenge-title>${title}</h1>
           <p class="result-copy">${text}</p>
         </div>
         ${progressCard()}
       </div>
-      <div class="feedback-card ${isSafe ? "safe" : "danger"}">
-        <strong>${isSafe ? "Boa decisão" : "Sinal de golpe encontrado"}</strong>
-        ${
-          isSafe
-            ? "Você interrompeu a pressão e confirmou por um canal mais seguro."
-            : "A simulação mostrou como uma resposta apressada mantém você dentro do caminho criado pelo golpista."
-        }
-      </div>
-      <div>
-        <h2 class="result-title">Sinais para lembrar</h2>
+      <section class="result-details">
+        <h2>Sinais para lembrar</h2>
         <ul class="signal-list">${scenario.signals.map((signal) => `<li>${signal}</li>`).join("")}</ul>
-      </div>
+      </section>
       <p class="recommended-action"><strong>Atitude recomendada:</strong> ${scenario.recommended}</p>
       <div class="challenge-action-row">
         <button type="button" class="challenge-action secondary" data-action="retry">Refazer este desafio</button>
@@ -576,17 +566,17 @@ function renderFinal() {
       <div class="final-topline">
         <div>
           <span class="challenge-eyebrow">Segurança digital</span>
-          <div class="final-check" aria-hidden="true">✓</div>
-          <h1 class="final-title" data-challenge-title>Desafio Antigolpe concluído</h1>
-          <p class="final-copy">Você analisou golpes no WhatsApp, e-mail e SMS.</p>
+          <p class="final-status">Atividade concluída</p>
+          <h1 class="final-title" data-challenge-title>Você analisou os três desafios</h1>
+          <p class="final-copy">WhatsApp, e-mail e SMS podem usar urgência para impedir uma confirmação.</p>
         </div>
         ${progressCard()}
       </div>
-      <ul class="final-signal-list">${finalSignals.map((signal) => `<li>${signal}</li>`).join("")}</ul>
       <div class="final-rule-copy">
-        <strong>PARE → CONFIRA → DECIDA</strong>
-        PARE antes de responder. CONFIRA pelo contato, aplicativo ou site oficial. DECIDA somente depois da confirmação.
+        <strong>Pare. Confira. Decida.</strong>
+        Antes de agir, confirme pelo contato, aplicativo ou site oficial.
       </div>
+      <ul class="final-signal-list">${finalSignals.map((signal) => `<li>${signal}</li>`).join("")}</ul>
       <div class="challenge-action-row">
         <button type="button" class="challenge-action" data-action="restart-all">Refazer desafios</button>
         <button type="button" class="challenge-action secondary" data-action="back-selection">Rever apenas um cenário</button>
@@ -617,7 +607,7 @@ function completeScenario(isSafe, title, text) {
   clearTypingTimeout();
   completedScenarios.add(activeScenario);
   currentView = "result";
-  renderScenarioResult(activeScenario, isSafe, title, text);
+  renderScenarioResult(isSafe, title, text);
 }
 
 function handleWhatsappChoice(value) {
@@ -717,7 +707,7 @@ function handleAction(event) {
   if (action === "whatsapp-choice") handleWhatsappChoice(value);
   if (action === "email-choice") handleEmailChoice(value);
   if (action === "sms-choice") handleSmsChoice(value);
-  if (action === "complete-scenario") completeScenario(false, "A tentativa foi interrompida", "Você viu como a página falsa tentaria obter informações. Agora sabe onde parar.");
+  if (action === "complete-scenario") completeScenario(false, "Você abriu um link falso", "O link poderia levar à perda de dados. A simulação parou antes de qualquer preenchimento.");
   if (action === "email-sender") {
     emailAddressExpanded = !emailAddressExpanded;
     renderEmail({ focusSelector: "[data-action=\"email-sender\"]", scrollSelector: "" });
