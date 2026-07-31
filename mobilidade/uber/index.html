@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador de corrida - Mobilidade UnAPI</title>
+    <link rel="stylesheet" href="../../css/base.css" />
+    <link rel="stylesheet" href="../../css/mobilidade.css" />
+    <link rel="stylesheet" href="../../css/mobilidade-uber.css" />
+    <script src="../../js/mobilidade-uber.js" defer></script>
+  </head>
+  <body class="mobility-simulator-page uber-simulator-page has-page-overlay">
+    <main class="simulator-page-shell">
+      <nav class="simulator-toolbar" aria-label="Controles do simulador">
+        <a class="simulator-control" href="../">← Voltar para Mobilidade</a>
+        <button id="reset-simulation" class="simulator-control" type="button">Reiniciar simulação</button>
+        <button id="fullscreen-simulation" class="simulator-control" type="button" aria-pressed="false">Abrir em tela cheia</button>
+      </nav>
+
+      <p class="training-notice">
+        <strong>Ambiente de treinamento — não use dados reais.</strong><br />
+        Simulação educativa. Nenhuma corrida é solicitada e nenhum dado é enviado.
+      </p>
+
+      <section id="simulator-phone" class="phone-frame" aria-label="Celular com aplicativo de corrida simulado">
+        <div class="phone-screen">
+          <div class="phone-status" aria-hidden="true">
+            <span>09:35</span><span class="phone-sensors"></span><span class="phone-signal">▮▮▮ Wi-Fi ▰</span>
+          </div>
+          <div id="uber-app" class="app-viewport"></div>
+          <div class="system-navigation" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <p id="uber-announcement" class="sr-only" aria-live="polite"></p>
+      <noscript>Ative o JavaScript para usar esta simulação educativa.</noscript>
+    </main>
+  </body>
+</html>

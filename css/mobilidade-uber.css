@@ -1,0 +1,656 @@
+.uber-simulator-page {
+  --page-overlay: rgba(255, 248, 220, 0.5);
+}
+
+.uber-app-screen {
+  position: relative;
+  color: #121212;
+  background: #fff;
+}
+
+.uber-topbar {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.uber-topbar h1 {
+  font-size: 21px;
+  line-height: 1.15;
+}
+
+.uber-home {
+  padding: 16px 18px 0;
+}
+
+.uber-home .app-screen-heading {
+  margin: 8px 0 18px;
+  font-size: 31px;
+}
+
+.destination-trigger {
+  min-height: 64px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  border: 0;
+  border-radius: 10px;
+  color: #111;
+  background: #ededed;
+  font: 800 20px/1.2 Arial, Helvetica, sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+
+.destination-trigger::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  border-radius: 3px;
+  background: #111;
+}
+
+.uber-shortcuts {
+  padding: 20px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.uber-shortcut {
+  min-height: 78px;
+  padding: 12px;
+  border: 0;
+  border-radius: 10px;
+  color: #171717;
+  background: #f4f4f4;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.uber-shortcut span {
+  width: 35px;
+  height: 35px;
+  margin-bottom: 8px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #dedede;
+  font-size: 18px;
+}
+
+.uber-home-map {
+  position: relative;
+  min-height: 265px;
+  margin-inline: -18px;
+  overflow: hidden;
+}
+
+.uber-home-map img,
+.uber-map-region > img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.map-caption {
+  position: absolute;
+  z-index: 3;
+  left: 12px;
+  bottom: 12px;
+  max-width: calc(100% - 24px);
+  padding: 7px 10px;
+  border-radius: 7px;
+  color: #454545;
+  background: rgba(255, 255, 255, 0.92);
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.uber-bottom-nav {
+  min-height: 66px;
+  margin-inline: -18px;
+  padding: 8px 10px 4px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid #ddd;
+  background: #fff;
+}
+
+.uber-bottom-nav span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #707070;
+  font-size: 14px;
+}
+
+.uber-bottom-nav .active {
+  color: #111;
+  font-weight: 800;
+}
+
+.uber-bottom-nav b {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.uber-search-fields {
+  padding: 8px 16px 18px;
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 8px 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.field-markers {
+  grid-row: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.field-markers::before,
+.field-markers::after {
+  content: "";
+  width: 11px;
+  height: 11px;
+  border: 3px solid #111;
+}
+
+.field-markers::before {
+  border-radius: 50%;
+}
+
+.field-markers::after {
+  background: #111;
+}
+
+.field-markers span {
+  width: 2px;
+  flex: 0 0 20px;
+  background: #aaa;
+}
+
+.destination-results {
+  padding: 6px 16px 20px;
+}
+
+.destination-results h2 {
+  padding: 13px 0 8px;
+  font-size: 18px;
+}
+
+.app-list-button {
+  width: 100%;
+  min-height: 64px;
+  padding: 11px 4px;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 11px;
+  align-items: center;
+  border: 0;
+  border-bottom: 1px solid #e6e6e6;
+  color: #181818;
+  background: #fff;
+  text-align: left;
+}
+
+.location-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #eeeeee;
+  font-size: 19px;
+}
+
+.app-list-button strong,
+.app-list-button small {
+  display: block;
+}
+
+.app-list-button strong {
+  font-size: 16px;
+}
+
+.app-list-button small {
+  margin-top: 3px;
+  color: #666;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.uber-map-layout {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: minmax(260px, 44%) minmax(0, 1fr);
+}
+
+.uber-map-region {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  background: #e8ebea;
+}
+
+.map-back {
+  position: absolute;
+  z-index: 5;
+  top: 12px;
+  left: 12px;
+  background: #fff;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
+}
+
+.pickup-pins {
+  position: absolute;
+  inset: 0;
+}
+
+.pickup-pin {
+  position: absolute;
+  min-height: 48px;
+  padding: 8px 10px;
+  border: 2px solid #111;
+  border-radius: 9px;
+  color: #111;
+  background: #fff;
+  font: 700 13px/1.2 Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.17);
+}
+
+.pickup-pin.selected {
+  color: #fff;
+  background: #111;
+}
+
+.pickup-pin:nth-child(1) { left: 24px; bottom: 35px; }
+.pickup-pin:nth-child(2) { right: 20px; bottom: 92px; }
+.pickup-pin:nth-child(3) { left: 135px; top: 82px; }
+
+.uber-sheet {
+  position: relative;
+  z-index: 4;
+  min-height: 0;
+  margin-top: -18px;
+  padding: 10px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 22px 22px 0 0;
+  background: #fff;
+  box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.12);
+}
+
+.sheet-handle {
+  width: 45px;
+  height: 5px;
+  margin: 0 auto 10px;
+  border-radius: 999px;
+  background: #d6d9da;
+}
+
+.uber-sheet h1 {
+  margin-bottom: 6px;
+  font-size: 25px;
+}
+
+.uber-sheet-scroll {
+  min-height: 0;
+  padding: 2px 2px 8px;
+  overflow-y: auto;
+}
+
+.pickup-address {
+  margin: 9px 0 16px;
+  color: #606060;
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.ride-list {
+  display: grid;
+  gap: 6px;
+}
+
+.ride-option {
+  width: 100%;
+  min-height: 94px;
+  padding: 8px 10px;
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  border: 3px solid transparent;
+  border-radius: 12px;
+  color: #141414;
+  background: #fff;
+  text-align: left;
+}
+
+.ride-option.selected {
+  border-color: #111;
+}
+
+.ride-option img {
+  width: 90px;
+  max-height: 62px;
+}
+
+.ride-option strong,
+.ride-option span,
+.ride-option small {
+  display: block;
+}
+
+.ride-option strong {
+  margin-bottom: 3px;
+  font-size: 18px;
+}
+
+.ride-option span,
+.ride-option small {
+  font-size: 16px;
+}
+
+.ride-option small {
+  margin-top: 3px;
+  color: #686868;
+}
+
+.ride-price {
+  font-size: 18px !important;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.payment-row {
+  width: 100%;
+  min-height: 54px;
+  margin: 8px 0;
+  padding: 8px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 0;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  color: #171717;
+  background: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.uber-primary {
+  color: #fff;
+  background: #111;
+}
+
+.uber-secondary {
+  margin-top: 8px;
+  color: #111;
+  background: #ededed;
+}
+
+.payment-backdrop {
+  position: absolute;
+  z-index: 40;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(0, 0, 0, 0.36);
+}
+
+.payment-sheet {
+  width: 100%;
+  padding: 13px 18px 24px;
+  border-radius: 22px 22px 0 0;
+  background: #fff;
+  box-shadow: 0 -5px 22px rgba(0, 0, 0, 0.2);
+}
+
+.payment-sheet h2 {
+  margin: 5px 0 12px;
+  font-size: 23px;
+}
+
+.payment-option {
+  width: 100%;
+  min-height: 58px;
+  padding: 10px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+  color: #111;
+  background: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.summary-list {
+  margin: 10px 0 16px;
+  border-top: 1px solid #ddd;
+}
+
+.summary-line {
+  min-height: 58px;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.summary-line span {
+  color: #646464;
+  font-size: 15px;
+}
+
+.summary-line strong {
+  max-width: 60%;
+  font-size: 16px;
+  text-align: right;
+}
+
+.searching-screen {
+  position: relative;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  text-align: center;
+  background: #eef0ef url("../img/mobilidade/mapa-uber.svg") center / cover;
+}
+
+.searching-card {
+  width: 100%;
+  padding: 28px 22px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+.searching-marker {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 20px;
+  border: 18px solid rgba(0, 0, 0, 0.18);
+  border-radius: 50%;
+  background: #111;
+  animation: uber-pulse 1.2s ease-in-out 2;
+}
+
+@keyframes uber-pulse {
+  50% { transform: scale(1.16); border-color: rgba(0, 0, 0, 0.08); }
+}
+
+.searching-card h1 {
+  margin-bottom: 10px;
+  font-size: 25px;
+}
+
+.nearby-car {
+  position: absolute;
+  width: 54px;
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.18));
+}
+
+.nearby-car.one { left: 26px; top: 70px; transform: rotate(18deg); }
+.nearby-car.two { right: 34px; bottom: 92px; transform: rotate(-28deg); }
+
+.driver-map {
+  height: 34%;
+  min-height: 235px;
+}
+
+.driver-sheet {
+  flex: 1;
+}
+
+.arrival-time {
+  margin-bottom: 10px;
+  color: #111;
+  font-size: 18px;
+}
+
+.driver-card {
+  padding: 12px 0 16px;
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.driver-avatar {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+}
+
+.driver-name-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.driver-name-row strong {
+  font-size: 21px;
+}
+
+.driver-vehicle {
+  margin-top: 5px;
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.driver-plate {
+  width: fit-content;
+  margin-top: 8px;
+  padding: 6px 10px;
+  border: 2px solid #111;
+  border-radius: 4px;
+  background: #f7f7f7;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.safety-reminder {
+  margin: 13px 0;
+  padding: 12px;
+  border-left: 5px solid #111;
+  background: #f0f0f0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.driver-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.driver-action {
+  min-height: 54px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 9px;
+  color: #111;
+  background: #f4f4f4;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.completion-screen {
+  padding: 32px 22px;
+  justify-content: center;
+  background: #fff;
+}
+
+.completion-mark {
+  width: 72px;
+  height: 72px;
+  margin-bottom: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: #111;
+  font-size: 38px;
+}
+
+.completion-screen h1 {
+  margin-bottom: 10px;
+  font-size: 31px;
+}
+
+.completion-items {
+  margin: 20px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.completion-items li {
+  padding: 10px 0 10px 30px;
+  border-bottom: 1px solid #e3e3e3;
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.completion-items li::before {
+  content: "✓";
+  margin-left: -28px;
+  margin-right: 12px;
+  font-weight: 900;
+}
+
+@media (max-width: 560px) {
+  .uber-map-layout {
+    grid-template-rows: minmax(225px, 41%) minmax(0, 1fr);
+  }
+
+  .ride-option {
+    grid-template-columns: 76px minmax(0, 1fr) auto;
+  }
+
+  .ride-option img {
+    width: 76px;
+  }
+}
