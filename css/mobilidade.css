@@ -303,35 +303,6 @@
   outline-offset: 3px;
 }
 
-.training-notice {
-  width: min(100%, 900px);
-  padding: 12px 18px;
-  border: 2px solid rgba(84, 42, 88, 0.24);
-  border-radius: 14px;
-  color: var(--unapi-roxo-escuro);
-  background: rgba(255, 248, 220, 0.96);
-  font-size: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-weight: 700;
-  line-height: 1.4;
-  text-align: center;
-}
-
-.training-notice strong {
-  flex: 0 0 auto;
-  color: #8a4a00;
-  white-space: nowrap;
-}
-
-.training-notice strong::after {
-  content: "·";
-  margin-left: 8px;
-  color: rgba(84, 42, 88, 0.45);
-}
-
 .phone-frame {
   position: relative;
   width: min(430px, calc(100vw - 40px));
@@ -419,6 +390,108 @@
   min-height: 0;
   overflow: hidden;
   background: #fff;
+}
+
+.mobility-live-map {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #e5e8e6;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.mobility-live-map .leaflet-tile-pane {
+  filter: saturate(0.74) contrast(0.96) brightness(1.03);
+}
+
+.mobility-live-map .leaflet-control-attribution {
+  padding: 2px 5px;
+  color: #5f6368;
+  background: rgba(255, 255, 255, 0.86);
+  font-size: 8px;
+  line-height: 1.2;
+}
+
+.mobility-live-map .leaflet-control-attribution a {
+  color: inherit;
+}
+
+.mobility-leaflet-icon {
+  border: 0;
+  background: transparent;
+}
+
+.mobility-map-marker {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  color: #fff;
+  background: #1967d2;
+  box-shadow: 0 5px 15px rgba(25, 39, 52, 0.32);
+}
+
+.mobility-map-marker svg {
+  width: 21px;
+  height: 21px;
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+.mobility-map-marker.marker-car {
+  color: #fff;
+  background: #171717;
+}
+
+.mobility-map-marker.marker-destination {
+  background: #d93025;
+}
+
+.mobility-map-marker.marker-walk {
+  background: #0b57d0;
+}
+
+.mobility-map-marker b {
+  position: absolute;
+  right: -7px;
+  top: -7px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 4px;
+  display: grid;
+  place-items: center;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  color: #fff;
+  background: #0b57d0;
+  font-size: 9px;
+  line-height: 1;
+  box-shadow: 0 2px 5px rgba(25, 39, 52, 0.2);
+}
+
+.mobility-map-tooltip {
+  padding: 6px 9px;
+  border: 0;
+  border-radius: 7px;
+  color: #242424;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 3px 12px rgba(25, 39, 52, 0.2);
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.mobility-map-tooltip::before {
+  display: none;
+}
+
+.mobility-route {
+  filter: drop-shadow(0 1px 1px rgba(25, 39, 52, 0.2));
 }
 
 .ui-icon {
@@ -514,6 +587,10 @@
 .app-screen-heading {
   font-size: 27px;
   line-height: 1.1;
+}
+
+[data-screen-heading]:focus {
+  outline: none;
 }
 
 .app-copy {
@@ -682,34 +759,6 @@
 
   .simulator-control:hover {
     color: var(--unapi-roxo);
-  }
-
-  .training-notice {
-    width: 100%;
-    min-height: 38px;
-    padding: 6px 10px;
-    border-width: 0 0 2px;
-    border-radius: 0;
-    justify-content: flex-start;
-    gap: 5px;
-    font-size: 12px;
-    line-height: 1.25;
-    text-align: left;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-
-  .training-notice strong {
-    flex: 0 0 auto;
-  }
-
-  .training-notice strong::after {
-    margin-left: 5px;
-  }
-
-  .training-notice span {
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   .phone-frame {

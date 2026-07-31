@@ -86,8 +86,9 @@ http://localhost:8000
 - `js/assinatura-eletronica.js` controla as dez etapas, o arquivo ficticio e a posicao visual da assinatura.
 - `seguranca-digital/` contem o Desafio Antigolpe, um simulador de decisoes para WhatsApp, e-mail e SMS.
 - `js/seguranca-digital.js` controla todos os dialogos pre-programados, as ramificacoes e o progresso temporario dos cenarios.
-- `mobilidade/` reúne dois simuladores: solicitação de corrida e planejamento de viagem de ônibus.
-- `js/mobilidade-uber.js` e `js/mobilidade-maps.js` controlam os fluxos locais e temporários dos simuladores.
+- `mobilidade/` reúne duas experiências interativas: solicitação de corrida e planejamento de viagem de ônibus.
+- `js/mobilidade-uber.js` e `js/mobilidade-maps.js` controlam os fluxos temporários das experiências de mobilidade.
+- `js/mobilidade-map.js` integra Leaflet, tiles do OpenStreetMap e geometrias de rota alinhadas à malha viária de Campo Grande.
 - As imagens institucionais foram convertidas para WebP para reduzir o peso do carregamento.
 
 ## Guia GOV.BR
@@ -116,9 +117,9 @@ O desafio nao coleta dados, nao abre links externos, nao usa inteligencia artifi
 
 ## Mobilidade com o celular
 
-Os simuladores de corrida e transporte público usam apenas HTML, CSS, JavaScript e SVGs locais. Todos os locais, preços, horários, linhas, veículos e pessoas exibidos são dados fictícios de treinamento.
+As experiências de corrida e transporte público usam HTML, CSS, JavaScript e Leaflet 1.9.4. O mapa é carregado do OpenStreetMap e os trajetos versionados usam coordenadas geográficas reais entre a AGEAD/UFMS e os destinos apresentados.
 
-As atividades funcionam integralmente no navegador, sem APIs externas, geolocalização, pagamentos, chamadas telefônicas, envio de formulários ou armazenamento das escolhas.
+Os traçados são armazenados localmente depois de calculados sobre a malha viária, portanto não há consulta de roteamento durante o uso. O carregamento do Leaflet e dos tiles requer internet, mas não exige token, cadastro ou chave. Não há geolocalização, pagamentos, chamadas telefônicas, envio de formulários ou armazenamento das escolhas.
 
 No celular, os fluxos usam transições direcionais, folhas inferiores, feedback tátil opcional quando o navegador oferece vibração e gesto de arrastar da borda esquerda para voltar. Os botões de navegação continuam disponíveis, e os ícones ficam no sprite SVG local `img/mobilidade/ui-icons.svg`.
 

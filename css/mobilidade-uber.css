@@ -253,33 +253,6 @@
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
 }
 
-.pickup-pins {
-  position: absolute;
-  inset: 0;
-}
-
-.pickup-pin {
-  position: absolute;
-  min-height: 48px;
-  padding: 8px 10px;
-  border: 2px solid #111;
-  border-radius: 9px;
-  color: #111;
-  background: #fff;
-  font: 700 13px/1.2 Arial, Helvetica, sans-serif;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.17);
-}
-
-.pickup-pin.selected {
-  color: #fff;
-  background: #111;
-}
-
-.pickup-pin:nth-child(1) { left: 24px; bottom: 35px; }
-.pickup-pin:nth-child(2) { right: 20px; bottom: 92px; }
-.pickup-pin:nth-child(3) { left: 135px; top: 82px; }
-
 .uber-sheet {
   position: relative;
   z-index: 4;
@@ -474,10 +447,12 @@
   justify-content: center;
   padding: 30px;
   text-align: center;
-  background: #eef0ef url("../img/mobilidade/mapa-uber.svg") center / cover;
+  background: #eef0ef;
 }
 
 .searching-card {
+  position: relative;
+  z-index: 2;
   width: 100%;
   padding: 28px 22px;
   border-radius: 20px;
@@ -506,6 +481,7 @@
 
 .nearby-car {
   position: absolute;
+  z-index: 1;
   width: 54px;
   filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.18));
 }
@@ -660,6 +636,14 @@
   touch-action: pan-y;
 }
 
+.uber-simulator-page .mobility-live-map .leaflet-tile-pane {
+  filter: saturate(0.35) contrast(0.98) brightness(1.04);
+}
+
+.searching-live-map {
+  z-index: 0;
+}
+
 .uber-home-kicker {
   display: flex;
   align-items: center;
@@ -798,50 +782,6 @@
 
 #uber-app[data-screen="summary"] .uber-map-layout {
   grid-template-rows: minmax(245px, 38%) minmax(0, 1fr);
-}
-
-.uber-map-region > img,
-.uber-home-map > img {
-  transform: scale(1.025);
-}
-
-.map-car {
-  position: absolute;
-  z-index: 3;
-  width: 32px;
-  height: 24px;
-  display: grid;
-  place-items: center;
-  border: 3px solid #fff;
-  border-radius: 8px;
-  color: #111;
-  background: #fff;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.22);
-}
-
-.map-car .ui-icon {
-  width: 19px;
-  height: 19px;
-}
-
-.map-car-a {
-  top: 32%;
-  left: 46%;
-  animation: map-car-a 5.5s ease-in-out infinite alternate;
-}
-
-.map-car-b {
-  right: 18%;
-  bottom: 22%;
-  animation: map-car-b 6.8s ease-in-out infinite alternate;
-}
-
-@keyframes map-car-a {
-  to { transform: translate(30px, -22px) rotate(-8deg); }
-}
-
-@keyframes map-car-b {
-  to { transform: translate(-24px, 18px) rotate(10deg); }
 }
 
 .route-overview-chip {

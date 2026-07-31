@@ -65,4 +65,6 @@ Nao remover os avisos de seguranca do GOV.BR. Os mockups nao coletam, salvam, en
 
 Os simuladores de mobilidade podem adotar densidade, movimento e hierarquia mais proximos de aplicativos reais. Priorizar mapas como superficie principal, folhas inferiores em camadas, transicoes direcionais, feedback ao toque e navegacao contextual dentro do aparelho.
 
-No celular real, reduzir ao minimo a interface externa do portal para preservar imersao. Manter botoes tradicionais mesmo quando houver gestos equivalentes e preservar sempre um aviso compacto de simulacao.
+No celular real, reduzir ao minimo a interface externa do portal para preservar imersao. Manter botoes tradicionais mesmo quando houver gestos equivalentes. Em Mobilidade, nao exibir faixas ou avisos externos que interrompam a experiencia do aplicativo.
+
+Usar Leaflet com OpenStreetMap como base cartografica real. Trajetos devem vir de geometrias de roteamento aderentes as ruas, nunca de curvas desenhadas manualmente. Marcadores, progresso e alternativas devem compartilhar a mesma geometria geografica.
