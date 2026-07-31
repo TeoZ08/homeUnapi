@@ -68,6 +68,21 @@
   background: #ececeb;
 }
 
+.mobility-card-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 28%, rgba(255, 255, 255, 0.34) 50%, transparent 72%);
+  transform: translateX(-120%);
+  transition: transform 0.65s ease;
+  pointer-events: none;
+}
+
+.mobility-card:hover .mobility-card-visual::after,
+.mobility-card:focus-visible .mobility-card-visual::after {
+  transform: translateX(120%);
+}
+
 .ride-card .mobility-card-visual {
   background-color: #e9ecea;
   background-image:
@@ -92,6 +107,12 @@
   right: 15px;
   bottom: 12px;
   filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.18));
+  transition: transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ride-card:hover .mobility-card-visual img,
+.ride-card:focus-visible .mobility-card-visual img {
+  transform: translate(-34px, -9px) rotate(-2deg);
 }
 
 .transit-card .mobility-card-visual {
@@ -144,6 +165,12 @@
   font-weight: 900;
   letter-spacing: 0.04em;
   transform: rotate(-3deg);
+  transition: transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.transit-card:hover .bus-glyph,
+.transit-card:focus-visible .bus-glyph {
+  transform: translate(25px, -18px) rotate(-3deg);
 }
 
 .mobility-card-content {
@@ -224,7 +251,8 @@
 }
 
 .simulator-toolbar {
-  width: 100%;
+  width: fit-content;
+  max-width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -247,12 +275,21 @@
   font: 800 16px/1.2 var(--unapi-fonte);
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.18s ease, background-color 0.18s ease;
+  transition: transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 .simulator-control:hover {
   background: var(--unapi-amarelo);
   transform: translateY(-2px);
+}
+
+.simulator-control:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.control-symbol {
+  font-size: 22px;
+  line-height: 1;
 }
 
 .simulator-control:focus-visible,
@@ -267,20 +304,32 @@
 }
 
 .training-notice {
-  width: min(100%, 760px);
+  width: min(100%, 900px);
   padding: 12px 18px;
   border: 2px solid rgba(84, 42, 88, 0.24);
   border-radius: 14px;
   color: var(--unapi-roxo-escuro);
   background: rgba(255, 248, 220, 0.96);
-  font-size: 16px;
-  font-weight: 800;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
   line-height: 1.4;
   text-align: center;
 }
 
 .training-notice strong {
+  flex: 0 0 auto;
   color: #8a4a00;
+  white-space: nowrap;
+}
+
+.training-notice strong::after {
+  content: "·";
+  margin-left: 8px;
+  color: rgba(84, 42, 88, 0.45);
 }
 
 .phone-frame {
@@ -290,8 +339,19 @@
   padding: 14px;
   border: 3px solid #3e4245;
   border-radius: 54px;
-  background: #090a0b;
-  box-shadow: 0 24px 48px rgba(25, 16, 28, 0.3), inset 0 0 0 2px #17191a;
+  background: linear-gradient(145deg, #34383b 0%, #08090a 14%, #050506 78%, #24282a 100%);
+  box-shadow: 0 28px 68px rgba(25, 16, 28, 0.35), 0 8px 18px rgba(25, 16, 28, 0.2), inset 0 0 0 2px #17191a;
+}
+
+.phone-frame > .phone-screen::before {
+  content: "";
+  position: absolute;
+  z-index: 60;
+  inset: 14px auto 14px 14px;
+  width: 35%;
+  border-radius: 39px 0 0 39px;
+  background: linear-gradient(105deg, rgba(255, 255, 255, 0.07), transparent 48%);
+  pointer-events: none;
 }
 
 .phone-frame::before,
@@ -315,6 +375,7 @@
 }
 
 .phone-screen {
+  position: relative;
   height: 100%;
   overflow: hidden;
   display: grid;
@@ -354,9 +415,30 @@
 }
 
 .app-viewport {
+  position: relative;
   min-height: 0;
   overflow: hidden;
   background: #fff;
+}
+
+.ui-icon {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  display: inline-block;
+  fill: currentColor;
+  stroke: currentColor;
+  pointer-events: none;
+}
+
+.ui-icon.icon-small {
+  width: 19px;
+  height: 19px;
+}
+
+.ui-icon.icon-large {
+  width: 28px;
+  height: 28px;
 }
 
 .system-navigation {
@@ -383,6 +465,43 @@
   display: flex;
   flex-direction: column;
   background: #fff;
+}
+
+.app-screen.app-enter-forward {
+  animation: app-screen-forward 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.app-screen.app-enter-back {
+  animation: app-screen-back 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.app-screen.app-enter-soft {
+  animation: app-screen-soft 0.2s ease-out both;
+}
+
+.app-viewport.is-swiping .app-screen,
+.app-screen.is-swiping {
+  transition: transform 0.08s linear;
+}
+
+.app-screen.swipe-cancel {
+  transform: translateX(0) !important;
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes app-screen-forward {
+  from { opacity: 0.35; transform: translateX(22px) scale(0.992); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes app-screen-back {
+  from { opacity: 0.35; transform: translateX(-20px) scale(0.992); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes app-screen-soft {
+  from { opacity: 0.72; }
+  to { opacity: 1; }
 }
 
 .app-scroll {
@@ -420,6 +539,19 @@
   border-radius: 9px;
   font-size: 17px;
   font-weight: 800;
+  transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
+}
+
+.app-button:hover {
+  filter: brightness(0.97);
+}
+
+.app-button:active,
+.app-icon-button:active,
+.selection-card:active,
+.app-list-button:active,
+.transport-mode:active {
+  transform: scale(0.97);
 }
 
 .app-icon-button {
@@ -431,6 +563,7 @@
   background: #f2f2f2;
   font-size: 22px;
   font-weight: 700;
+  transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
 .app-field {
@@ -462,6 +595,12 @@
   font-weight: 700;
   text-align: center;
   box-shadow: 0 7px 20px rgba(0, 0, 0, 0.24);
+  animation: toast-in 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .sr-only {
@@ -501,21 +640,44 @@
   }
 
   .simulator-toolbar {
-    padding: 8px;
-    justify-content: flex-start;
-    gap: 6px;
+    width: 100%;
+    min-height: 58px;
+    padding: 7px 10px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 46px 46px;
+    gap: 8px;
     background: var(--unapi-roxo);
   }
 
   .simulator-control {
-    min-height: 48px;
-    padding: 8px 10px;
-    flex: 1 1 auto;
+    min-width: 46px;
+    min-height: 44px;
+    padding: 8px 11px;
     border: 1px solid rgba(255, 248, 220, 0.28);
     color: var(--unapi-fundo);
     background: rgba(255, 248, 220, 0.1);
     box-shadow: none;
-    font-size: 13px;
+    border-radius: 14px;
+    font-size: 14px;
+  }
+
+  .simulator-control:not(.simulator-back) span:last-child {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .simulator-back {
+    justify-content: flex-start;
+  }
+
+  .simulator-back span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .simulator-control:hover {
@@ -524,10 +686,30 @@
 
   .training-notice {
     width: 100%;
-    padding: 9px 12px;
+    min-height: 38px;
+    padding: 6px 10px;
     border-width: 0 0 2px;
     border-radius: 0;
-    font-size: 13px;
+    justify-content: flex-start;
+    gap: 5px;
+    font-size: 12px;
+    line-height: 1.25;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .training-notice strong {
+    flex: 0 0 auto;
+  }
+
+  .training-notice strong::after {
+    margin-left: 5px;
+  }
+
+  .training-notice span {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .phone-frame {
@@ -551,21 +733,13 @@
     border-radius: 0;
   }
 
+  .phone-frame > .phone-screen::before {
+    display: none;
+  }
+
   .phone-status {
     padding-inline: 16px;
   }
-}
-
-@media (max-width: 380px) {
-  .simulator-toolbar {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .simulator-toolbar .simulator-control:first-child {
-    grid-column: 1 / -1;
-  }
-
 }
 
 @media (prefers-reduced-motion: reduce) {

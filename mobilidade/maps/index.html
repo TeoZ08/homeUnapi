@@ -13,14 +13,14 @@
   <body class="mobility-simulator-page maps-simulator-page has-page-overlay">
     <main class="simulator-page-shell">
       <nav class="simulator-toolbar" aria-label="Controles do simulador">
-        <a class="simulator-control" href="../">← Voltar para Mobilidade</a>
-        <button id="reset-simulation" class="simulator-control" type="button">Reiniciar simulação</button>
-        <button id="fullscreen-simulation" class="simulator-control" type="button" aria-pressed="false">Abrir em tela cheia</button>
+        <a class="simulator-control simulator-back" href="../"><svg class="ui-icon" aria-hidden="true"><use href="../../img/mobilidade/ui-icons.svg#m-arrow-back"></use></svg><span>Voltar para Mobilidade</span></a>
+        <button id="reset-simulation" class="simulator-control" type="button"><span class="control-symbol" aria-hidden="true">↻</span><span>Reiniciar simulação</span></button>
+        <button id="fullscreen-simulation" class="simulator-control" type="button" aria-pressed="false"><span class="control-symbol" aria-hidden="true">⛶</span><span data-fullscreen-label>Abrir em tela cheia</span></button>
       </nav>
 
       <p class="training-notice">
-        <strong>Ambiente de treinamento — não use dados reais.</strong><br />
-        Simulação educativa. Nenhuma rota é iniciada e nenhum dado é enviado.
+        <strong>Ambiente de treinamento</strong>
+        <span>Não use dados reais. Nenhuma rota é iniciada e nenhum dado é enviado.</span>
       </p>
 
       <section id="simulator-phone" class="phone-frame" aria-label="Celular com aplicativo de mapas simulado">

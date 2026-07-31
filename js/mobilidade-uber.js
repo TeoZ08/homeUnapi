@@ -3,6 +3,11 @@ const uberAnnouncement = document.getElementById("uber-announcement");
 const simulatorPhone = document.getElementById("simulator-phone");
 const resetButton = document.getElementById("reset-simulation");
 const fullscreenButton = document.getElementById("fullscreen-simulation");
+const fullscreenLabel = fullscreenButton.querySelector("[data-fullscreen-label]");
+
+function icon(name, className = "") {
+  return `<svg class="ui-icon ${className}" aria-hidden="true"><use href="../../img/mobilidade/ui-icons.svg#${name}"></use></svg>`;
+}
 
 const uberScenario = {
   origin: {
@@ -26,6 +31,9 @@ const uberScenario = {
       id: "uberx",
       name: "UberX",
       time: "4 min",
+      duration: "12 min",
+      arrival: "09:51",
+      capacity: "4 lugares",
       price: "R$ 22,90",
       note: "Econômico",
       image: "../../img/mobilidade/carro-economico.svg",
@@ -34,6 +42,9 @@ const uberScenario = {
       id: "comfort",
       name: "Comfort",
       time: "7 min",
+      duration: "12 min",
+      arrival: "09:54",
+      capacity: "4 lugares",
       price: "R$ 28,40",
       note: "Mais conforto",
       image: "../../img/mobilidade/carro-comfort.svg",
@@ -42,6 +53,9 @@ const uberScenario = {
       id: "prioridade",
       name: "Prioridade",
       time: "2 min",
+      duration: "12 min",
+      arrival: "09:49",
+      capacity: "4 lugares",
       price: "R$ 31,60",
       note: "Embarque mais rápido",
       image: "../../img/mobilidade/carro-prioridade.svg",
@@ -64,6 +78,22 @@ let paymentOpen = false;
 let searchingTimer = null;
 let toastTimer = null;
 let toastMessage = "";
+let navigationDirection = "forward";
+let swipeStart = null;
+
+const backScreens = {
+  search: "home",
+  pickup: "search",
+  rides: "pickup",
+  summary: "rides",
+  searching: "rides",
+  driver: "rides",
+  complete: "home",
+};
+
+function haptic(pattern = 10) {
+  if (typeof navigator.vibrate === "function") navigator.vibrate(pattern);
+}
 
 function announce(message) {
   uberAnnouncement.textContent = "";
@@ -91,12 +121,14 @@ function clearSearchingTimer() {
   searchingTimer = null;
 }
 
-function setScreen(screen, message = "") {
+function setScreen(screen, message = "", direction = "forward") {
   clearSearchingTimer();
   paymentOpen = false;
   toastMessage = "";
+  navigationDirection = direction;
   currentScreen = screen;
   renderScreen();
+  haptic(direction === "back" ? 6 : 10);
   announce(message || `Tela ${screen} aberta.`);
   focusPrimaryHeading();
 }
@@ -111,7 +143,9 @@ function resetSimulation() {
   selectedPayment = "Dinheiro";
   paymentOpen = false;
   toastMessage = "";
+  navigationDirection = "soft";
   renderScreen();
+  haptic([8, 30, 8]);
   announce("Simulação reiniciada. Tela inicial aberta.");
   focusPrimaryHeading();
 }
@@ -119,11 +153,16 @@ function resetSimulation() {
 function showToast(message) {
   window.clearTimeout(toastTimer);
   toastMessage = message;
-  renderScreen({ preserveFocus: true });
+  uberApp.querySelector(".screen-toast")?.remove();
+  const toast = document.createElement("p");
+  toast.className = "screen-toast";
+  toast.setAttribute("role", "status");
+  toast.textContent = message;
+  uberApp.querySelector(".app-screen")?.append(toast);
   announce(message);
   toastTimer = window.setTimeout(() => {
     toastMessage = "";
-    renderScreen({ preserveFocus: true });
+    uberApp.querySelector(".screen-toast")?.remove();
   }, 2600);
 }
 
@@ -131,7 +170,10 @@ function mapMarkup(extraClass = "") {
   return `
     <div class="uber-map-region ${extraClass}">
       <img src="../../img/mobilidade/mapa-uber.svg" alt="Mapa ilustrativo da rota entre a UnAPI e a Praça Ary Coelho" />
-      <p class="map-caption">Mapa ilustrativo para treinamento — não representa navegação em tempo real.</p>
+      <span class="map-car map-car-a" aria-hidden="true">${icon("car")}</span>
+      <span class="map-car map-car-b" aria-hidden="true">${icon("car")}</span>
+      <div class="route-overview-chip"><span><small>De</small>${selectedPickup}</span><b aria-hidden="true">→</b><span><small>Para</small>${selectedDestination.name}</span></div>
+      <p class="map-caption">Mapa ilustrativo • sem navegação em tempo real</p>
     </div>
   `;
 }
@@ -139,22 +181,24 @@ function mapMarkup(extraClass = "") {
 function renderHome() {
   return `
     <section class="app-screen uber-app-screen uber-home">
-      <p class="app-copy">Bom dia!</p>
+      <div class="uber-home-kicker"><span>Bom dia!</span><span class="live-location">${icon("locate", "icon-small")} UnAPI/AGEAD</span></div>
       <h1 class="app-screen-heading" data-screen-heading>Para onde você vai?</h1>
-      <button type="button" class="destination-trigger" data-action="open-search">Para onde?</button>
+      <button type="button" class="destination-trigger" data-action="open-search">${icon("search")}<span>Para onde?</span><small>Agora</small></button>
       <div class="uber-shortcuts" aria-label="Atalhos de lugares">
-        <button type="button" class="uber-shortcut" data-action="choose-destination" data-destination="Praça Ary Coelho"><span aria-hidden="true">★</span>Praça Ary Coelho</button>
-        <button type="button" class="uber-shortcut" data-action="choose-destination" data-destination="Terminal Morenão"><span aria-hidden="true">⌁</span>Terminal Morenão</button>
+        <button type="button" class="uber-shortcut" data-action="choose-destination" data-destination="Praça Ary Coelho"><span aria-hidden="true">${icon("star")}</span><strong>Praça Ary Coelho</strong><small>12 min</small></button>
+        <button type="button" class="uber-shortcut" data-action="choose-destination" data-destination="Terminal Morenão"><span aria-hidden="true">${icon("map-pin")}</span><strong>Terminal Morenão</strong><small>5 min</small></button>
       </div>
       <div class="uber-home-map">
         <img src="../../img/mobilidade/mapa-uber.svg" alt="Mapa ilustrativo próximo à UnAPI e ao Centro" />
-        <p class="map-caption">Localização simulada: UnAPI/UFMS — AGEAD</p>
+        <span class="home-location-pulse" aria-hidden="true"></span>
+        <button type="button" class="map-locate-button" data-action="simulated-feature" data-feature="Centralizar mapa" aria-label="Centralizar mapa">${icon("locate")}</button>
+        <p class="map-caption">Localização simulada • UnAPI/UFMS — AGEAD</p>
       </div>
       <nav class="uber-bottom-nav" aria-label="Navegação simulada do aplicativo">
-        <span class="active"><b aria-hidden="true">●</b>Início</span>
-        <span><b aria-hidden="true">▦</b>Serviços</span>
-        <span><b aria-hidden="true">▤</b>Atividade</span>
-        <span><b aria-hidden="true">●</b>Conta</span>
+        <span class="active">${icon("home")}Início</span>
+        <span>${icon("grid")}Serviços</span>
+        <span>${icon("clock")}Atividade</span>
+        <span>${icon("user")}Conta</span>
       </nav>
     </section>
   `;
@@ -163,7 +207,7 @@ function renderHome() {
 function destinationButton(destination) {
   return `
     <button type="button" class="app-list-button" data-action="choose-destination" data-destination="${destination.name}">
-      <span class="location-icon" aria-hidden="true">●</span>
+      <span class="location-icon" aria-hidden="true">${icon("map-pin")}</span>
       <span><strong>${destination.name}</strong><small>${destination.detail}</small></span>
     </button>
   `;
@@ -173,7 +217,7 @@ function renderSearch() {
   return `
     <section class="app-screen uber-app-screen">
       <header class="uber-topbar">
-        <button type="button" class="app-icon-button" data-action="back-home" aria-label="Voltar à tela inicial">←</button>
+        <button type="button" class="app-icon-button" data-action="back-home" aria-label="Voltar à tela inicial">${icon("arrow-left")}</button>
         <h1 data-screen-heading>Pesquisar destino</h1>
       </header>
       <div class="uber-search-fields">
@@ -194,7 +238,7 @@ function renderPickup() {
     <section class="app-screen uber-app-screen uber-map-layout">
       <div class="uber-map-region">
         <img src="../../img/mobilidade/mapa-uber.svg" alt="Mapa ilustrativo dos pontos de embarque próximos à UnAPI" />
-        <button type="button" class="app-icon-button map-back" data-action="back-search" aria-label="Voltar à pesquisa">←</button>
+        <button type="button" class="app-icon-button map-back" data-action="back-search" aria-label="Voltar à pesquisa">${icon("arrow-left")}</button>
         <div class="pickup-pins" aria-label="Pontos simulados de embarque">
           ${uberScenario.pickupPoints
             .map((point) => `<button type="button" class="pickup-pin ${point === selectedPickup ? "selected" : ""}" data-action="select-pickup" data-pickup="${point}">${point}</button>`)
@@ -206,7 +250,7 @@ function renderPickup() {
         <h1 data-screen-heading>Confirme o local de partida</h1>
         <div class="uber-sheet-scroll">
           <p class="pickup-address"><strong>${selectedPickup}</strong><br />${uberScenario.origin.detail}</p>
-          <p class="app-copy">Toque em um dos três pontos do mapa para simular o ajuste do marcador.</p>
+          <p class="pickup-hint">${icon("locate", "icon-small")} Toque em um ponto para ajustar o embarque.</p>
         </div>
         <button type="button" class="app-button uber-primary" data-action="confirm-pickup">Confirmar local de partida</button>
       </section>
@@ -219,8 +263,8 @@ function rideButton(ride) {
   return `
     <button type="button" class="selection-card ride-option ${selected ? "selected" : ""}" data-action="select-ride" data-ride="${ride.id}" aria-pressed="${selected}">
       <img src="${ride.image}" alt="" />
-      <span><strong>${ride.name}</strong><span>${ride.time}</span><small>${ride.note}</small></span>
-      <span class="ride-price">${ride.price}</span>
+      <span class="ride-main"><strong>${ride.name}</strong><span>${ride.time} • ${ride.duration}</span><small>${ride.note} • ${ride.capacity}</small></span>
+      <span class="ride-side"><strong class="ride-price">${ride.price}</strong><small>${ride.arrival}</small>${selected ? '<span class="ride-selected-mark">✓</span>' : ""}</span>
     </button>
   `;
 }
@@ -232,10 +276,10 @@ function paymentSheet() {
       <section class="payment-sheet" role="dialog" aria-modal="true" aria-labelledby="payment-title">
         <span class="sheet-handle" aria-hidden="true"></span>
         <h2 id="payment-title" data-screen-heading>Forma de pagamento</h2>
-        <button type="button" class="payment-option" data-action="select-payment" data-payment="Dinheiro">Dinheiro <span>${selectedPayment === "Dinheiro" ? "✓" : ""}</span></button>
-        <button type="button" class="payment-option" data-action="select-payment" data-payment="Cartão •••• 1234">Cartão •••• 1234 <span>${selectedPayment !== "Dinheiro" ? "✓" : ""}</span></button>
+        <button type="button" class="payment-option" data-action="select-payment" data-payment="Dinheiro"><span>${icon("banknote")} Dinheiro</span><span>${selectedPayment === "Dinheiro" ? "✓" : ""}</span></button>
+        <button type="button" class="payment-option" data-action="select-payment" data-payment="Cartão •••• 1234"><span>${icon("credit-card")} Cartão •••• 1234</span><span>${selectedPayment !== "Dinheiro" ? "✓" : ""}</span></button>
         <p class="app-copy">O cartão é fictício. Nenhum dado de pagamento é solicitado.</p>
-        <button type="button" class="app-button uber-secondary" data-action="close-payment">Fechar</button>
+        <button type="button" class="app-button uber-secondary" data-action="close-payment">Concluído</button>
       </section>
     </div>
   `;
@@ -246,17 +290,18 @@ function renderRides() {
     <section class="app-screen uber-app-screen uber-map-layout">
       <div class="uber-map-region">
         <img src="../../img/mobilidade/mapa-uber.svg" alt="Mapa ilustrativo do percurso da UnAPI até a Praça Ary Coelho" />
-        <button type="button" class="app-icon-button map-back" data-action="back-pickup" aria-label="Voltar ao local de partida">←</button>
+        <button type="button" class="app-icon-button map-back" data-action="back-pickup" aria-label="Voltar ao local de partida">${icon("arrow-left")}</button>
+        <span class="route-eta-chip">${icon("clock", "icon-small")} ${selectedRide.duration} até ${selectedDestination.name}</span>
       </div>
       <section class="uber-sheet">
         <span class="sheet-handle" aria-hidden="true"></span>
         <h1 data-screen-heading>Escolha uma viagem</h1>
         <div class="uber-sheet-scroll">
           <div class="ride-list">${uberScenario.rideOptions.map(rideButton).join("")}</div>
-          <button type="button" class="payment-row" data-action="open-payment"><span>${selectedPayment}</span><span aria-hidden="true">›</span></button>
-          <p class="app-copy">Valores simulados para treinamento.</p>
+          <button type="button" class="payment-row" data-action="open-payment"><span>${selectedPayment.startsWith("Cartão") ? icon("credit-card") : icon("banknote")}<span>${selectedPayment}</span></span><b>Alterar</b></button>
+          <p class="ride-disclaimer">Preços e tempos simulados.</p>
         </div>
-        <button type="button" class="app-button uber-primary" data-action="review-ride">Escolher ${selectedRide.name}</button>
+        <button type="button" class="app-button uber-primary ride-confirm-button" data-action="review-ride"><span>Escolher ${selectedRide.name}</span><strong>${selectedRide.price}</strong></button>
       </section>
       ${paymentSheet()}
     </section>
@@ -283,7 +328,7 @@ function renderSummary() {
         <span class="sheet-handle" aria-hidden="true"></span>
         <h1 data-screen-heading>Confira sua corrida</h1>
         <div class="uber-sheet-scroll">${summaryLines()}<p class="app-copy">Dados e valor totalmente fictícios.</p></div>
-        <button type="button" class="app-button uber-primary" data-action="confirm-ride">Confirmar ${selectedRide.name}</button>
+        <button type="button" class="app-button uber-primary ride-confirm-button" data-action="confirm-ride"><span>Confirmar ${selectedRide.name}</span><strong>${selectedRide.price}</strong></button>
         <button type="button" class="app-button uber-secondary" data-action="back-rides">Alterar viagem</button>
       </section>
     </section>
@@ -293,7 +338,7 @@ function renderSummary() {
 function renderSearching() {
   searchingTimer = window.setTimeout(() => {
     if (currentScreen === "searching") setScreen("driver", "Motorista fictício encontrado. Confira os dados do veículo.");
-  }, 1500);
+  }, prefersReducedMotion() ? 600 : 2100);
 
   return `
     <section class="app-screen uber-app-screen searching-screen">
@@ -302,7 +347,8 @@ function renderSearching() {
       <div class="searching-card">
         <div class="searching-marker" aria-hidden="true"></div>
         <h1 data-screen-heading>Procurando um motorista próximo...</h1>
-        <p class="app-copy">Esta busca é apenas uma transição simulada.</p>
+        <p class="app-copy">Conectando você a motoristas próximos</p>
+        <div class="search-progress" aria-hidden="true"><span></span></div>
         <button type="button" class="app-button uber-primary" data-action="show-driver">Continuar agora</button>
         <button type="button" class="app-button uber-secondary" data-action="cancel-search">Cancelar simulação</button>
       </div>
@@ -315,24 +361,26 @@ function renderDriver() {
     <section class="app-screen uber-app-screen">
       <div class="uber-map-region driver-map">
         <img src="../../img/mobilidade/mapa-uber.svg" alt="Mapa ilustrativo do trajeto do motorista até a UnAPI" />
-        <p class="map-caption">Trajeto do motorista simulado.</p>
+        <span class="driver-car-marker" aria-hidden="true">${icon("car")}</span>
+        <span class="driver-pickup-marker" aria-hidden="true">${icon("locate")}</span>
+        <p class="map-caption">Carlos está a caminho • trajeto simulado</p>
       </div>
       <section class="uber-sheet driver-sheet">
         <span class="sheet-handle" aria-hidden="true"></span>
-        <p class="arrival-time"><strong>Chega em 5 min</strong></p>
+        <p class="arrival-time"><strong>Chega em 5 min</strong><span>Embarque na Entrada da AGEAD</span></p>
         <h1 class="sr-only" data-screen-heading>Motorista encontrado</h1>
         <div class="uber-sheet-scroll">
           <div class="driver-card">
             <img class="driver-avatar" src="../../img/mobilidade/motorista-ficticio.svg" alt="Avatar ilustrado do motorista fictício Carlos" />
             <div>
-              <div class="driver-name-row"><strong>${uberScenario.driver.name}</strong><span>★ ${uberScenario.driver.rating}</span></div>
+              <div class="driver-name-row"><strong>${uberScenario.driver.name}</strong><span>${icon("star", "icon-small")} ${uberScenario.driver.rating}</span></div>
               <p class="driver-vehicle">${uberScenario.driver.vehicle}</p>
               <p class="driver-plate" aria-label="Placa fictícia ${uberScenario.driver.plate}">${uberScenario.driver.plate}</p>
             </div>
           </div>
-          <p class="safety-reminder">Confira a placa e o veículo antes de entrar.</p>
+          <p class="safety-reminder">${icon("shield")}<span><strong>Antes de embarcar</strong>Confira a placa, a cor e o modelo do veículo.</span></p>
           <div class="driver-actions">
-            ${["Mensagem", "Ligar", "Compartilhar viagem", "Segurança"].map((label) => `<button type="button" class="driver-action" data-action="simulated-feature" data-feature="${label}">${label}</button>`).join("")}
+            ${[["Mensagem", "message"], ["Ligar", "phone"], ["Compartilhar", "send"], ["Segurança", "shield"]].map(([label, iconName]) => `<button type="button" class="driver-action" data-action="simulated-feature" data-feature="${label}">${icon(iconName)}<span>${label}</span></button>`).join("")}
           </div>
         </div>
         <button type="button" class="app-button uber-primary" data-action="finish-training">Conferi os dados</button>
@@ -372,6 +420,9 @@ function renderScreen(options = {}) {
     complete: renderComplete,
   };
   uberApp.innerHTML = screens[currentScreen]();
+  uberApp.dataset.screen = currentScreen;
+  const screen = uberApp.querySelector(".app-screen");
+  screen?.classList.add(`app-enter-${options.transition || navigationDirection}`);
   if (!options.preserveFocus && currentScreen === "search") {
     window.requestAnimationFrame(() => document.getElementById("destination-search")?.focus());
   }
@@ -403,49 +454,109 @@ uberApp.addEventListener("click", (event) => {
   const { action } = control.dataset;
 
   if (action === "open-search") setScreen("search", "Pesquise ou escolha um destino sugerido.");
-  if (action === "back-home") setScreen("home", "Tela inicial aberta.");
-  if (action === "back-search") setScreen("search", "Pesquisa de destino aberta.");
-  if (action === "back-pickup") setScreen("pickup", "Confirme o local de partida.");
-  if (action === "back-rides") setScreen("rides", "Escolha uma categoria de viagem.");
+  if (action === "back-home") setScreen("home", "Tela inicial aberta.", "back");
+  if (action === "back-search") setScreen("search", "Pesquisa de destino aberta.", "back");
+  if (action === "back-pickup") setScreen("pickup", "Confirme o local de partida.", "back");
+  if (action === "back-rides") setScreen("rides", "Escolha uma categoria de viagem.", "back");
   if (action === "choose-destination") {
     selectedDestination = findDestination(control.dataset.destination) || selectedDestination;
     setScreen("pickup", `${selectedDestination.name} selecionada. Confirme o local de partida.`);
   }
   if (action === "select-pickup") {
     selectedPickup = control.dataset.pickup;
-    renderScreen();
+    haptic(8);
+    renderScreen({ transition: "soft" });
     announce(`${selectedPickup} selecionada como local de partida.`);
   }
   if (action === "confirm-pickup") setScreen("rides", "Local confirmado. Escolha uma viagem.");
   if (action === "select-ride") {
     selectedRide = uberScenario.rideOptions.find((ride) => ride.id === control.dataset.ride) || selectedRide;
-    renderScreen();
+    haptic(8);
+    renderScreen({ transition: "soft" });
     announce(`${selectedRide.name} selecionado por ${selectedRide.price}.`);
   }
   if (action === "open-payment") {
     paymentOpen = true;
-    renderScreen();
+    renderScreen({ transition: "soft" });
     focusPrimaryHeading();
     announce("Escolha uma forma de pagamento fictícia.");
   }
   if (action === "close-payment") {
     paymentOpen = false;
-    renderScreen();
+    renderScreen({ transition: "soft" });
+    window.requestAnimationFrame(() => uberApp.querySelector('[data-action="open-payment"]')?.focus());
     announce("Forma de pagamento fechada.");
   }
   if (action === "select-payment") {
     selectedPayment = control.dataset.payment;
     paymentOpen = false;
-    renderScreen();
+    haptic(8);
+    renderScreen({ transition: "soft" });
+    window.requestAnimationFrame(() => uberApp.querySelector('[data-action="open-payment"]')?.focus());
     announce(`${selectedPayment} selecionado.`);
   }
   if (action === "review-ride") setScreen("summary", "Confira o resumo da corrida simulada.");
   if (action === "confirm-ride") setScreen("searching", "Procurando um motorista fictício próximo.");
   if (action === "show-driver") setScreen("driver", "Motorista fictício encontrado. Confira nome, veículo e placa.");
-  if (action === "cancel-search") setScreen("rides", "Busca cancelada. Nenhuma corrida foi solicitada.");
+  if (action === "cancel-search") setScreen("rides", "Busca cancelada. Nenhuma corrida foi solicitada.", "back");
   if (action === "simulated-feature") showToast(`${control.dataset.feature}: recurso apenas demonstrativo. Nenhuma ação real foi iniciada.`);
   if (action === "finish-training") setScreen("complete", "Treinamento concluído.");
   if (action === "reset") resetSimulation();
+});
+
+function navigateBackFromGesture() {
+  if (paymentOpen) {
+    paymentOpen = false;
+    renderScreen({ transition: "back" });
+    announce("Forma de pagamento fechada.");
+    return;
+  }
+
+  const target = backScreens[currentScreen];
+  if (target) setScreen(target, "Tela anterior aberta.", "back");
+}
+
+uberApp.addEventListener("pointerdown", (event) => {
+  if (event.clientX > 34 || event.pointerType === "mouse" || !backScreens[currentScreen]) return;
+  swipeStart = { x: event.clientX, y: event.clientY, pointerId: event.pointerId };
+  uberApp.setPointerCapture?.(event.pointerId);
+});
+
+uberApp.addEventListener("pointermove", (event) => {
+  if (!swipeStart || swipeStart.pointerId !== event.pointerId) return;
+  const dx = Math.max(0, event.clientX - swipeStart.x);
+  const dy = Math.abs(event.clientY - swipeStart.y);
+  if (dy > 70) return;
+  const screen = uberApp.querySelector(".app-screen");
+  screen?.classList.add("is-swiping");
+  if (screen) screen.style.transform = `translateX(${Math.min(dx * 0.72, 96)}px)`;
+});
+
+function finishSwipe(event) {
+  if (!swipeStart || swipeStart.pointerId !== event.pointerId) return;
+  const dx = event.clientX - swipeStart.x;
+  const dy = Math.abs(event.clientY - swipeStart.y);
+  const screen = uberApp.querySelector(".app-screen");
+  swipeStart = null;
+  if (screen) screen.style.transform = "";
+  if (dx > 82 && dy < 65) {
+    haptic(8);
+    navigateBackFromGesture();
+  } else {
+    screen?.classList.remove("is-swiping");
+    screen?.classList.add("swipe-cancel");
+  }
+}
+
+uberApp.addEventListener("pointerup", finishSwipe);
+uberApp.addEventListener("pointercancel", finishSwipe);
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape" || !paymentOpen) return;
+  paymentOpen = false;
+  renderScreen({ transition: "back" });
+  window.requestAnimationFrame(() => uberApp.querySelector('[data-action="open-payment"]')?.focus());
+  announce("Forma de pagamento fechada.");
 });
 
 resetButton.addEventListener("click", resetSimulation);
@@ -465,7 +576,7 @@ fullscreenButton.addEventListener("click", async () => {
 document.addEventListener("fullscreenchange", () => {
   const active = document.fullscreenElement === simulatorPhone;
   fullscreenButton.setAttribute("aria-pressed", String(active));
-  fullscreenButton.textContent = active ? "Sair da tela cheia" : "Abrir em tela cheia";
+  fullscreenLabel.textContent = active ? "Sair da tela cheia" : "Abrir em tela cheia";
 });
 
 renderScreen();

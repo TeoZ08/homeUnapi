@@ -60,3 +60,9 @@ Nos treinamentos GOV.BR, usar mockup central com aviso permanente de simulacao e
 ## Limites
 
 Nao remover os avisos de seguranca do GOV.BR. Os mockups nao coletam, salvam, enviam formularios, usam cookies ou localStorage. Simulacoes de reconhecimento facial nao podem abrir a camera. Simulacoes de assinatura nao podem enviar, modificar, gerar ou baixar documentos reais.
+
+## Mobilidade
+
+Os simuladores de mobilidade podem adotar densidade, movimento e hierarquia mais proximos de aplicativos reais. Priorizar mapas como superficie principal, folhas inferiores em camadas, transicoes direcionais, feedback ao toque e navegacao contextual dentro do aparelho.
+
+No celular real, reduzir ao minimo a interface externa do portal para preservar imersao. Manter botoes tradicionais mesmo quando houver gestos equivalentes e preservar sempre um aviso compacto de simulacao.

@@ -120,6 +120,8 @@ Os simuladores de corrida e transporte público usam apenas HTML, CSS, JavaScrip
 
 As atividades funcionam integralmente no navegador, sem APIs externas, geolocalização, pagamentos, chamadas telefônicas, envio de formulários ou armazenamento das escolhas.
 
+No celular, os fluxos usam transições direcionais, folhas inferiores, feedback tátil opcional quando o navegador oferece vibração e gesto de arrastar da borda esquerda para voltar. Os botões de navegação continuam disponíveis, e os ícones ficam no sprite SVG local `img/mobilidade/ui-icons.svg`.
+
 ## Publicacao
 
 O projeto pode ser publicado em qualquer hospedagem de arquivos estaticos, como GitHub Pages, Netlify ou Vercel. Nao ha etapa de build.
