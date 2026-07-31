@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 500" role="img" aria-labelledby="title desc">
+  <title id="title">Mapa ilustrativo de rota de ônibus em Campo Grande</title>
+  <desc id="desc">Mapa vetorial fictício para treinamento, com rota azul entre a UnAPI e a Praça Ary Coelho.</desc>
+  <rect width="420" height="500" fill="#e9eceb"/>
+  <path d="M0 310c88-48 151-52 222-19 66 31 125 26 198-14v223H0Z" fill="#cde8cc"/>
+  <path d="M-24 79 443 302M-8 394 395 53M50 0l48 500M171-15l-7 530M298-11l-35 520M401 12l-77 496" stroke="#fff" stroke-width="11"/>
+  <path d="M0 181 420 230M0 445l420-41M-11 43l442 50" stroke="#f5dca1" stroke-width="9"/>
+  <path d="M70 404c12-56 28-88 71-112 32-18 44-55 70-93 33-49 63-67 125-88" fill="none" stroke="#a8adb1" stroke-width="8" stroke-linecap="round"/>
+  <path d="M70 404c12-56 28-88 71-112 32-18 44-55 70-93 33-49 63-67 125-88" fill="none" stroke="#2269d5" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#fff" stroke="#2269d5" stroke-width="4"><circle cx="70" cy="404" r="10"/><circle cx="141" cy="292" r="9"/><circle cx="211" cy="199" r="9"/><circle cx="336" cy="111" r="10"/></g>
+  <g font-family="Arial, sans-serif" fill="#66706c">
+    <text x="16" y="82" font-size="15">Av. Afonso Pena</text>
+    <text x="245" y="215" font-size="14" transform="rotate(-48 245 215)">Av. Costa e Silva</text>
+    <text x="28" y="468" font-size="17" font-weight="700">Cidade Universitária</text>
+    <text x="301" y="63" font-size="17" font-weight="700">Centro</text>
+    <text x="159" y="332" font-size="14">Terminal Morenão</text>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="12" font-weight="700">
+    <rect x="46" y="367" width="112" height="28" rx="6" fill="#fff"/><text x="55" y="385">UnAPI / AGEAD</text>
+    <rect x="269" y="121" width="128" height="28" rx="6" fill="#fff"/><text x="278" y="139">Praça Ary Coelho</text>
+    <rect x="126" y="259" width="35" height="25" rx="5" fill="#1664bb"/><text x="134" y="276" fill="#fff">059</text>
+  </g>
+  <path d="M336 79c-12 0-21 9-21 21 0 17 21 37 21 37s21-20 21-37c0-12-9-21-21-21Z" fill="#d33b32"/><circle cx="336" cy="100" r="6" fill="#fff"/>
+</svg>

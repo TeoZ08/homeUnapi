@@ -112,9 +112,17 @@
   transform: translateX(3px);
 }
 
+.tool-card-wide {
+  grid-column: 1 / -1;
+}
+
 @media (max-width: 860px) {
   .tools-grid {
     grid-template-columns: 1fr;
+  }
+
+  .tool-card-wide {
+    grid-column: auto;
   }
 }
 

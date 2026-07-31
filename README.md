@@ -23,6 +23,12 @@ Site estatico para apoiar as oficinas de informatica da UnAPI UFMS. O portal reu
 │   └── index.html
 ├── seguranca-digital/
 │   └── index.html
+├── mobilidade/
+│   ├── index.html
+│   ├── uber/
+│   │   └── index.html
+│   └── maps/
+│       └── index.html
 ├── css/
 │   ├── base.css
 │   ├── home.css
@@ -33,14 +39,19 @@ Site estatico para apoiar as oficinas de informatica da UnAPI UFMS. O portal reu
 │   ├── gov.css
 │   ├── prova-vida.css
 │   ├── assinatura-eletronica.css
-│   └── seguranca-digital.css
+│   ├── seguranca-digital.css
+│   ├── mobilidade.css
+│   ├── mobilidade-uber.css
+│   └── mobilidade-maps.css
 ├── js/
 │   ├── teclado.js
 │   ├── mouse.js
 │   ├── gov.js
 │   ├── prova-vida.js
 │   ├── assinatura-eletronica.js
-│   └── seguranca-digital.js
+│   ├── seguranca-digital.js
+│   ├── mobilidade-uber.js
+│   └── mobilidade-maps.js
 └── img/
     └── imagens compartilhadas em WebP e SVG
 ```
@@ -75,6 +86,8 @@ http://localhost:8000
 - `js/assinatura-eletronica.js` controla as dez etapas, o arquivo ficticio e a posicao visual da assinatura.
 - `seguranca-digital/` contem o Desafio Antigolpe, um simulador de decisoes para WhatsApp, e-mail e SMS.
 - `js/seguranca-digital.js` controla todos os dialogos pre-programados, as ramificacoes e o progresso temporario dos cenarios.
+- `mobilidade/` reúne dois simuladores: solicitação de corrida e planejamento de viagem de ônibus.
+- `js/mobilidade-uber.js` e `js/mobilidade-maps.js` controlam os fluxos locais e temporários dos simuladores.
 - As imagens institucionais foram convertidas para WebP para reduzir o peso do carregamento.
 
 ## Guia GOV.BR
@@ -100,6 +113,12 @@ O documento `documento-treinamento.pdf`, o codigo `000000` e o selo final existe
 A pagina `seguranca-digital/` ensina a regra `PARE -> CONFIRA -> DECIDA` por meio de conversas e mensagens ficticias. Os tres cenarios usam somente respostas pre-programadas e ficam inteiramente no navegador durante a sessao atual.
 
 O desafio nao coleta dados, nao abre links externos, nao usa inteligencia artificial, nao chama APIs, nao usa cookies nem `localStorage` e nao aceita senhas, codigos, cartoes ou documentos.
+
+## Mobilidade com o celular
+
+Os simuladores de corrida e transporte público usam apenas HTML, CSS, JavaScript e SVGs locais. Todos os locais, preços, horários, linhas, veículos e pessoas exibidos são dados fictícios de treinamento.
+
+As atividades funcionam integralmente no navegador, sem APIs externas, geolocalização, pagamentos, chamadas telefônicas, envio de formulários ou armazenamento das escolhas.
 
 ## Publicacao
 

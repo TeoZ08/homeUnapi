@@ -1,0 +1,580 @@
+.mobility-index-page {
+  --shell-max-width: 1080px;
+  --shell-padding: 34px 20px 32px;
+  --shell-gap: 28px;
+  --page-overlay: rgba(255, 248, 220, 0.42);
+}
+
+.mobility-hero {
+  padding: 34px;
+  border: 1px solid rgba(84, 42, 88, 0.14);
+  border-radius: var(--unapi-borda);
+  background: var(--unapi-card);
+  box-shadow: var(--unapi-sombra);
+}
+
+.mobility-hero h1 {
+  max-width: 850px;
+  margin-bottom: 14px;
+  color: var(--unapi-roxo);
+  font-size: clamp(32px, 5vw, 54px);
+  line-height: 1.02;
+}
+
+.mobility-hero p {
+  color: var(--unapi-texto-suave);
+  font-size: clamp(18px, 2vw, 21px);
+  line-height: 1.5;
+}
+
+.mobility-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.mobility-card {
+  min-width: 0;
+  min-height: 480px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  color: var(--unapi-roxo);
+  text-decoration: none;
+  border: 2px solid rgba(84, 42, 88, 0.18);
+  border-radius: var(--unapi-borda);
+  background: var(--unapi-card);
+  box-shadow: var(--unapi-sombra);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mobility-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(84, 42, 88, 0.52);
+  box-shadow: 0 18px 38px rgba(84, 42, 88, 0.2);
+}
+
+.mobility-card:focus-visible {
+  outline: 3px solid var(--unapi-amarelo);
+  outline-offset: 4px;
+}
+
+.mobility-card-visual {
+  position: relative;
+  height: 165px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #ececeb;
+}
+
+.ride-card .mobility-card-visual {
+  background-color: #e9ecea;
+  background-image:
+    linear-gradient(28deg, transparent 45%, #fff 45%, #fff 51%, transparent 51%),
+    linear-gradient(104deg, transparent 52%, #fff 52%, #fff 58%, transparent 58%);
+}
+
+.road-line {
+  position: absolute;
+  width: 68%;
+  height: 9px;
+  left: 14%;
+  top: 54%;
+  background: #1f1f1f;
+  transform: rotate(-10deg);
+}
+
+.ride-card .mobility-card-visual img {
+  position: absolute;
+  z-index: 1;
+  width: 150px;
+  right: 15px;
+  bottom: 12px;
+  filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.18));
+}
+
+.transit-card .mobility-card-visual {
+  background: #e8f1e8;
+}
+
+.route-line {
+  position: absolute;
+  width: 10px;
+  height: 112px;
+  left: 50%;
+  top: 23px;
+  border-radius: 999px;
+  background: #2567d9;
+  transform: rotate(38deg);
+}
+
+.route-dot {
+  position: absolute;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+  border: 5px solid #fff;
+  border-radius: 50%;
+  background: #2567d9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.route-dot-start {
+  left: 32%;
+  top: 24px;
+}
+
+.route-dot-end {
+  right: 27%;
+  bottom: 22px;
+  background: #d13a2f;
+}
+
+.bus-glyph {
+  position: absolute;
+  z-index: 2;
+  left: 42%;
+  top: 67px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  color: #fff;
+  background: #1664bb;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  transform: rotate(-3deg);
+}
+
+.mobility-card-content {
+  flex: 1;
+}
+
+.mobility-card .tag {
+  margin-bottom: 16px;
+  color: var(--unapi-roxo);
+  background: rgba(84, 42, 88, 0.08);
+}
+
+.mobility-card h2 {
+  margin-bottom: 12px;
+  font-size: clamp(28px, 3.4vw, 39px);
+  line-height: 1.06;
+}
+
+.mobility-card p {
+  color: var(--unapi-texto-suave);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.mobility-card:hover .btn-visual {
+  background: var(--unapi-amarelo-hover);
+  transform: translateX(3px);
+}
+
+@media (max-width: 780px) {
+  .mobility-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mobility-card {
+    min-height: 440px;
+  }
+}
+
+@media (max-width: 520px) {
+  .mobility-index-page {
+    --shell-padding: 20px 14px 24px;
+    --shell-gap: 20px;
+  }
+
+  .mobility-hero,
+  .mobility-card {
+    padding: 24px;
+  }
+
+  .mobility-card-visual {
+    height: 145px;
+  }
+}
+
+/* Estrutura compartilhada pelos dois simuladores */
+.mobility-simulator-page {
+  --simulator-space-1: 4px;
+  --simulator-space-2: 8px;
+  --simulator-space-3: 12px;
+  --simulator-space-4: 16px;
+  --simulator-space-5: 20px;
+  --simulator-space-6: 24px;
+  min-height: 100vh;
+  padding: 20px;
+  color: var(--unapi-roxo);
+}
+
+.simulator-page-shell {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 1120px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--simulator-space-4);
+}
+
+.simulator-toolbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--simulator-space-3);
+  flex-wrap: wrap;
+}
+
+.simulator-control {
+  min-height: 48px;
+  padding: 11px 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--simulator-space-2);
+  border: 2px solid rgba(84, 42, 88, 0.22);
+  border-radius: 12px;
+  color: var(--unapi-roxo);
+  background: rgba(255, 248, 220, 0.96);
+  box-shadow: 0 5px 14px rgba(84, 42, 88, 0.12);
+  font: 800 16px/1.2 var(--unapi-fonte);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.18s ease, background-color 0.18s ease;
+}
+
+.simulator-control:hover {
+  background: var(--unapi-amarelo);
+  transform: translateY(-2px);
+}
+
+.simulator-control:focus-visible,
+.app-button:focus-visible,
+.app-icon-button:focus-visible,
+.selection-card:focus-visible,
+.app-list-button:focus-visible,
+.app-field:focus-visible,
+.transport-mode:focus-visible {
+  outline: 4px solid var(--unapi-amarelo);
+  outline-offset: 3px;
+}
+
+.training-notice {
+  width: min(100%, 760px);
+  padding: 12px 18px;
+  border: 2px solid rgba(84, 42, 88, 0.24);
+  border-radius: 14px;
+  color: var(--unapi-roxo-escuro);
+  background: rgba(255, 248, 220, 0.96);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.training-notice strong {
+  color: #8a4a00;
+}
+
+.phone-frame {
+  position: relative;
+  width: min(430px, calc(100vw - 40px));
+  height: 880px;
+  padding: 14px;
+  border: 3px solid #3e4245;
+  border-radius: 54px;
+  background: #090a0b;
+  box-shadow: 0 24px 48px rgba(25, 16, 28, 0.3), inset 0 0 0 2px #17191a;
+}
+
+.phone-frame::before,
+.phone-frame::after {
+  content: "";
+  position: absolute;
+  left: -7px;
+  width: 5px;
+  border-radius: 5px 0 0 5px;
+  background: #33373a;
+}
+
+.phone-frame::before {
+  top: 150px;
+  height: 74px;
+}
+
+.phone-frame::after {
+  top: 242px;
+  height: 110px;
+}
+
+.phone-screen {
+  height: 100%;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 32px minmax(0, 1fr) 22px;
+  border-radius: 39px;
+  color: #161616;
+  background: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.phone-status {
+  position: relative;
+  z-index: 20;
+  padding: 9px 22px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  color: #111;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.phone-sensors {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  width: 108px;
+  height: 24px;
+  border-radius: 999px;
+  background: #090a0b;
+  transform: translateX(-50%);
+}
+
+.phone-signal {
+  letter-spacing: 0.02em;
+}
+
+.app-viewport {
+  min-height: 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+.system-navigation {
+  position: relative;
+  z-index: 20;
+  background: #fff;
+}
+
+.system-navigation::after {
+  content: "";
+  position: absolute;
+  width: 118px;
+  height: 5px;
+  left: 50%;
+  bottom: 7px;
+  border-radius: 999px;
+  background: #222;
+  transform: translateX(-50%);
+}
+
+.app-screen {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.app-scroll {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.app-screen-heading {
+  font-size: 27px;
+  line-height: 1.1;
+}
+
+.app-copy {
+  color: #626262;
+  font-size: 16px;
+  line-height: 1.42;
+}
+
+.app-button,
+.app-icon-button,
+.selection-card,
+.app-list-button,
+.transport-mode {
+  font: inherit;
+  cursor: pointer;
+}
+
+.app-button {
+  width: 100%;
+  min-height: 52px;
+  padding: 13px 18px;
+  border: 0;
+  border-radius: 9px;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.app-icon-button {
+  min-width: 48px;
+  min-height: 48px;
+  padding: 8px;
+  border: 0;
+  border-radius: 50%;
+  background: #f2f2f2;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.app-field {
+  width: 100%;
+  min-height: 50px;
+  padding: 11px 14px;
+  border: 2px solid transparent;
+  border-radius: 9px;
+  color: #171717;
+  background: #f1f1f1;
+  font: 600 16px/1.3 Arial, Helvetica, sans-serif;
+}
+
+.app-field[readonly] {
+  color: #424242;
+}
+
+.screen-toast {
+  position: absolute;
+  z-index: 50;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  padding: 13px 16px;
+  border-radius: 10px;
+  color: #fff;
+  background: rgba(22, 22, 22, 0.95);
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.24);
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.phone-frame:fullscreen {
+  width: min(430px, 100vw);
+  height: min(880px, 100vh);
+  margin: auto;
+  border-radius: 0;
+}
+
+@media (max-width: 560px) {
+  .mobility-simulator-page {
+    padding: 0;
+    background: #fff;
+    background-image: none;
+  }
+
+  .mobility-simulator-page::before {
+    display: none;
+  }
+
+  .simulator-page-shell {
+    height: 100dvh;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  .simulator-toolbar {
+    padding: 8px;
+    justify-content: flex-start;
+    gap: 6px;
+    background: var(--unapi-roxo);
+  }
+
+  .simulator-control {
+    min-height: 48px;
+    padding: 8px 10px;
+    flex: 1 1 auto;
+    border: 1px solid rgba(255, 248, 220, 0.28);
+    color: var(--unapi-fundo);
+    background: rgba(255, 248, 220, 0.1);
+    box-shadow: none;
+    font-size: 13px;
+  }
+
+  .simulator-control:hover {
+    color: var(--unapi-roxo);
+  }
+
+  .training-notice {
+    width: 100%;
+    padding: 9px 12px;
+    border-width: 0 0 2px;
+    border-radius: 0;
+    font-size: 13px;
+  }
+
+  .phone-frame {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    flex: 1 1 auto;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .phone-frame::before,
+  .phone-frame::after,
+  .phone-sensors {
+    display: none;
+  }
+
+  .phone-screen {
+    border-radius: 0;
+  }
+
+  .phone-status {
+    padding-inline: 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .simulator-toolbar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .simulator-toolbar .simulator-control:first-child {
+    grid-column: 1 / -1;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
