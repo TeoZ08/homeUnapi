@@ -49,7 +49,7 @@ Nos treinamentos GOV.BR, usar mockup central com aviso permanente de simulacao e
 
 ## Composicao das paginas de entrada
 
-- Home: hero com o mascote olhando para tras integrado a tipografia, manifesto curto em roxo e dois acessos como cartazes sobrepostos: praticar e relembrar.
+- Home: composicao full-bleed, sem moldura externa; hero com o mascote olhando para tras integrado a tipografia, manifesto roxo com recorte diagonal e dois acessos como cartazes sobrepostos: praticar e relembrar. O `background-unapi.svg` volta como atmosfera luminosa nas transicoes e na area dos cartazes, nao como papel de parede uniforme sobre todo o conteudo.
 - Ferramentas: introducao amarela, indice textual e grupos em grandes planos alternados. Cada atividade e uma linha editorial inteira, nao um card isolado.
 - Videos: abertura roxa com carimbo textual, um registro em destaque e os demais em lista compacta sem numeracao.
 - Mobilidade: abertura roxa e experiencias em linhas amplas, mantendo as ilustracoes autorais do mascote como impresso levemente deslocado.
