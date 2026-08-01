@@ -2,7 +2,7 @@ const challengeApp = document.getElementById("challenge-app");
 const challengeAnnouncement = document.getElementById("challenge-announcement");
 const completedScenarios = new Set();
 
-let currentView = "intro";
+let currentView = "selection";
 let activeScenario = null;
 let scenarioStage = "start";
 let typingTimeout = null;
@@ -109,40 +109,6 @@ function ruleBanner() {
   `;
 }
 
-function progressCard() {
-  const count = completedScenarios.size;
-  const completed = ["whatsapp", "email", "sms"];
-
-  return `
-    <div class="challenge-progress" aria-label="${count} de 3 desafios concluídos">
-      <span>${count} de 3 desafios concluídos</span>
-      <span class="progress-dots" aria-hidden="true">
-        ${completed
-          .map((scenario) => `<span class="${completedScenarios.has(scenario) ? "complete" : ""}"></span>`)
-          .join("")}
-      </span>
-    </div>
-  `;
-}
-
-function renderIntro() {
-  clearTypingTimeout();
-  currentView = "intro";
-  activeScenario = null;
-
-  render(`
-    <section class="challenge-view challenge-intro">
-      <span class="challenge-eyebrow">Segurança digital</span>
-      <h1 class="challenge-title" data-challenge-title>Desafio Antigolpe</h1>
-      <p class="challenge-lead">
-        Analise mensagens suspeitas no WhatsApp, e-mail e SMS.
-      </p>
-      ${ruleBanner()}
-      <button type="button" class="challenge-action" data-action="start">Começar desafio</button>
-    </section>
-  `, "Desafio Antigolpe. Regra principal: pare, confira, decida.");
-}
-
 function renderSelection() {
   clearTypingTimeout();
   currentView = "selection";
@@ -158,11 +124,9 @@ function renderSelection() {
     <section class="challenge-view">
       <div class="challenge-selection-header">
         <div>
-          <span class="challenge-eyebrow">Escolha uma situação</span>
-          <h1 class="challenge-selection-title" data-challenge-title>Por onde você quer começar?</h1>
-          <p class="challenge-selection-copy">Você pode praticar as três situações em qualquer ordem.</p>
+          <h1 class="challenge-selection-title" data-challenge-title>Escolha uma situação</h1>
+          ${ruleBanner()}
         </div>
-        ${progressCard()}
       </div>
       <div class="scenario-grid">
         ${cards
@@ -200,7 +164,6 @@ function scenarioLayout(channel, title, summary, content, decisionTitle, decisio
           <p class="scenario-summary">${summary}</p>
         </div>
         <div class="scenario-header-meta">
-          ${progressCard()}
           <button type="button" class="scenario-return" data-action="back-selection">← Voltar aos desafios</button>
         </div>
       </header>
@@ -531,7 +494,6 @@ function renderScenarioResult(isSafe, title, text) {
           <h1 class="result-title" data-challenge-title>${title}</h1>
           <p class="result-copy">${text}</p>
         </div>
-        ${progressCard()}
       </div>
       <section class="result-details">
         <h2>Sinais para lembrar</h2>
@@ -570,7 +532,6 @@ function renderFinal() {
           <h1 class="final-title" data-challenge-title>Você analisou os três desafios</h1>
           <p class="final-copy">WhatsApp, e-mail e SMS podem usar urgência para impedir uma confirmação.</p>
         </div>
-        ${progressCard()}
       </div>
       <div class="final-rule-copy">
         <strong>Pare. Confira. Decida.</strong>
@@ -695,14 +656,13 @@ function handleAction(event) {
 
   const { action, scenario, value } = actionElement.dataset;
 
-  if (action === "start") renderSelection();
   if (action === "start-scenario") startScenario(scenario);
   if (action === "back-selection") renderSelection();
   if (action === "retry") startScenario(activeScenario);
   if (action === "view-final") renderFinal();
   if (action === "restart-all") {
     completedScenarios.clear();
-    renderIntro();
+    renderSelection();
   }
   if (action === "whatsapp-choice") handleWhatsappChoice(value);
   if (action === "email-choice") handleEmailChoice(value);
@@ -726,4 +686,4 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-renderIntro();
+renderSelection();

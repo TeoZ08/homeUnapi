@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ferramentas e Materiais - UnAPI UFMS</title>
-    <link rel="icon" href="../img/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="../img/favicon-unapi.webp?v=2" type="image/webp" />
     <link rel="stylesheet" href="../css/base.css" />
     <link rel="stylesheet" href="../css/ferramentas.css" />
   </head>
@@ -25,47 +25,65 @@
         </nav>
       </header>
 
-      <section class="tools-intro" aria-labelledby="tools-title">
-        <div>
-          <span class="section-kicker">Atividades práticas</span>
-          <h1 id="tools-title">Escolha pelo que você quer aprender.</h1>
-          <p>As práticas estão organizadas como uma sequência de oficina: movimentos básicos, serviços digitais e autonomia para o dia a dia.</p>
-        </div>
-        <nav class="tools-sections" aria-label="Grupos de atividades">
-          <a href="#fundamentos">Primeiros movimentos <span aria-hidden="true">↘</span></a>
-          <a href="#servicos-digitais">Serviços digitais <span aria-hidden="true">↘</span></a>
-          <a href="#autonomia">Autonomia no dia a dia <span aria-hidden="true">↘</span></a>
-        </nav>
-      </section>
-
-      <section id="fundamentos" class="tool-cluster" aria-labelledby="fundamentos-title">
-        <header class="cluster-heading">
-          <div><span class="cluster-kicker">Comece por aqui</span><h2 id="fundamentos-title">Primeiros movimentos</h2><p>Ganhe confiança nos dois controles básicos do computador.</p></div>
+      <section class="tools-direct" aria-labelledby="tools-title">
+        <header class="tools-heading">
+          <h1 id="tools-title">Escolha uma atividade</h1>
         </header>
-        <div class="tool-rows">
-          <a class="tool-row" href="../teclado/"><div><span class="row-label">Teclado</span><h3>Conhecendo o Teclado</h3><p>Pratique a digitação e visualize as principais famílias de teclas.</p></div><span class="row-action">Praticar →</span></a>
-          <a class="tool-row" href="../mouse/"><div><span class="row-label">Mouse</span><h3>Conhecendo o Mouse</h3><p>Treine cliques, arrasto, botão direito e rolagem de forma interativa.</p></div><span class="row-action">Praticar →</span></a>
-        </div>
-      </section>
 
-      <section id="servicos-digitais" class="tool-cluster" aria-labelledby="servicos-title">
-        <header class="cluster-heading">
-          <div><span class="cluster-kicker">Treinamento seguro</span><h2 id="servicos-title">Serviços digitais</h2><p>Conheça fluxos do gov.br em ambientes demonstrativos, sem usar dados reais.</p></div>
-        </header>
-        <div class="tool-rows">
-          <a class="tool-row" href="../gov/"><div><span class="row-label">GOV.BR</span><h3>Criando conta GOV.BR</h3><p>Acompanhe o passo a passo inicial para criar uma conta com segurança.</p></div><span class="row-action">Abrir guia →</span></a>
-          <a class="tool-row" href="../prova-de-vida/"><div><span class="row-label">Simulação</span><h3>Prova de Vida Digital</h3><p>Conheça o fluxo sem câmera, cadastro ou informações pessoais.</p></div><span class="row-action">Iniciar →</span></a>
-          <a class="tool-row" href="../assinatura-eletronica/"><div><span class="row-label">Simulação</span><h3>Assinatura Eletrônica</h3><p>Aprenda a conferir, assinar e guardar um documento digital fictício.</p></div><span class="row-action">Iniciar →</span></a>
-        </div>
-      </section>
+        <div class="tools-grid">
+          <a class="tool-row" href="../teclado/">
+            <span class="tool-visual visual-keyboard" aria-hidden="true"><i>A</i><i>B</i><i>C</i><i class="key-space"></i></span>
+            <div><h2>Teclado</h2></div>
+            <span class="row-action">Abrir <span aria-hidden="true">→</span></span>
+          </a>
 
-      <section id="autonomia" class="tool-cluster" aria-labelledby="autonomia-title">
-        <header class="cluster-heading">
-          <div><span class="cluster-kicker">Para o dia a dia</span><h2 id="autonomia-title">Autonomia e segurança</h2><p>Pratique decisões que ajudam a usar mensagens e mobilidade com mais confiança.</p></div>
-        </header>
-        <div class="tool-rows">
-          <a class="tool-row" href="../seguranca-digital/"><div><span class="row-label">Segurança digital</span><h3>Desafio Antigolpe</h3><p>Pratique como agir diante de mensagens suspeitas no WhatsApp, e-mail e SMS.</p></div><span class="row-action">Iniciar →</span></a>
-          <a class="tool-row" href="../mobilidade/"><div><span class="row-label">Mobilidade</span><h3>Mobilidade com o celular</h3><p>Pratique como pedir uma corrida e planejar rotas de carro, a pé ou de bicicleta.</p></div><span class="row-action">Explorar →</span></a>
+          <a class="tool-row" href="../mouse/">
+            <span class="tool-visual visual-mouse" aria-hidden="true">
+              <img class="tool-cover-icon" src="../img/ferramentas/mouse.svg" alt="" />
+            </span>
+            <div><h2>Mouse</h2></div>
+            <span class="row-action">Abrir <span aria-hidden="true">→</span></span>
+          </a>
+
+          <a class="tool-row" href="../gov/">
+            <span class="tool-visual visual-gov" aria-hidden="true"><strong>gov.br</strong><i></i></span>
+            <div><h2>Conta gov.br</h2></div>
+            <span class="row-action">Abrir <span aria-hidden="true">→</span></span>
+          </a>
+
+          <a class="tool-row" href="../prova-de-vida/">
+            <span class="tool-visual visual-life" aria-hidden="true">
+              <img class="tool-cover-icon" src="../img/ferramentas/prova-de-vida.svg" alt="" />
+            </span>
+            <div><h2>Prova de Vida</h2></div>
+            <span class="row-action">Abrir <span aria-hidden="true">→</span></span>
+          </a>
+
+          <a class="tool-row" href="../assinatura-eletronica/">
+            <span class="tool-visual visual-signature" aria-hidden="true">
+              <img class="tool-cover-icon" src="../img/ferramentas/assinatura-eletronica.svg" alt="" />
+            </span>
+            <div><h2>Assinatura eletrônica</h2></div>
+            <span class="row-action">Abrir <span aria-hidden="true">→</span></span>
+          </a>
+
+          <a class="tool-row" href="../seguranca-digital/">
+            <span class="tool-visual visual-security tool-icon-pair" aria-hidden="true">
+              <img class="tool-cover-icon" src="../img/ferramentas/antigolpe-monitor.svg" alt="" />
+              <img class="tool-cover-icon" src="../img/ferramentas/antigolpe-celular.svg" alt="" />
+            </span>
+            <div><h2>Desafio Antigolpe</h2></div>
+            <span class="row-action">Abrir <span aria-hidden="true">→</span></span>
+          </a>
+
+          <a class="tool-row" href="../mobilidade/">
+            <span class="tool-visual visual-mobility tool-icon-pair" aria-hidden="true">
+              <img class="tool-cover-icon" src="../img/ferramentas/mobilidade-transporte.svg" alt="" />
+              <img class="tool-cover-icon" src="../img/ferramentas/mobilidade-carro.svg" alt="" />
+            </span>
+            <div><h2>Mobilidade</h2></div>
+            <span class="row-action">Abrir <span aria-hidden="true">→</span></span>
+          </a>
         </div>
       </section>
 
@@ -81,5 +99,6 @@
         <div class="footer-note">Portal das Oficinas de Informática • UNAPI UFMS</div>
       </footer>
     </main>
+    <script src="../js/portal-motion.js" defer></script>
   </body>
 </html>

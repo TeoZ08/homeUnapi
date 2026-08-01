@@ -92,6 +92,7 @@ http://localhost:8000
 - `js/mobilidade-uber.js` e `js/mobilidade-maps.js` controlam os fluxos temporários das experiências de mobilidade.
 - `js/mobilidade-location.js` faz busca explícita de locais e solicita rotas temporárias sem guardar as escolhas.
 - `js/mobilidade-map.js` integra Leaflet, tiles do OpenStreetMap, marcadores A/B e geometrias de rota alinhadas à malha viária.
+- `js/portal-motion.js` conecta as aberturas, textos e fichas das páginas de entrada com animações progressivas por viewport. O movimento usa APIs nativas, não bloqueia a rolagem e é desativado quando o navegador prefere movimento reduzido.
 - As imagens institucionais foram convertidas para WebP para reduzir o peso do carregamento.
 
 ## Guia GOV.BR

@@ -12,7 +12,7 @@
   --security-muted: #5f6368;
   --security-line: #dadce0;
   --shell-max-width: 1240px;
-  --shell-padding: 30px 20px 32px;
+  --shell-padding: 0 20px 32px;
   --shell-gap: 24px;
   --page-overlay: rgba(255, 248, 220, 0.4);
 }
@@ -22,6 +22,9 @@
   top: -100px;
   left: 50%;
   z-index: 1000;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   padding: 10px 16px;
   border-radius: 8px;
   background: var(--unapi-roxo-escuro);
@@ -163,15 +166,6 @@
   gap: 12px;
 }
 
-.challenge-intro {
-  display: grid;
-  align-content: start;
-}
-
-.challenge-intro .challenge-action {
-  width: fit-content;
-}
-
 .challenge-selection-header,
 .result-topline,
 .final-topline {
@@ -197,38 +191,6 @@
   color: var(--unapi-texto-suave);
   font-size: 18px;
   line-height: 1.5;
-}
-
-.challenge-progress {
-  flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 9px 11px;
-  border: 1px solid rgba(84, 42, 88, 0.16);
-  border-radius: 999px;
-  background: #ffffff;
-  color: var(--unapi-roxo);
-  font-size: 13px;
-  font-weight: 900;
-  line-height: 1.1;
-}
-
-.progress-dots {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-}
-
-.progress-dots span {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: rgba(84, 42, 88, 0.15);
-}
-
-.progress-dots span.complete {
-  background: var(--security-green);
 }
 
 .scenario-grid {
@@ -351,7 +313,10 @@
 }
 
 .scenario-return {
-  padding: 5px 0;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 0;
   border: 0;
   background: transparent;
   color: var(--unapi-roxo);
@@ -616,6 +581,10 @@
 
 .sender-toggle {
   width: fit-content;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 0;
   border: 0;
   background: transparent;
   color: #202124;
@@ -678,9 +647,10 @@
 }
 
 .link-address-toggle {
+  min-height: 44px;
   display: block;
   margin-top: 10px;
-  padding: 0;
+  padding: 8px 0;
   border: 0;
   background: transparent;
   color: #245ca6;
@@ -983,7 +953,7 @@
 
 @media (max-width: 700px) {
   .security-page {
-    --shell-padding: 18px 12px 24px;
+    --shell-padding: 0 12px 24px;
     --shell-gap: 18px;
   }
 
