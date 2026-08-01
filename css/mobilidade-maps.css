@@ -1044,3 +1044,90 @@
     animation: none;
   }
 }
+
+.maps-custom-planner .transport-modes {
+  min-height: 62px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.maps-custom-planner .transport-mode {
+  min-height: 52px;
+  font-size: 12px;
+}
+
+.maps-plan-actions .maps-primary,
+.route-details-button {
+  width: 100%;
+}
+
+.maps-search-form {
+  border-color: var(--maps-border);
+}
+
+.maps-route-layout .departure-row {
+  align-items: flex-start;
+  font-size: 11px;
+}
+
+.maps-route-layout .departure-row span {
+  width: 48%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.maps-route-layout .departure-row span:last-child {
+  text-align: right;
+}
+
+.maps-routes-sheet .route-details-button {
+  margin-top: 8px;
+}
+
+.route-sheet-heading > div {
+  min-width: 0;
+}
+
+.route-sheet-heading h1,
+.route-sheet-heading p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.route-sheet-heading .filter-icon {
+  flex: 0 0 auto;
+}
+
+.maps-route-layout .routes-scroll {
+  margin-bottom: 0;
+}
+
+.maps-route-layout .transit-route {
+  min-height: 100px;
+  grid-template-columns: 76px minmax(0, 1fr) 18px;
+}
+
+.maps-route-layout .route-duration {
+  font-size: 17px;
+}
+
+@media (max-width: 560px) {
+  .maps-route-layout {
+    grid-template-rows: minmax(300px, 45%) minmax(0, 1fr);
+  }
+}
+
+@media (max-height: 700px) {
+  .maps-custom-planner .transport-modes {
+    min-height: 54px;
+  }
+
+  .maps-custom-planner .transport-mode {
+    min-height: 46px;
+  }
+
+  .maps-route-layout {
+    grid-template-rows: minmax(235px, 40%) minmax(0, 1fr);
+  }
+}

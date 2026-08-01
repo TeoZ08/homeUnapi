@@ -1190,3 +1190,23 @@
     font-size: 11px;
   }
 }
+
+.uber-app-screen .planner-actions .uber-primary {
+  width: 100%;
+}
+
+.uber-app-screen .location-search-form .uber-primary {
+  width: auto;
+  margin: 0;
+}
+
+.estimate-disclaimer {
+  margin-top: 12px;
+  padding: 8px;
+  border-radius: 9px;
+  background: #f4f4f4;
+}
+
+#uber-app[data-screen="driver"] .uber-map-layout {
+  grid-template-rows: minmax(220px, 40%) minmax(0, 1fr);
+}

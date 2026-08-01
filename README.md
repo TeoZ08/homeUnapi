@@ -50,6 +50,8 @@ Site estatico para apoiar as oficinas de informatica da UnAPI UFMS. O portal reu
 │   ├── prova-vida.js
 │   ├── assinatura-eletronica.js
 │   ├── seguranca-digital.js
+│   ├── mobilidade-location.js
+│   ├── mobilidade-map.js
 │   ├── mobilidade-uber.js
 │   └── mobilidade-maps.js
 └── img/
@@ -86,9 +88,10 @@ http://localhost:8000
 - `js/assinatura-eletronica.js` controla as dez etapas, o arquivo ficticio e a posicao visual da assinatura.
 - `seguranca-digital/` contem o Desafio Antigolpe, um simulador de decisoes para WhatsApp, e-mail e SMS.
 - `js/seguranca-digital.js` controla todos os dialogos pre-programados, as ramificacoes e o progresso temporario dos cenarios.
-- `mobilidade/` reúne duas experiências interativas: solicitação de corrida e planejamento de viagem de ônibus.
+- `mobilidade/` reúne duas experiências interativas: solicitação de corrida e planejamento personalizado de rotas.
 - `js/mobilidade-uber.js` e `js/mobilidade-maps.js` controlam os fluxos temporários das experiências de mobilidade.
-- `js/mobilidade-map.js` integra Leaflet, tiles do OpenStreetMap e geometrias de rota alinhadas à malha viária de Campo Grande.
+- `js/mobilidade-location.js` faz busca explícita de locais e solicita rotas temporárias sem guardar as escolhas.
+- `js/mobilidade-map.js` integra Leaflet, tiles do OpenStreetMap, marcadores A/B e geometrias de rota alinhadas à malha viária.
 - As imagens institucionais foram convertidas para WebP para reduzir o peso do carregamento.
 
 ## Guia GOV.BR
@@ -117,9 +120,9 @@ O desafio nao coleta dados, nao abre links externos, nao usa inteligencia artifi
 
 ## Mobilidade com o celular
 
-As experiências de corrida e transporte público usam HTML, CSS, JavaScript e Leaflet 1.9.4. O mapa é carregado do OpenStreetMap e os trajetos versionados usam coordenadas geográficas reais entre a AGEAD/UFMS e os destinos apresentados.
+As experiências de corrida e planejamento de rotas usam HTML, CSS, JavaScript e Leaflet 1.9.4. Partida e destino não são pré-definidos: podem ser escolhidos por busca explícita, toque no mapa, arraste dos marcadores A/B ou geolocalização autorizada pelo usuário.
 
-Os traçados são armazenados localmente depois de calculados sobre a malha viária, portanto não há consulta de roteamento durante o uso. O carregamento do Leaflet e dos tiles requer internet, mas não exige token, cadastro ou chave. Não há geolocalização, pagamentos, chamadas telefônicas, envio de formulários ou armazenamento das escolhas.
+A busca de endereços usa o Nominatim somente após o botão `Buscar`, com limitação local e cache temporário em memória. As rotas são consultadas em serviços OSRM distintos para carro, caminhada e bicicleta, evitando apresentar um trajeto de carro como se fosse outro modal. Tiles, busca e roteamento requerem internet, mas não exigem token, cadastro ou chave. As escolhas não são armazenadas; a simulação não realiza pagamentos, chamadas telefônicas ou solicitações de corrida reais.
 
 No celular, cada experiência ocupa toda a viewport, sem moldura, barra de status ou navegação de sistema fictícias. Retorno e reinício ficam em um menu lateral recolhido da oficina. Os fluxos usam transições direcionais, folhas inferiores, feedback tátil opcional quando o navegador oferece vibração e gesto de arrastar da borda esquerda para voltar. Os botões de navegação continuam disponíveis, e os ícones ficam no sprite SVG local `img/mobilidade/ui-icons.svg`.
 

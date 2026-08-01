@@ -70,3 +70,5 @@ No celular real, o aplicativo ocupa toda a viewport: remover moldura, sensores, 
 Kits externos podem orientar composicao, hierarquia e comportamento, mas nao devem substituir componentes locais mais atuais apenas por semelhanca visual. Priorizar folhas inferiores, cartoes flutuantes e controles contextuais sobre o mapa; evitar copiar mockups inteiros ou importar mapas estaticos.
 
 Usar Leaflet com OpenStreetMap como base cartografica real. Trajetos devem vir de geometrias de roteamento aderentes as ruas, nunca de curvas desenhadas manualmente. Marcadores, progresso e alternativas devem compartilhar a mesma geometria geografica.
+
+Origem e destino devem ser livres e começar vazios. A pessoa pode definir A/B por busca explícita, localização autorizada, toque ou arraste no mapa. Usar A verde para origem, B vermelho para destino, carro somente para veículo e ícones próprios para caminhada e bicicleta. Não inventar linhas, horários, paradas ou trajetos de transporte público quando não houver uma fonte verificável para o par escolhido.
