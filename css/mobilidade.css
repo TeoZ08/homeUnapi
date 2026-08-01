@@ -250,6 +250,16 @@
   gap: var(--simulator-space-4);
 }
 
+.simulator-tools {
+  position: relative;
+  z-index: 70;
+  max-width: 100%;
+}
+
+.simulator-tools-toggle {
+  display: none;
+}
+
 .simulator-toolbar {
   width: fit-content;
   max-width: 100%;
@@ -293,6 +303,7 @@
 }
 
 .simulator-control:focus-visible,
+.simulator-tools-toggle:focus-visible,
 .app-button:focus-visible,
 .app-icon-button:focus-visible,
 .selection-card:focus-visible,
@@ -701,7 +712,9 @@
 
 @media (max-width: 560px) {
   .mobility-simulator-page {
+    min-height: 100dvh;
     padding: 0;
+    overflow: hidden;
     background: #fff;
     background-image: none;
   }
@@ -711,61 +724,112 @@
   }
 
   .simulator-page-shell {
+    width: 100%;
     height: 100dvh;
+    display: block;
     gap: 0;
     overflow: hidden;
   }
 
-  .simulator-toolbar {
-    width: 100%;
-    min-height: 58px;
-    padding: 7px 10px;
+  .simulator-tools {
+    position: fixed;
+    z-index: 1000;
+    top: max(72px, 11dvh);
+    right: 0;
+    width: auto;
+  }
+
+  .simulator-tools-toggle {
+    width: 40px;
+    height: 52px;
+    padding: 0;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 46px 46px;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.38);
+    border-right: 0;
+    border-radius: 16px 0 0 16px;
+    color: #fff;
+    background: rgba(84, 42, 88, 0.94);
+    box-shadow: 0 6px 20px rgba(25, 16, 28, 0.24);
+    cursor: pointer;
+    transition: width 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .simulator-tools-toggle .ui-icon {
+    width: 23px;
+    height: 23px;
+  }
+
+  .simulator-tools.is-open .simulator-tools-toggle {
+    width: 46px;
+    color: var(--unapi-roxo);
+    background: var(--unapi-amarelo);
+  }
+
+  .simulator-toolbar {
+    position: absolute;
+    top: 0;
+    right: 52px;
+    width: min(250px, calc(100vw - 68px));
+    max-width: none;
+    min-height: 0;
+    padding: 8px;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
     gap: 8px;
-    background: var(--unapi-roxo);
+    border: 1px solid rgba(84, 42, 88, 0.16);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.97);
+    box-shadow: 0 14px 38px rgba(25, 16, 28, 0.24);
+    backdrop-filter: blur(14px);
+  }
+
+  .simulator-tools.is-open .simulator-toolbar {
+    display: flex;
+    animation: tools-menu-in 0.22s ease-out both;
+  }
+
+  @keyframes tools-menu-in {
+    from { opacity: 0; transform: translateX(12px) scale(0.97); }
+    to { opacity: 1; transform: translateX(0) scale(1); }
   }
 
   .simulator-control {
-    min-width: 46px;
-    min-height: 44px;
-    padding: 8px 11px;
-    border: 1px solid rgba(255, 248, 220, 0.28);
-    color: var(--unapi-fundo);
-    background: rgba(255, 248, 220, 0.1);
-    box-shadow: none;
-    border-radius: 14px;
-    font-size: 14px;
-  }
-
-  .simulator-control:not(.simulator-back) span:last-child {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
-  }
-
-  .simulator-back {
+    width: 100%;
+    min-width: 0;
+    min-height: 48px;
+    padding: 10px 12px;
     justify-content: flex-start;
+    border: 1px solid rgba(84, 42, 88, 0.14);
+    color: var(--unapi-roxo);
+    background: #fff;
+    box-shadow: none;
+    border-radius: 12px;
+    font-size: 15px;
   }
 
-  .simulator-back span {
+  .simulator-control:hover {
+    color: var(--unapi-roxo);
+    background: var(--unapi-amarelo);
+    transform: none;
+  }
+
+  .simulator-control span:last-child {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
-  .simulator-control:hover {
-    color: var(--unapi-roxo);
+  .simulator-fullscreen {
+    display: none;
   }
 
   .phone-frame {
     width: 100%;
-    height: auto;
+    height: 100dvh;
     min-height: 0;
-    flex: 1 1 auto;
     padding: 0;
     border: 0;
     border-radius: 0;
@@ -779,6 +843,8 @@
   }
 
   .phone-screen {
+    height: 100dvh;
+    grid-template-rows: minmax(0, 1fr);
     border-radius: 0;
   }
 
@@ -786,8 +852,9 @@
     display: none;
   }
 
-  .phone-status {
-    padding-inline: 16px;
+  .phone-status,
+  .system-navigation {
+    display: none;
   }
 }
 

@@ -419,6 +419,7 @@ function renderScreen(options = {}) {
   activeMap = null;
   mapsApp.innerHTML = screens[currentScreen]();
   mapsApp.dataset.screen = currentScreen;
+  document.body.dataset.mobilityScreen = currentScreen;
   const screen = mapsApp.querySelector(".app-screen");
   if (screen) {
     screen.classList.add(

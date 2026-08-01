@@ -86,6 +86,7 @@
 
 .uber-home-map {
   position: relative;
+  flex: 1 1 265px;
   min-height: 265px;
   margin-inline: -18px;
   overflow: hidden;
@@ -114,6 +115,7 @@
 }
 
 .uber-bottom-nav {
+  flex: 0 0 66px;
   min-height: 66px;
   margin-inline: -18px;
   padding: 8px 10px 4px;
@@ -618,6 +620,10 @@
 }
 
 @media (max-width: 560px) {
+  .uber-simulator-page[data-mobility-screen="rides"] .simulator-tools {
+    top: 12px;
+  }
+
   .uber-map-layout {
     grid-template-rows: minmax(225px, 41%) minmax(0, 1fr);
   }

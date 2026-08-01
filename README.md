@@ -121,7 +121,7 @@ As experiências de corrida e transporte público usam HTML, CSS, JavaScript e L
 
 Os traçados são armazenados localmente depois de calculados sobre a malha viária, portanto não há consulta de roteamento durante o uso. O carregamento do Leaflet e dos tiles requer internet, mas não exige token, cadastro ou chave. Não há geolocalização, pagamentos, chamadas telefônicas, envio de formulários ou armazenamento das escolhas.
 
-No celular, os fluxos usam transições direcionais, folhas inferiores, feedback tátil opcional quando o navegador oferece vibração e gesto de arrastar da borda esquerda para voltar. Os botões de navegação continuam disponíveis, e os ícones ficam no sprite SVG local `img/mobilidade/ui-icons.svg`.
+No celular, cada experiência ocupa toda a viewport, sem moldura, barra de status ou navegação de sistema fictícias. Retorno e reinício ficam em um menu lateral recolhido da oficina. Os fluxos usam transições direcionais, folhas inferiores, feedback tátil opcional quando o navegador oferece vibração e gesto de arrastar da borda esquerda para voltar. Os botões de navegação continuam disponíveis, e os ícones ficam no sprite SVG local `img/mobilidade/ui-icons.svg`.
 
 ## Publicacao
 

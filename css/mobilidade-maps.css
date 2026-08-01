@@ -543,6 +543,15 @@
 }
 
 @media (max-width: 560px) {
+  .maps-simulator-page[data-mobility-screen="directions"] .simulator-tools {
+    top: 248px;
+  }
+
+  .maps-place-sheet .maps-route-cta,
+  .maps-journey-sheet .journey-actions {
+    margin-top: auto;
+  }
+
   .maps-place-layout {
     grid-template-rows: minmax(270px, 48%) minmax(0, 1fr);
   }

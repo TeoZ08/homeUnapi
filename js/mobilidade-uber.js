@@ -426,6 +426,7 @@ function renderScreen(options = {}) {
   activeMap = null;
   uberApp.innerHTML = screens[currentScreen]();
   uberApp.dataset.screen = currentScreen;
+  document.body.dataset.mobilityScreen = currentScreen;
   const screen = uberApp.querySelector(".app-screen");
   screen?.classList.add(`app-enter-${options.transition || navigationDirection}`);
   if (!options.preserveFocus && currentScreen === "search") {
