@@ -10,33 +10,12 @@
   --gov-text: #222222;
   --gov-focus: #fff7b8;
   min-height: 100vh;
-  padding: 18px 24px 18px;
+  padding: 0 24px 18px;
   background: #ffffff;
   background-image: none;
   color: var(--gov-text);
   font-family: Arial, "Segoe UI", sans-serif;
   overflow-x: hidden;
-}
-
-.gov-page .activity-nav {
-  top: 16px;
-  left: 16px;
-}
-
-.gov-page .activity-nav a {
-  border-color: rgba(255, 255, 255, 0.35);
-  background: var(--gov-blue-dark);
-}
-
-.gov-page .activity-nav .activity-nav-home {
-  border-color: var(--gov-blue-dark);
-  background: #ffffff;
-  color: var(--gov-blue-dark);
-}
-
-.gov-page .activity-nav a:hover {
-  background: var(--gov-blue);
-  color: #ffffff;
 }
 
 .gov-page button,
@@ -50,8 +29,8 @@
 
 .gov-shell {
   width: min(100%, 1380px);
-  min-height: calc(100vh - 36px);
-  margin: 0 auto;
+  min-height: calc(100vh - 94px);
+  margin: 18px auto 0;
   display: grid;
   grid-template-rows: 1fr auto;
   gap: 12px;
@@ -124,11 +103,11 @@
 
 .login-page {
   position: relative;
-  width: min(100%, 900px);
-  margin: 72px auto 0;
+  width: min(100%, 1040px);
+  margin: 58px auto 0;
   display: grid;
-  grid-template-columns: minmax(280px, 430px) minmax(300px, 360px);
-  gap: 48px;
+  grid-template-columns: minmax(300px, 480px) minmax(330px, 400px);
+  gap: 64px;
   align-items: start;
 }
 
@@ -187,9 +166,9 @@
 }
 
 .login-intro p {
-  max-width: 330px;
+  max-width: 390px;
   color: #4f4f4f;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.42;
 }
 
@@ -207,8 +186,8 @@
 }
 
 .login-card {
-  min-height: 350px;
-  padding: 24px 22px 22px;
+  min-height: 380px;
+  padding: 28px;
   border: 1px solid var(--gov-gray-20);
   border-radius: 2px;
   background: #ffffff;
@@ -217,22 +196,22 @@
 
 .login-card h2 {
   margin-bottom: 24px;
-  font-size: 20px;
+  font-size: 23px;
   line-height: 1.2;
 }
 
 .login-method {
   color: var(--gov-blue);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   margin-bottom: 12px;
 }
 
 .login-card p {
-  max-width: 300px;
+  max-width: 340px;
   margin-bottom: 10px;
   color: #555555;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.35;
 }
 
@@ -243,19 +222,19 @@
   display: block;
   margin: 12px 0 6px;
   color: #333333;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
 }
 
 .gov-input {
   width: 100%;
-  height: 34px;
-  padding: 6px 9px;
+  min-height: 44px;
+  padding: 8px 10px;
   border: 1px solid #777777;
   border-radius: 2px;
   background: #ffffff;
   color: #111111;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
 }
 
@@ -285,22 +264,22 @@
 }
 
 .primary-action {
-  min-height: 36px;
+  min-height: 44px;
   padding: 0 24px;
   border-radius: 999px;
   background: var(--gov-blue);
   color: #ffffff;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .secondary-action {
-  min-height: 36px;
+  min-height: 44px;
   padding: 0 22px;
   border: 1px solid var(--gov-blue);
   border-radius: 999px;
   background: #ffffff;
   color: var(--gov-blue);
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .link-action {
@@ -776,10 +755,6 @@
 }
 
 @media (max-width: 980px) {
-  .gov-page {
-    padding-top: 78px;
-  }
-
   .login-page {
     grid-template-columns: 1fr;
     margin-top: 32px;

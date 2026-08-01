@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vídeos e Registros - UnAPI UFMS</title>
-    <link rel="icon" href="../img/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="../img/favicon-unapi.webp?v=2" type="image/webp" />
     <link rel="stylesheet" href="../css/base.css" />
     <link rel="stylesheet" href="../css/videos.css" />
   </head>
@@ -13,7 +13,7 @@
       <header class="topbar" aria-label="Cabeçalho do portal">
         <div class="brand brand-with-mark">
           <img class="brand-mark" src="../img/unapi-marca.webp" alt="UnAPI UFMS" width="1024" height="1024" />
-          <div class="brand-copy"><small>Oficinas de informática</small><strong>Vídeos e Registros</strong></div>
+          <div class="brand-copy"><small>Oficinas de informática</small><strong>Vídeos das oficinas</strong></div>
         </div>
         <nav class="topnav" aria-label="Navegação da página">
           <a class="nav-back" href="../">← Voltar ao início</a>
@@ -21,24 +21,32 @@
         </nav>
       </header>
 
-      <section class="videos-intro" aria-labelledby="videos-title">
-        <div><span class="section-kicker">Memória da oficina</span><h1 id="videos-title">Momentos que ajudam a lembrar.</h1><p>Os registros mostram participantes aprendendo juntos e ajudam a retomar o que foi praticado nos encontros.</p></div>
-        <p class="records-note">Um arquivo vivo do que acontece nas oficinas.</p>
-      </section>
+      <section class="videos-direct" aria-labelledby="videos-title">
+        <header class="videos-heading">
+          <h1 id="videos-title">Escolha um vídeo</h1>
+        </header>
 
-      <section class="video-program" aria-label="Registros das oficinas">
-        <a class="video-featured" href="https://youtube.com/shorts/-jH6xlBCN_o?si=tamyI9VxZL70dKnA" target="_blank" rel="noopener noreferrer">
-          <div class="featured-media"><img src="https://img.youtube.com/vi/-jH6xlBCN_o/hqdefault.jpg" alt="Primeira Oficina UnAPI" /><span class="play-button" aria-hidden="true">▶</span></div>
-          <div class="featured-copy"><span class="video-tag">Registro em destaque</span><h2>Primeira Oficina UnAPI</h2><p>Conhecendo Teclado e Mouse com prática acompanhada.</p><span class="watch-action">Assistir no YouTube ↗</span></div>
-        </a>
+        <div class="video-grid" aria-label="Vídeos das oficinas">
+          <a class="video-card" href="https://youtube.com/shorts/-jH6xlBCN_o?si=tamyI9VxZL70dKnA" target="_blank" rel="noopener noreferrer">
+            <span class="video-media"><img src="../img/videos/primeira-oficina.webp" alt="" width="480" height="360" decoding="async" /><span class="play-button" aria-hidden="true">▶</span></span>
+            <span class="video-copy"><strong>Primeira oficina</strong><span class="video-action">Assistir <span aria-hidden="true">↗</span></span></span>
+          </a>
 
-        <div class="video-list" aria-label="Outros registros">
-          <a class="video-row" href="https://youtube.com/shorts/lQYpWqZ3yww?si=OILJJdqehTFEfZaW" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/lQYpWqZ3yww/hqdefault.jpg" alt="" loading="lazy" /><div><span>Primeira oficina</span><h3>Participantes em atividade</h3><p>Mais um momento da prática de informática.</p></div><span class="row-watch">Assistir ↗</span></a>
-          <a class="video-row" href="https://youtube.com/shorts/-2MqL9CBbF0?si=iCjgI73N79qkxGG" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/-2MqL9CBbF0/hqdefault.jpg" alt="" loading="lazy" /><div><span>Acompanhamento</span><h3>Prática com acompanhamento</h3><p>Atividades realizadas durante a oficina.</p></div><span class="row-watch">Assistir ↗</span></a>
-          <a class="video-row" href="https://youtube.com/shorts/bZv5cydyzWo?si=2nxi_29wWPQc3dKE" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/bZv5cydyzWo/hqdefault.jpg" alt="" loading="lazy" /><div><span>Memória</span><h3>Registro das atividades</h3><p>Mais um encontro publicado da oficina.</p></div><span class="row-watch">Assistir ↗</span></a>
+          <a class="video-card" href="https://youtube.com/shorts/lQYpWqZ3yww?si=OILJJdqehTFEfZaW" target="_blank" rel="noopener noreferrer">
+            <span class="video-media"><img src="../img/videos/participantes-em-atividade.webp" alt="" width="480" height="360" decoding="async" /><span class="play-button" aria-hidden="true">▶</span></span>
+            <span class="video-copy"><strong>Participantes em atividade</strong><span class="video-action">Assistir <span aria-hidden="true">↗</span></span></span>
+          </a>
+
+          <a class="video-card" href="https://youtube.com/shorts/-2MqL9CBbF0?si=iCjgI73N79qkxGG" target="_blank" rel="noopener noreferrer">
+            <span class="video-media"><img src="../img/videos/pratica-com-acompanhamento.webp" alt="" width="480" height="360" decoding="async" /><span class="play-button" aria-hidden="true">▶</span></span>
+            <span class="video-copy"><strong>Prática com acompanhamento</strong><span class="video-action">Assistir <span aria-hidden="true">↗</span></span></span>
+          </a>
+
+          <a class="video-card" href="https://youtube.com/shorts/bZv5cydyzWo?si=2nxi_29wWPQc3dKE" target="_blank" rel="noopener noreferrer">
+            <span class="video-media"><img src="../img/videos/atividades-da-oficina.webp" alt="" width="480" height="360" decoding="async" /><span class="play-button" aria-hidden="true">▶</span></span>
+            <span class="video-copy"><strong>Atividades da oficina</strong><span class="video-action">Assistir <span aria-hidden="true">↗</span></span></span>
+          </a>
         </div>
-
-        <p class="external-note">Os vídeos abrem no canal do YouTube em uma nova aba.</p>
       </section>
 
       <footer class="institutional-footer" aria-label="Logos institucionais">
@@ -53,5 +61,6 @@
         <div class="footer-note">Portal das Oficinas de Informática • UNAPI UFMS</div>
       </footer>
     </main>
+    <script src="../js/portal-motion.js" defer></script>
   </body>
 </html>

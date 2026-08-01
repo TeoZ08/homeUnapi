@@ -11,6 +11,7 @@
   background-position: center bottom;
   background-size: contain;
   opacity: 0.82;
+  margin-top: clamp(8px, 1.6vh, 18px);
   margin-bottom: clamp(-10px, -1vh, -4px);
   z-index: 0;
   pointer-events: none;
@@ -39,7 +40,8 @@
 }
 
 #practice-input::placeholder {
-  color: #777;
+  color: rgba(255, 248, 220, 0.82);
+  opacity: 1;
 }
 
 .keyboard-scale-area {
@@ -245,6 +247,7 @@
 }
 
 .btn-mode {
+  min-height: 44px;
   padding: 10px 20px;
   cursor: pointer;
   font-weight: bold;
@@ -296,6 +299,7 @@
 }
 
 #family-menu button {
+  min-height: 44px;
   margin: 0 5px;
   padding: 8px 15px;
   cursor: pointer;

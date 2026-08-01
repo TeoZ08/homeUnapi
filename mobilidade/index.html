@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mobilidade com o celular - UnAPI UFMS</title>
-    <link rel="icon" href="../img/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="../img/favicon-unapi.webp?v=2" type="image/webp" />
+    <link rel="preload" href="../img/mobilidade/card-corrida-mascote.webp" as="image" type="image/webp" fetchpriority="high" />
+    <link rel="preload" href="../img/mobilidade/card-rotas-mascote.webp" as="image" type="image/webp" fetchpriority="high" />
     <link rel="stylesheet" href="../css/base.css" />
     <link rel="stylesheet" href="../css/mobilidade.css" />
   </head>
@@ -13,7 +15,7 @@
       <header class="topbar" aria-label="Cabeçalho do portal">
         <div class="brand brand-with-mark">
           <img class="brand-mark" src="../img/unapi-marca.webp" alt="UnAPI UFMS" width="1024" height="1024" />
-          <div class="brand-copy"><small>Oficinas de informática</small><strong>Mobilidade com o celular</strong></div>
+          <div class="brand-copy"><small>Oficinas de informática</small><strong>Mobilidade</strong></div>
         </div>
         <nav class="topnav" aria-label="Navegação da página">
           <a class="nav-back" href="../ferramentas/">← Voltar para Ferramentas</a>
@@ -21,35 +23,32 @@
         </nav>
       </header>
 
-      <section class="mobility-hero" aria-labelledby="mobility-title">
-        <div><span class="section-kicker">Prática interativa</span><h1 id="mobility-title">Mobilidade e autonomia urbana com o celular</h1><p>Escolha uma experiência e explore a cidade pelo celular.</p></div>
-        <p class="mobility-note">Escolha pontos, compare opções e simule o percurso sem solicitar uma corrida real.</p>
-      </section>
+      <section class="mobility-direct" aria-labelledby="mobility-title">
+        <header class="mobility-heading">
+          <h1 id="mobility-title">Escolha uma atividade</h1>
+        </header>
 
-      <section class="mobility-journey" aria-label="Experiências de mobilidade">
+        <div class="mobility-journey" aria-label="Atividades de mobilidade">
         <a class="mobility-experience ride-card" href="uber/">
           <div class="mobility-card-visual" aria-hidden="true">
-            <img class="mobility-card-image" src="../img/mobilidade/card-corrida-mascote.webp" width="1600" height="614" alt="" decoding="async" />
+            <img class="mobility-card-image" src="../img/mobilidade/card-corrida-mascote.webp" width="1600" height="614" alt="" loading="eager" fetchpriority="high" decoding="sync" />
           </div>
           <div class="mobility-card-content">
-            <span class="tag">Corrida por aplicativo</span>
             <h2>Pedir uma corrida</h2>
-            <p>Escolha partida e destino, compare veículos, defina o pagamento e acompanhe o motorista no mapa.</p>
           </div>
-          <span class="btn-visual">Abrir experiência →</span>
+          <span class="btn-visual">Abrir <span aria-hidden="true">→</span></span>
         </a>
 
         <a class="mobility-experience transit-card" href="maps/">
           <div class="mobility-card-visual" aria-hidden="true">
-            <img class="mobility-card-image" src="../img/mobilidade/card-rotas-mascote.webp" width="1600" height="614" alt="" decoding="async" />
+            <img class="mobility-card-image" src="../img/mobilidade/card-rotas-mascote.webp" width="1600" height="614" alt="" loading="eager" fetchpriority="high" decoding="sync" />
           </div>
           <div class="mobility-card-content">
-            <span class="tag">Planejamento de rotas</span>
-            <h2>Criar uma rota no Maps</h2>
-            <p>Escolha qualquer origem e destino, compare trajetos e pratique de carro, a pé ou de bicicleta.</p>
+            <h2>Planejar uma rota</h2>
           </div>
-          <span class="btn-visual">Abrir experiência →</span>
+          <span class="btn-visual">Abrir <span aria-hidden="true">→</span></span>
         </a>
+        </div>
       </section>
 
       <footer class="institutional-footer" aria-label="Logos institucionais">
@@ -64,5 +63,6 @@
         <div class="footer-note">Portal das Oficinas de Informática • UNAPI UFMS</div>
       </footer>
     </main>
+    <script src="../js/portal-motion.js" defer></script>
   </body>
 </html>
