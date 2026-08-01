@@ -334,7 +334,7 @@ function renderStep({ focusHeading = false } = {}) {
     `Etapa ${currentStep + 1} de ${steps.length}`
   );
   previousButton.disabled = currentStep === 0;
-  nextButton.textContent = currentStep === steps.length - 1 ? "Reiniciar" : "Próximo";
+  nextButton.textContent = currentStep === steps.length - 1 ? "Voltar para Ferramentas" : "Próximo";
 
   if (focusHeading) {
     titleElement.setAttribute("tabindex", "-1");
@@ -355,7 +355,7 @@ function goToPreviousStep() {
 
 function goToNextStep() {
   if (currentStep === steps.length - 1) {
-    setStep(0, { focusHeading: true });
+    window.location.assign("../ferramentas/");
     return;
   }
 
@@ -379,7 +379,7 @@ screenElement.addEventListener("click", handleScreenAction);
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowRight") {
-    goToNextStep();
+    if (currentStep < steps.length - 1) goToNextStep();
   }
 
   if (event.key === "ArrowLeft") {

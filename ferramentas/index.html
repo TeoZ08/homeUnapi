@@ -11,88 +11,62 @@
   <body class="tools-index-page portal-page has-page-overlay">
     <main class="page-shell">
       <header class="topbar" aria-label="Cabeçalho do portal">
-        <div class="brand">
-          <small>UNAPI UFMS</small>
-          <strong>Ferramentas e Materiais</strong>
+        <div class="brand brand-with-mark">
+          <img class="brand-mark" src="../img/unapi-marca.webp" alt="UnAPI UFMS" width="1024" height="1024" />
+          <div class="brand-copy">
+            <small>Oficinas de informática</small>
+            <strong>Ferramentas e Materiais</strong>
+          </div>
         </div>
 
-        <nav class="topnav" aria-label="Navegação principal">
-          <a href="../">Home</a>
+        <nav class="topnav" aria-label="Navegação da página">
+          <a class="nav-back" href="../">← Voltar ao início</a>
           <a href="../videos/">Vídeos</a>
         </nav>
       </header>
 
-      <section class="page-hero" aria-label="Apresentação das ferramentas">
-        <span class="eyebrow">Atividades práticas</span>
-        <h1>Escolha uma ferramenta para praticar.</h1>
-        <p>
-          Use os recursos abaixo para treinar habilidades e acompanhar guias de segurança no seu ritmo.
-        </p>
+      <section class="tools-intro" aria-labelledby="tools-title">
+        <div>
+          <span class="section-kicker">Atividades práticas</span>
+          <h1 id="tools-title">Escolha pelo que você quer aprender.</h1>
+          <p>As práticas estão organizadas como uma sequência de oficina: movimentos básicos, serviços digitais e autonomia para o dia a dia.</p>
+        </div>
+        <nav class="tools-sections" aria-label="Grupos de atividades">
+          <a href="#fundamentos">Primeiros movimentos <span aria-hidden="true">↘</span></a>
+          <a href="#servicos-digitais">Serviços digitais <span aria-hidden="true">↘</span></a>
+          <a href="#autonomia">Autonomia no dia a dia <span aria-hidden="true">↘</span></a>
+        </nav>
       </section>
 
-      <section class="tools-grid" aria-label="Lista de ferramentas">
-        <a class="tool-card" href="../teclado/">
-          <div class="tool-card-content">
-            <span class="tag">Teclado</span>
-            <h2>Conhecendo o Teclado</h2>
-            <p>Pratique a digitação e visualize as principais famílias de teclas.</p>
-          </div>
-          <span class="btn-visual">Acessar</span>
-        </a>
+      <section id="fundamentos" class="tool-cluster" aria-labelledby="fundamentos-title">
+        <header class="cluster-heading">
+          <div><span class="cluster-kicker">Comece por aqui</span><h2 id="fundamentos-title">Primeiros movimentos</h2><p>Ganhe confiança nos dois controles básicos do computador.</p></div>
+        </header>
+        <div class="tool-rows">
+          <a class="tool-row" href="../teclado/"><div><span class="row-label">Teclado</span><h3>Conhecendo o Teclado</h3><p>Pratique a digitação e visualize as principais famílias de teclas.</p></div><span class="row-action">Praticar →</span></a>
+          <a class="tool-row" href="../mouse/"><div><span class="row-label">Mouse</span><h3>Conhecendo o Mouse</h3><p>Treine cliques, arrasto, botão direito e rolagem de forma interativa.</p></div><span class="row-action">Praticar →</span></a>
+        </div>
+      </section>
 
-        <a class="tool-card" href="../mouse/">
-          <div class="tool-card-content">
-            <span class="tag">Mouse</span>
-            <h2>Conhecendo o Mouse</h2>
-            <p>Treine cliques, arrasto, botão direito e rolagem de forma interativa.</p>
-          </div>
-          <span class="btn-visual">Acessar</span>
-        </a>
+      <section id="servicos-digitais" class="tool-cluster" aria-labelledby="servicos-title">
+        <header class="cluster-heading">
+          <div><span class="cluster-kicker">Treinamento seguro</span><h2 id="servicos-title">Serviços digitais</h2><p>Conheça fluxos do gov.br em ambientes demonstrativos, sem usar dados reais.</p></div>
+        </header>
+        <div class="tool-rows">
+          <a class="tool-row" href="../gov/"><div><span class="row-label">GOV.BR</span><h3>Criando conta GOV.BR</h3><p>Acompanhe o passo a passo inicial para criar uma conta com segurança.</p></div><span class="row-action">Abrir guia →</span></a>
+          <a class="tool-row" href="../prova-de-vida/"><div><span class="row-label">Simulação</span><h3>Prova de Vida Digital</h3><p>Conheça o fluxo sem câmera, cadastro ou informações pessoais.</p></div><span class="row-action">Iniciar →</span></a>
+          <a class="tool-row" href="../assinatura-eletronica/"><div><span class="row-label">Simulação</span><h3>Assinatura Eletrônica</h3><p>Aprenda a conferir, assinar e guardar um documento digital fictício.</p></div><span class="row-action">Iniciar →</span></a>
+        </div>
+      </section>
 
-        <a class="tool-card" href="../gov/">
-          <div class="tool-card-content">
-            <span class="tag">GOV.BR</span>
-            <h2>Criando conta GOV.BR</h2>
-            <p>Acompanhe o passo a passo inicial para criar uma conta gov.br com segurança.</p>
-          </div>
-          <span class="btn-visual">Acessar</span>
-        </a>
-
-        <a class="tool-card" href="../prova-de-vida/">
-          <div class="tool-card-content">
-            <span class="tag">Treinamento GOV.BR</span>
-            <h2>Prova de Vida Digital</h2>
-            <p>Conheça o fluxo da Prova de Vida em uma simulação segura, sem câmera ou dados reais.</p>
-          </div>
-          <span class="btn-visual">Iniciar</span>
-        </a>
-
-        <a class="tool-card" href="../assinatura-eletronica/">
-          <div class="tool-card-content">
-            <span class="tag">Treinamento GOV.BR</span>
-            <h2>Assinatura Eletrônica</h2>
-            <p>Aprenda a escolher, assinar e guardar um documento digital sem enviar arquivos reais.</p>
-          </div>
-          <span class="btn-visual">Iniciar</span>
-        </a>
-
-        <a class="tool-card" href="../seguranca-digital/">
-          <div class="tool-card-content">
-            <span class="tag">Segurança Digital</span>
-            <h2>Desafio Antigolpe</h2>
-            <p>Pratique como agir diante de mensagens suspeitas no WhatsApp, e-mail e SMS.</p>
-          </div>
-          <span class="btn-visual">Iniciar</span>
-        </a>
-
-        <a class="tool-card tool-card-wide" href="../mobilidade/">
-          <div class="tool-card-content">
-            <span class="tag">Mobilidade</span>
-            <h2>Mobilidade com o celular</h2>
-            <p>Pratique como pedir uma corrida e consultar trajetos de ônibus pelo celular.</p>
-          </div>
-          <span class="btn-visual">Acessar</span>
-        </a>
+      <section id="autonomia" class="tool-cluster" aria-labelledby="autonomia-title">
+        <header class="cluster-heading">
+          <div><span class="cluster-kicker">Para o dia a dia</span><h2 id="autonomia-title">Autonomia e segurança</h2><p>Pratique decisões que ajudam a usar mensagens e mobilidade com mais confiança.</p></div>
+        </header>
+        <div class="tool-rows">
+          <a class="tool-row" href="../seguranca-digital/"><div><span class="row-label">Segurança digital</span><h3>Desafio Antigolpe</h3><p>Pratique como agir diante de mensagens suspeitas no WhatsApp, e-mail e SMS.</p></div><span class="row-action">Iniciar →</span></a>
+          <a class="tool-row" href="../mobilidade/"><div><span class="row-label">Mobilidade</span><h3>Mobilidade com o celular</h3><p>Pratique como pedir uma corrida e planejar rotas de carro, a pé ou de bicicleta.</p></div><span class="row-action">Explorar →</span></a>
+        </div>
       </section>
 
       <footer class="institutional-footer" aria-label="Logos institucionais">

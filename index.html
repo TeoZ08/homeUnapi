@@ -8,45 +8,66 @@
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/home.css" />
   </head>
-  <body class="home-page portal-page has-page-overlay">
+  <body class="home-page portal-page">
     <main class="page-shell">
-      <header class="topbar" aria-label="Cabeçalho do portal">
-        <div class="brand">
-          <small>UNAPI UFMS</small>
-          <strong>Oficinas de Informática</strong>
+      <header class="topbar home-masthead" aria-label="Cabeçalho do portal">
+        <div class="brand brand-with-mark">
+          <img class="brand-mark" src="img/unapi-marca.webp" alt="UnAPI UFMS" width="1024" height="1024" />
+          <div class="brand-copy">
+            <small>Portal de apoio</small>
+            <strong>Oficinas de Informática</strong>
+          </div>
         </div>
-
         <nav class="topnav" aria-label="Navegação principal">
-          <a href="ferramentas/">Ferramentas</a>
+          <a href="ferramentas/">Práticas</a>
           <a href="videos/">Vídeos</a>
         </nav>
       </header>
 
       <section class="hero" aria-label="Apresentação do portal">
         <div class="hero-content">
-          <span class="eyebrow">Ambiente de aprendizagem</span>
-          <h1><span class="title-highlight">Pratique,</span><br />revise e<br /><span class="title-highlight">acompanhe</span><br /><span class="title-end">as oficinas.</span></h1>
+          <span class="eyebrow">UnAPI UFMS</span>
+          <h1>Pratique.<br /><em>Revise.</em><br />Acompanhe.</h1>
+          <p>Um espaço para aprender informática com calma, segurança e apoio.</p>
+          <a class="hero-action" href="ferramentas/">Começar uma prática <span aria-hidden="true">→</span></a>
+        </div>
+        <p class="hero-caption">A oficina continua por aqui.</p>
+      </section>
+
+      <section class="workshop-note" aria-labelledby="workshop-title">
+        <div class="workshop-note-heading">
+          <span class="section-kicker">Do encontro para a tela</span>
+          <h2 id="workshop-title">A oficina não termina quando a aula acaba.</h2>
+        </div>
+        <div class="workshop-note-copy">
+          <p>Este portal reúne práticas para repetir os movimentos, conhecer serviços digitais e rever momentos dos encontros. Sem pressa e sem usar dados reais.</p>
+          <span class="workshop-mark" aria-hidden="true">oficina aberta</span>
         </div>
       </section>
 
-      <section class="hub-grid" aria-label="Áreas do portal">
-        <a class="hub-card primary" href="ferramentas/">
-          <div class="hub-card-content">
-            <span class="tag">Praticar</span>
-            <h2>Ferramentas e Materiais</h2>
-            <p>Entre nas atividades de teclado e mouse ou acesse materiais de apoio da oficina.</p>
-          </div>
-          <span class="btn-visual">Acessar</span>
-        </a>
+      <section class="home-access" aria-labelledby="access-title">
+        <header class="access-heading">
+          <span class="section-kicker">Continue por aqui</span>
+          <h2 id="access-title">O que você quer fazer agora?</h2>
+        </header>
 
-        <a class="hub-card secondary" href="videos/">
-          <div class="hub-card-content">
-            <span class="tag">Registros</span>
-            <h2>Vídeos das Oficinas</h2>
-            <p>Veja os Shorts e registros publicados dos encontros realizados com os participantes.</p>
-          </div>
-          <span class="btn-visual">Ver vídeos</span>
-        </a>
+        <div class="access-composition">
+          <a class="access-strip access-practice" href="ferramentas/">
+            <span class="access-label">Quero praticar</span>
+            <h3>Ferramentas<br />e materiais</h3>
+            <p>Teclado, mouse, segurança digital, serviços gov.br e mobilidade com o celular.</p>
+            <strong>Explorar as práticas <span aria-hidden="true">→</span></strong>
+          </a>
+
+          <a class="access-strip access-records" href="videos/">
+            <span class="access-label">Quero relembrar</span>
+            <h3>Vídeos<br />das oficinas</h3>
+            <p>Registros dos participantes aprendendo juntos e praticando com acompanhamento.</p>
+            <strong>Assistir aos registros <span aria-hidden="true">→</span></strong>
+          </a>
+        </div>
+
+        <p class="access-footnote">Teclado · Mouse · GOV.BR · Segurança digital · Mobilidade · Vídeos</p>
       </section>
 
       <footer class="institutional-footer" aria-label="Logos institucionais">

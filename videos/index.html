@@ -10,58 +10,35 @@
   </head>
   <body class="videos-page">
     <main class="page-shell">
-      <nav class="top-nav" aria-label="Navegação principal">
-        <a class="btn-home" href="../">← Home</a>
-      </nav>
-
-      <header class="page-hero">
-        <div class="intro-label">Vídeos e Registros</div>
-        <h1>Momentos das Oficinas</h1>
-        <p>Assista aos registros publicados das oficinas de informática da UnAPI UFMS.</p>
+      <header class="topbar" aria-label="Cabeçalho do portal">
+        <div class="brand brand-with-mark">
+          <img class="brand-mark" src="../img/unapi-marca.webp" alt="UnAPI UFMS" width="1024" height="1024" />
+          <div class="brand-copy"><small>Oficinas de informática</small><strong>Vídeos e Registros</strong></div>
+        </div>
+        <nav class="topnav" aria-label="Navegação da página">
+          <a class="nav-back" href="../">← Voltar ao início</a>
+          <a href="../ferramentas/">Ferramentas</a>
+        </nav>
       </header>
 
-      <section class="videos-area" aria-label="Galeria de vídeos das oficinas">
-        <div class="video-gallery">
-          <a class="video-card" href="https://youtube.com/shorts/-jH6xlBCN_o?si=tamyI9VxZL70dKnA" target="_blank" rel="noopener noreferrer">
-            <img src="https://img.youtube.com/vi/-jH6xlBCN_o/hqdefault.jpg" alt="Primeira Oficina UnAPI" loading="lazy" />
-            <div class="play-button" aria-hidden="true">▶</div>
-            <div class="video-info">
-              <span class="video-tag">Short 01</span>
-              <h3>Primeira Oficina UnAPI</h3>
-              <p>Registro da oficina Conhecendo Teclado e Mouse.</p>
-            </div>
-          </a>
+      <section class="videos-intro" aria-labelledby="videos-title">
+        <div><span class="section-kicker">Memória da oficina</span><h1 id="videos-title">Momentos que ajudam a lembrar.</h1><p>Os registros mostram participantes aprendendo juntos e ajudam a retomar o que foi praticado nos encontros.</p></div>
+        <p class="records-note">Um arquivo vivo do que acontece nas oficinas.</p>
+      </section>
 
-          <a class="video-card" href="https://youtube.com/shorts/lQYpWqZ3yww?si=OILJJdqehTFEfZaW" target="_blank" rel="noopener noreferrer">
-            <img src="https://img.youtube.com/vi/lQYpWqZ3yww/hqdefault.jpg" alt="Participantes em atividade" loading="lazy" />
-            <div class="play-button" aria-hidden="true">▶</div>
-            <div class="video-info">
-              <span class="video-tag">Short 02</span>
-              <h3>Participantes em atividade</h3>
-              <p>Mais um momento da primeira oficina de informática.</p>
-            </div>
-          </a>
+      <section class="video-program" aria-label="Registros das oficinas">
+        <a class="video-featured" href="https://youtube.com/shorts/-jH6xlBCN_o?si=tamyI9VxZL70dKnA" target="_blank" rel="noopener noreferrer">
+          <div class="featured-media"><img src="https://img.youtube.com/vi/-jH6xlBCN_o/hqdefault.jpg" alt="Primeira Oficina UnAPI" /><span class="play-button" aria-hidden="true">▶</span></div>
+          <div class="featured-copy"><span class="video-tag">Registro em destaque</span><h2>Primeira Oficina UnAPI</h2><p>Conhecendo Teclado e Mouse com prática acompanhada.</p><span class="watch-action">Assistir no YouTube ↗</span></div>
+        </a>
 
-          <a class="video-card" href="https://youtube.com/shorts/-2MqL9CBbF0?si=iCjgI73N79qkxGG" target="_blank" rel="noopener noreferrer">
-            <img src="https://img.youtube.com/vi/-2MqL9CBbF0/hqdefault.jpg" alt="Prática com acompanhamento" loading="lazy" />
-            <div class="play-button" aria-hidden="true">▶</div>
-            <div class="video-info">
-              <span class="video-tag">Short 03</span>
-              <h3>Prática com acompanhamento</h3>
-              <p>Novo registro das atividades realizadas durante a oficina.</p>
-            </div>
-          </a>
-
-          <a class="video-card" href="https://youtube.com/shorts/bZv5cydyzWo?si=2nxi_29wWPQc3dKE" target="_blank" rel="noopener noreferrer">
-            <img src="https://img.youtube.com/vi/bZv5cydyzWo/hqdefault.jpg" alt="Registro das atividades" loading="lazy" />
-            <div class="play-button" aria-hidden="true">▶</div>
-            <div class="video-info">
-              <span class="video-tag">Short 04</span>
-              <h3>Registro das atividades</h3>
-              <p>Mais um registro publicado da oficina de informática.</p>
-            </div>
-          </a>
+        <div class="video-list" aria-label="Outros registros">
+          <a class="video-row" href="https://youtube.com/shorts/lQYpWqZ3yww?si=OILJJdqehTFEfZaW" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/lQYpWqZ3yww/hqdefault.jpg" alt="" loading="lazy" /><div><span>Primeira oficina</span><h3>Participantes em atividade</h3><p>Mais um momento da prática de informática.</p></div><span class="row-watch">Assistir ↗</span></a>
+          <a class="video-row" href="https://youtube.com/shorts/-2MqL9CBbF0?si=iCjgI73N79qkxGG" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/-2MqL9CBbF0/hqdefault.jpg" alt="" loading="lazy" /><div><span>Acompanhamento</span><h3>Prática com acompanhamento</h3><p>Atividades realizadas durante a oficina.</p></div><span class="row-watch">Assistir ↗</span></a>
+          <a class="video-row" href="https://youtube.com/shorts/bZv5cydyzWo?si=2nxi_29wWPQc3dKE" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/bZv5cydyzWo/hqdefault.jpg" alt="" loading="lazy" /><div><span>Memória</span><h3>Registro das atividades</h3><p>Mais um encontro publicado da oficina.</p></div><span class="row-watch">Assistir ↗</span></a>
         </div>
+
+        <p class="external-note">Os vídeos abrem no canal do YouTube em uma nova aba.</p>
       </section>
 
       <footer class="institutional-footer" aria-label="Logos institucionais">

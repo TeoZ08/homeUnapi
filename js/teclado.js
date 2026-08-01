@@ -14,14 +14,14 @@ function ajustarEscalaTeclado() {
   document.documentElement.style.setProperty("--keyboard-scale", 1);
   scaleArea.style.height = "auto";
 
-  const availableWidth = Math.max(320, window.innerWidth - 40);
+  const availableWidth = Math.max(240, window.innerWidth - 40);
   const footerHeight = footer ? footer.offsetHeight : 0;
   const controlsHeight = controlsWrapper ? controlsWrapper.offsetHeight : 0;
   const boardTop = boardElement.getBoundingClientRect().top;
   const availableHeight = Math.max(260, window.innerHeight - boardTop - controlsHeight - footerHeight - 56);
   const scaleByWidth = availableWidth / boardElement.offsetWidth;
   const scaleByHeight = availableHeight / boardElement.offsetHeight;
-  const scale = Math.max(0.52, Math.min(1, scaleByWidth, scaleByHeight));
+  const scale = Math.max(0.22, Math.min(1, scaleByWidth, scaleByHeight));
 
   document.documentElement.style.setProperty("--keyboard-scale", scale);
   scaleArea.style.height = `${boardElement.offsetHeight * scale}px`;

@@ -1,83 +1,118 @@
 .mobility-index-page {
-  --shell-max-width: 1080px;
-  --shell-padding: 34px 20px 32px;
-  --shell-gap: 28px;
-  --page-overlay: rgba(255, 248, 220, 0.42);
+  --shell-max-width: 1240px;
+  --shell-padding: 24px 20px 34px;
+  --shell-gap: 0;
+  background: #efe4c9;
+}
+
+.mobility-index-page::before {
+  display: none;
+}
+
+.mobility-index-page .topbar {
+  margin-bottom: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: var(--unapi-roxo-escuro);
+}
+
+.mobility-index-page .brand-mark {
+  border-radius: 0;
 }
 
 .mobility-hero {
-  padding: 34px;
-  border: 1px solid rgba(84, 42, 88, 0.14);
-  border-radius: var(--unapi-borda);
-  background: var(--unapi-card);
-  box-shadow: var(--unapi-sombra);
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.46fr);
+  gap: clamp(44px, 8vw, 100px);
+  align-items: end;
+  padding: clamp(66px, 9vw, 112px) clamp(28px, 6vw, 76px) clamp(84px, 10vw, 126px);
+  color: var(--unapi-fundo);
+  background: var(--unapi-roxo);
+  overflow: hidden;
+}
+
+.mobility-hero::after {
+  content: "IR E VOLTAR";
+  position: absolute;
+  right: -24px;
+  bottom: -25px;
+  color: rgba(255, 248, 220, 0.07);
+  font-size: clamp(80px, 14vw, 180px);
+  font-weight: 900;
+  letter-spacing: -0.07em;
+  line-height: 0.8;
+  pointer-events: none;
+}
+
+.mobility-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.mobility-hero .section-kicker {
+  color: var(--unapi-amarelo);
 }
 
 .mobility-hero h1 {
-  max-width: 850px;
-  margin-bottom: 14px;
-  color: var(--unapi-roxo);
-  font-size: clamp(32px, 5vw, 54px);
-  line-height: 1.02;
+  max-width: 780px;
+  margin-bottom: 22px;
+  font-size: clamp(52px, 7vw, 84px);
+  letter-spacing: -0.055em;
+  line-height: 0.9;
 }
 
 .mobility-hero p {
-  color: var(--unapi-texto-suave);
-  font-size: clamp(18px, 2vw, 21px);
-  line-height: 1.5;
+  color: rgba(255, 248, 220, 0.76);
+  font-size: 18px;
+  line-height: 1.6;
 }
 
-.mobility-grid {
+.mobility-note {
+  width: fit-content;
+  padding: 16px 18px;
+  border: 2px solid var(--unapi-amarelo);
+  color: var(--unapi-amarelo) !important;
+  font-size: 14px !important;
+  font-weight: 900;
+  transform: rotate(2deg);
+}
+
+.mobility-journey {
+  padding: clamp(68px, 9vw, 112px) clamp(28px, 6vw, 76px);
+  background: #efe4c9;
+}
+
+.mobility-experience {
+  min-height: 340px;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
-}
-
-.mobility-card {
-  min-width: 0;
-  min-height: 480px;
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
+  grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.1fr) auto;
+  gap: clamp(26px, 5vw, 64px);
+  align-items: center;
+  padding: 46px 4px;
+  border-top: 2px solid var(--unapi-roxo);
   color: var(--unapi-roxo);
   text-decoration: none;
-  border: 2px solid rgba(84, 42, 88, 0.18);
-  border-radius: var(--unapi-borda);
-  background: var(--unapi-card);
-  box-shadow: var(--unapi-sombra);
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.mobility-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(84, 42, 88, 0.52);
-  box-shadow: 0 18px 38px rgba(84, 42, 88, 0.2);
-}
-
-.mobility-card:focus-visible {
-  outline: 3px solid var(--unapi-amarelo);
-  outline-offset: 4px;
+.mobility-experience:last-child {
+  border-bottom: 1px solid rgba(84, 42, 88, 0.35);
 }
 
 .mobility-card-visual {
   position: relative;
-  height: 185px;
+  height: 220px;
   overflow: hidden;
-  border-radius: 16px;
-  border: 1px solid rgba(238, 188, 8, 0.3);
+  border: 1px solid rgba(84, 42, 88, 0.28);
   background: #090704;
-  box-shadow: 0 10px 24px rgba(24, 12, 3, 0.2);
+  box-shadow: 12px 14px 0 rgba(84, 42, 88, 0.12);
+  transform: rotate(-1.4deg);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.mobility-card-visual::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(115deg, transparent 28%, rgba(255, 255, 255, 0.34) 50%, transparent 72%);
-  transform: translateX(-120%);
-  transition: transform 0.65s ease;
-  pointer-events: none;
+.transit-card .mobility-card-visual {
+  transform: rotate(1.4deg);
 }
 
 .mobility-card-image {
@@ -86,74 +121,105 @@
   display: block;
   object-fit: cover;
   object-position: center;
-  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), filter 0.3s ease;
 }
 
 .ride-card .mobility-card-image {
   object-position: 54% center;
 }
 
-.mobility-card:hover .mobility-card-image,
-.mobility-card:focus-visible .mobility-card-image {
-  filter: saturate(1.06) contrast(1.03);
-  transform: scale(1.035);
+.mobility-experience:hover .mobility-card-visual,
+.mobility-experience:focus-visible .mobility-card-visual {
+  box-shadow: 8px 10px 0 rgba(84, 42, 88, 0.16);
+  transform: rotate(0deg) translateY(-3px);
 }
 
-.mobility-card:hover .mobility-card-visual::after,
-.mobility-card:focus-visible .mobility-card-visual::after {
-  transform: translateX(120%);
-}
-
-.mobility-card-content {
-  flex: 1;
-}
-
-.mobility-card .tag {
+.mobility-experience .tag {
   margin-bottom: 16px;
+  padding: 0 0 7px;
+  border-bottom: 2px solid var(--unapi-amarelo);
+  border-radius: 0;
   color: var(--unapi-roxo);
-  background: rgba(84, 42, 88, 0.08);
+  background: transparent;
 }
 
-.mobility-card h2 {
-  margin-bottom: 12px;
-  font-size: clamp(28px, 3.4vw, 39px);
-  line-height: 1.06;
+.mobility-experience h2 {
+  margin-bottom: 14px;
+  font-size: clamp(36px, 4.5vw, 54px);
+  letter-spacing: -0.04em;
+  line-height: 0.96;
 }
 
-.mobility-card p {
+.mobility-experience p {
   color: var(--unapi-texto-suave);
   font-size: 18px;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
-.mobility-card:hover .btn-visual {
-  background: var(--unapi-amarelo-hover);
-  transform: translateX(3px);
+.mobility-experience .btn-visual {
+  border: 2px solid var(--unapi-roxo);
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-@media (max-width: 780px) {
-  .mobility-grid {
+.mobility-experience:hover .btn-visual,
+.mobility-experience:focus-visible .btn-visual {
+  color: var(--unapi-fundo);
+  background: var(--unapi-roxo);
+}
+
+.mobility-index-page .institutional-footer {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (max-width: 840px) {
+  .mobility-hero,
+  .mobility-experience {
     grid-template-columns: 1fr;
   }
 
-  .mobility-card {
-    min-height: 440px;
+  .mobility-experience .btn-visual {
+    justify-self: start;
   }
 }
 
 @media (max-width: 520px) {
   .mobility-index-page {
-    --shell-padding: 20px 14px 24px;
-    --shell-gap: 20px;
+    --shell-padding: 0;
+  }
+
+  .mobility-index-page .topbar {
+    padding: 14px 16px 18px;
   }
 
   .mobility-hero,
-  .mobility-card {
-    padding: 24px;
+  .mobility-journey {
+    padding: 66px 22px 78px;
+  }
+
+  .mobility-hero h1 {
+    font-size: clamp(50px, 15vw, 66px);
+  }
+
+  .mobility-experience {
+    gap: 28px;
+    padding: 44px 0 54px;
   }
 
   .mobility-card-visual {
-    height: 145px;
+    height: 180px;
+  }
+
+  .mobility-experience h2 {
+    font-size: 42px;
+  }
+
+  .mobility-experience p {
+    font-size: 16px;
   }
 }
 
