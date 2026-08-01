@@ -72,3 +72,5 @@ Kits externos podem orientar composicao, hierarquia e comportamento, mas nao dev
 Usar Leaflet com OpenStreetMap como base cartografica real. Trajetos devem vir de geometrias de roteamento aderentes as ruas, nunca de curvas desenhadas manualmente. Marcadores, progresso e alternativas devem compartilhar a mesma geometria geografica.
 
 Origem e destino devem ser livres e começar vazios. A pessoa pode definir A/B por busca explícita, localização autorizada, toque ou arraste no mapa. Usar A verde para origem, B vermelho para destino, carro somente para veículo e ícones próprios para caminhada e bicicleta. Não inventar linhas, horários, paradas ou trajetos de transporte público quando não houver uma fonte verificável para o par escolhido.
+
+No hub de Mobilidade, usar o mascote UnAPI de óculos e o conversível amarelo como assinatura visual dos cards. As ilustrações podem variar a ação, mas devem preservar o traço preto, o rosto, a camiseta, o fundo escuro com luz dourada e a leitura adulta do personagem; evitar cenas urbanas genéricas com aparência de banco de imagens ou geração sem identidade.
