@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Corrida pelo celular - Mobilidade UnAPI</title>
+    <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="../../css/base.css" />
+    <link rel="stylesheet" href="../../css/mobilidade.css" />
+    <link rel="stylesheet" href="../../css/mobilidade-uber.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+    <script src="../../js/mobilidade-location.js" defer></script>
+    <script src="../../js/mobilidade-map.js" defer></script>
+    <script src="../../js/mobilidade-shell.js" defer></script>
+    <script src="../../js/mobilidade-uber.js" defer></script>
+  </head>
+  <body class="mobility-simulator-page uber-simulator-page has-page-overlay">
+    <main class="simulator-page-shell">
+      <div class="simulator-tools">
+        <button class="simulator-tools-toggle" type="button" aria-expanded="false" aria-controls="experience-tools"><svg class="ui-icon" aria-hidden="true"><use href="../../img/mobilidade/ui-icons.svg#m-more"></use></svg><span class="sr-only">Controles da oficina</span></button>
+        <nav id="experience-tools" class="simulator-toolbar" aria-label="Controles da experiência">
+          <a class="simulator-control simulator-back" href="../"><svg class="ui-icon" aria-hidden="true"><use href="../../img/mobilidade/ui-icons.svg#arrow-left"></use></svg><span>Voltar para Mobilidade</span></a>
+          <button id="reset-simulation" class="simulator-control" type="button"><span class="control-symbol" aria-hidden="true">↻</span><span>Recomeçar</span></button>
+          <button id="fullscreen-simulation" class="simulator-control simulator-fullscreen" type="button" aria-pressed="false"><span class="control-symbol" aria-hidden="true">⛶</span><span data-fullscreen-label>Abrir em tela cheia</span></button>
+        </nav>
+      </div>
+
+      <section id="simulator-phone" class="phone-frame" aria-label="Aplicativo de corrida">
+        <div class="phone-screen">
+          <div class="phone-status" aria-hidden="true">
+            <span>09:35</span><span class="phone-sensors"></span><span class="phone-signal">▮▮▮ Wi-Fi ▰</span>
+          </div>
+          <div id="uber-app" class="app-viewport"></div>
+          <div class="system-navigation" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <p id="uber-announcement" class="sr-only" aria-live="polite"></p>
+      <noscript>Ative o JavaScript para usar esta experiência.</noscript>
+    </main>
+  </body>
+</html>

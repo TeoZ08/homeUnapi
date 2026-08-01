@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Avatar ilustrado do motorista Carlos</title>
+  <desc id="desc">Retrato vetorial fictício de um homem sorrindo.</desc>
+  <circle cx="80" cy="80" r="78" fill="#d9ebe1"/>
+  <path d="M29 151c5-35 23-50 51-50s47 15 51 50" fill="#202a31"/>
+  <path d="M62 96h36v27H62z" fill="#b87552"/>
+  <ellipse cx="80" cy="69" rx="38" ry="45" fill="#c98661"/>
+  <path d="M42 64c0-33 17-51 42-51 27 0 39 19 37 47-11-3-20-12-24-24-11 15-28 23-52 22" fill="#27231f"/>
+  <path d="M56 69h13m22 0h13" stroke="#332a25" stroke-width="4" stroke-linecap="round"/>
+  <path d="M66 87c9 7 20 7 29 0" fill="none" stroke="#8e3f3b" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="63" cy="70" r="2.8" fill="#28211e"/><circle cx="97" cy="70" r="2.8" fill="#28211e"/>
+</svg>

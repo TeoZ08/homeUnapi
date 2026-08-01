@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" role="img" aria-labelledby="title desc">
+  <title id="title">Carro confortável cinza ilustrado</title>
+  <desc id="desc">Ilustração lateral simplificada de um sedã cinza.</desc>
+  <defs><linearGradient id="body" x1="0" x2="1"><stop stop-color="#6e757c"/><stop offset="1" stop-color="#353a3f"/></linearGradient></defs>
+  <ellipse cx="122" cy="100" rx="102" ry="10" fill="#000" opacity=".16"/>
+  <path d="M25 78 47 54c7-8 15-11 27-12l69-4c12-1 23 4 32 14l13 14 25 9c8 3 12 8 12 17v5H17v-8c0-6 3-9 8-11Z" fill="url(#body)" stroke="#24282c" stroke-width="2"/>
+  <path d="m76 46 62-4c12-1 20 3 28 12l10 12H59l11-15c2-3 4-4 6-5Z" fill="#b8d2da"/>
+  <path d="M121 43v23M56 67h124" fill="none" stroke="#2b3034" stroke-width="2"/>
+  <circle cx="63" cy="92" r="18" fill="#17191b"/><circle cx="63" cy="92" r="8" fill="#a9afb4"/>
+  <circle cx="184" cy="92" r="18" fill="#17191b"/><circle cx="184" cy="92" r="8" fill="#a9afb4"/>
+</svg>

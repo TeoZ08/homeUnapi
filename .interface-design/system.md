@@ -60,3 +60,17 @@ Nos treinamentos GOV.BR, usar mockup central com aviso permanente de simulacao e
 ## Limites
 
 Nao remover os avisos de seguranca do GOV.BR. Os mockups nao coletam, salvam, enviam formularios, usam cookies ou localStorage. Simulacoes de reconhecimento facial nao podem abrir a camera. Simulacoes de assinatura nao podem enviar, modificar, gerar ou baixar documentos reais.
+
+## Mobilidade
+
+Os simuladores de mobilidade podem adotar densidade, movimento e hierarquia mais proximos de aplicativos reais. Priorizar mapas como superficie principal, folhas inferiores em camadas, transicoes direcionais, feedback ao toque e navegacao contextual dentro do aparelho.
+
+No celular real, o aplicativo ocupa toda a viewport: remover moldura, sensores, barra de status e navegacao de sistema ficticios. Reunir retorno e reinicio em um menu lateral discreto da oficina; tela cheia fica restrita ao desktop, onde ainda existe um aparelho emoldurado. Manter botoes tradicionais mesmo quando houver gestos equivalentes. Em Mobilidade, nao exibir faixas ou avisos externos que interrompam a experiencia do aplicativo.
+
+Kits externos podem orientar composicao, hierarquia e comportamento, mas nao devem substituir componentes locais mais atuais apenas por semelhanca visual. Priorizar folhas inferiores, cartoes flutuantes e controles contextuais sobre o mapa; evitar copiar mockups inteiros ou importar mapas estaticos.
+
+Usar Leaflet com OpenStreetMap como base cartografica real. Trajetos devem vir de geometrias de roteamento aderentes as ruas, nunca de curvas desenhadas manualmente. Marcadores, progresso e alternativas devem compartilhar a mesma geometria geografica.
+
+Origem e destino devem ser livres e começar vazios. A pessoa pode definir A/B por busca explícita, localização autorizada, toque ou arraste no mapa. Usar A verde para origem, B vermelho para destino, carro somente para veículo e ícones próprios para caminhada e bicicleta. Não inventar linhas, horários, paradas ou trajetos de transporte público quando não houver uma fonte verificável para o par escolhido.
+
+No hub de Mobilidade, usar o mascote UnAPI de óculos e o conversível amarelo como assinatura visual dos cards. As ilustrações podem variar a ação, mas devem preservar o traço preto, o rosto, a camiseta, o fundo escuro com luz dourada e a leitura adulta do personagem; evitar cenas urbanas genéricas com aparência de banco de imagens ou geração sem identidade.

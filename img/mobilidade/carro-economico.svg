@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" role="img" aria-labelledby="title desc">
+  <title id="title">Carro econômico branco ilustrado</title>
+  <desc id="desc">Ilustração lateral simplificada de um carro compacto branco.</desc>
+  <defs><linearGradient id="body" x1="0" x2="1"><stop stop-color="#f7f7f7"/><stop offset="1" stop-color="#d8dcdf"/></linearGradient></defs>
+  <ellipse cx="122" cy="100" rx="100" ry="10" fill="#000" opacity=".14"/>
+  <path d="M31 78 45 55c5-8 13-12 23-13l60-5c12-1 21 3 30 12l18 17 29 8c9 3 14 9 14 18v5H22v-8c0-6 3-9 9-11Z" fill="url(#body)" stroke="#899097" stroke-width="2"/>
+  <path d="m70 46 56-5c10-1 17 2 25 10l13 14H57l8-14c1-2 3-4 5-5Z" fill="#c7e2ea"/>
+  <path d="M112 42v23M55 66h113" fill="none" stroke="#7d858b" stroke-width="2"/>
+  <path d="M23 82h23M197 78h16" stroke="#f4d33f" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="65" cy="92" r="18" fill="#242629"/><circle cx="65" cy="92" r="8" fill="#aeb4b8"/>
+  <circle cx="177" cy="92" r="18" fill="#242629"/><circle cx="177" cy="92" r="8" fill="#aeb4b8"/>
+</svg>
