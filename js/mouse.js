@@ -184,11 +184,11 @@ function adjustGameScale() {
   const footer = document.querySelector(".logos-footer");
   const boardTop = board.getBoundingClientRect().top;
   const footerHeight = footer ? footer.offsetHeight : 0;
-  const availableWidth = Math.max(320, window.innerWidth - 40);
+  const availableWidth = Math.max(240, window.innerWidth - 40);
   const availableHeight = Math.max(300, window.innerHeight - boardTop - footerHeight - 48);
   const scaleByWidth = availableWidth / board.offsetWidth;
   const scaleByHeight = availableHeight / board.offsetHeight;
-  const scale = Math.max(0.38, Math.min(1, scaleByWidth, scaleByHeight));
+  const scale = Math.max(0.22, Math.min(1, scaleByWidth, scaleByHeight));
 
   document.documentElement.style.setProperty("--game-scale", scale);
   if (scaleArea) {

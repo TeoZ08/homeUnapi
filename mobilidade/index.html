@@ -11,24 +11,23 @@
   <body class="mobility-index-page portal-page has-page-overlay">
     <main class="page-shell">
       <header class="topbar" aria-label="Cabeçalho do portal">
-        <div class="brand">
-          <small>UNAPI UFMS</small>
-          <strong>Mobilidade com o celular</strong>
+        <div class="brand brand-with-mark">
+          <img class="brand-mark" src="../img/unapi-marca.webp" alt="UnAPI UFMS" width="1024" height="1024" />
+          <div class="brand-copy"><small>Oficinas de informática</small><strong>Mobilidade com o celular</strong></div>
         </div>
-        <nav class="topnav" aria-label="Navegação principal">
-          <a href="../">Home</a>
-          <a href="../ferramentas/">Ferramentas</a>
+        <nav class="topnav" aria-label="Navegação da página">
+          <a class="nav-back" href="../ferramentas/">← Voltar para Ferramentas</a>
+          <a href="../">Início</a>
         </nav>
       </header>
 
       <section class="mobility-hero" aria-labelledby="mobility-title">
-        <span class="eyebrow">Prática interativa</span>
-        <h1 id="mobility-title">Mobilidade e autonomia urbana com o celular</h1>
-        <p>Escolha uma experiência e explore a cidade pelo celular.</p>
+        <div><span class="section-kicker">Prática interativa</span><h1 id="mobility-title">Mobilidade e autonomia urbana com o celular</h1><p>Escolha uma experiência e explore a cidade pelo celular.</p></div>
+        <p class="mobility-note">Escolha pontos, compare opções e simule o percurso sem solicitar uma corrida real.</p>
       </section>
 
-      <section class="mobility-grid" aria-label="Experiências de mobilidade">
-        <a class="mobility-card ride-card" href="uber/">
+      <section class="mobility-journey" aria-label="Experiências de mobilidade">
+        <a class="mobility-experience ride-card" href="uber/">
           <div class="mobility-card-visual" aria-hidden="true">
             <img class="mobility-card-image" src="../img/mobilidade/card-corrida-mascote.webp" width="1600" height="614" alt="" decoding="async" />
           </div>
@@ -40,7 +39,7 @@
           <span class="btn-visual">Abrir experiência →</span>
         </a>
 
-        <a class="mobility-card transit-card" href="maps/">
+        <a class="mobility-experience transit-card" href="maps/">
           <div class="mobility-card-visual" aria-hidden="true">
             <img class="mobility-card-image" src="../img/mobilidade/card-rotas-mascote.webp" width="1600" height="614" alt="" decoding="async" />
           </div>

@@ -354,7 +354,7 @@ function renderSignatureStep({ focusHeading = false } = {}) {
   );
   signaturePrevious.disabled = signatureCurrentStep === 0;
   signatureNext.textContent =
-    signatureCurrentStep === signatureSteps.length - 1 ? "Reiniciar" : "Próximo";
+    signatureCurrentStep === signatureSteps.length - 1 ? "Voltar para Ferramentas" : "Próximo";
 
   if (focusHeading) {
     signatureTitle.setAttribute("tabindex", "-1");
@@ -375,7 +375,7 @@ function previousSignatureStep() {
 
 function nextSignatureStep() {
   if (signatureCurrentStep === signatureSteps.length - 1) {
-    setSignatureStep(0, { focusHeading: true });
+    window.location.assign("../ferramentas/");
     return;
   }
 
@@ -419,7 +419,7 @@ signatureScreen.addEventListener("click", handleSignatureScreenClick);
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowRight") {
-    nextSignatureStep();
+    if (signatureCurrentStep < signatureSteps.length - 1) nextSignatureStep();
   }
 
   if (event.key === "ArrowLeft") {

@@ -59,7 +59,7 @@ function accountPage(activeIndex, body) {
 function actionBar(primaryLabel = "Avançar", extraButtons = "") {
   return `
     <div class="action-bar">
-      <button type="button" class="link-action" data-action="reset">Cancelar</button>
+      <button type="button" class="link-action" data-action="reset">Recomeçar guia</button>
       <div class="action-buttons">
         ${extraButtons}
         <button type="button" class="primary-action active-target" data-action="next">${primaryLabel}</button>
@@ -305,7 +305,9 @@ const steps = [
           <h2>Conta criada com sucesso</h2>
           <p>Use sua conta gov.br para acessar os serviços digitais quando precisar.</p>
         </section>
-        ${actionBar("Concluir")}
+        <div class="action-bar">
+          <button type="button" class="primary-action active-target" data-action="reset">Rever guia</button>
+        </div>
       `
     ),
   },
@@ -325,7 +327,7 @@ function renderStep() {
   mockupElement.innerHTML = step.mockup;
   indicatorElement.textContent = `Passo ${currentStep + 1} de ${steps.length}`;
   previousButton.disabled = currentStep === 0;
-  nextButton.textContent = currentStep === steps.length - 1 ? "Reiniciar" : "Próximo";
+  nextButton.textContent = currentStep === steps.length - 1 ? "Voltar para Ferramentas" : "Próximo";
   prepareEditableMockup();
 }
 
@@ -472,10 +474,11 @@ function goToPreviousStep() {
 
 function goToNextStep() {
   if (currentStep === steps.length - 1) {
-    setStep(0);
-  } else {
-    setStep(currentStep + 1);
+    window.location.assign("../ferramentas/");
+    return;
   }
+
+  setStep(currentStep + 1);
 }
 
 previousButton.addEventListener("click", goToPreviousStep);
@@ -487,7 +490,7 @@ document.addEventListener("keydown", (event) => {
   if (activeTag === "INPUT" || activeTag === "TEXTAREA") return;
 
   if (event.key === "ArrowRight") {
-    goToNextStep();
+    if (currentStep < steps.length - 1) goToNextStep();
   }
 
   if (event.key === "ArrowLeft") {

@@ -18,16 +18,23 @@
   overflow-x: hidden;
 }
 
-.gov-page .btn-voltar-home {
+.gov-page .activity-nav {
   top: 16px;
   left: 16px;
-  background: var(--gov-blue-dark);
-  border-color: rgba(255, 255, 255, 0.35);
-  transform: scale(0.86);
-  transform-origin: top left;
 }
 
-.gov-page .btn-voltar-home:hover {
+.gov-page .activity-nav a {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: var(--gov-blue-dark);
+}
+
+.gov-page .activity-nav .activity-nav-home {
+  border-color: var(--gov-blue-dark);
+  background: #ffffff;
+  color: var(--gov-blue-dark);
+}
+
+.gov-page .activity-nav a:hover {
   background: var(--gov-blue);
   color: #ffffff;
 }
