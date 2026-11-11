@@ -87,7 +87,13 @@
   function draw() {
     const frameIndex = sequences[animation][Math.min(frame, sequences[animation].length-1)];
     const src = path(animation,dir,frameIndex);
-    if (src !== lastPaint) { sprite.src = src; warm(src); lastPaint = src; }
+    // Mantém o último quadro visível até a próxima imagem chegar da rede.
+    warm(src);
+    const ready = imageCache.get(src);
+    if (src !== lastPaint && ready.complete && ready.naturalWidth > 0) {
+      sprite.src = src;
+      lastPaint = src;
+    }
     pet.style.transform = `translate3d(${Math.round(x - width()/2)}px, ${Math.round(foot - height())}px, 0)`;
     pet.classList.toggle('unapi-pet--dragging', dragging);
     pet.classList.toggle('unapi-pet--on-card', support !== null);
