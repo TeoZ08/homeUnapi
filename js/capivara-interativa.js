@@ -76,6 +76,27 @@
     return available(el) && centerX >= r.left + 16 && centerX <= r.right - 16;
   };
   const adjustedX = (centerX) => clamp(centerX, width()/2 + 6, innerWidth - width()/2 - 6);
+  // O rodapé é uma barreira física: ao entrar em seu retângulo, os pés precisam
+  // estar acima da borda, inclusive durante transições e arrastes.
+  const intersectsLogos = (centerX) => {
+    if (!logosPlatform || !available(logosPlatform)) return false;
+    const r = logosPlatform.getBoundingClientRect();
+    return centerX + width() * .38 > r.left && centerX - width() * .38 < r.right;
+  };
+  function automaticJump(now, targetX) {
+    if (!logosPlatform || !available(logosPlatform) || hop || dragging) return false;
+    const r = logosPlatform.getBoundingClientRect();
+    const left = r.left + width()/2 + 12;
+    const right = r.right - width()/2 - 12;
+    if (left >= right) return false;
+    const landX = adjustedX(clamp(targetX,left,right));
+    hop = { el:logosPlatform, automatic:true, fromX:x, toX:landX,
+      from:foot, start:now, length:670 };
+    support = null; vy = 0; action = null; restUntil = 0;
+    platformStayUntil = now + 4600;
+    return true;
+  }
+
   const setAnim = (next) => {
     if (animation === next) return;
     animation = next; frame = 0; frameTimer = 0;
@@ -88,6 +109,13 @@
   // Pré-carregamento leve: a sequência atual primeiro; as demais são carregadas sob demanda.
   sequences.parado.forEach(i => warm(path('parado','right',i)));
   function draw() {
+    // Última proteção para que nenhum quadro seja desenhado sobre as marcas.
+    if (intersectsLogos(x) && foot > surface(logosPlatform)) {
+      foot = surface(logosPlatform);
+      if (!dragging && !hop && canStand(logosPlatform,x)) {
+        support = logosPlatform; vy = 0;
+      }
+    }
     const frameIndex = sequences[animation][Math.min(frame, sequences[animation].length-1)];
     const src = path(animation,dir,frameIndex);
     // Mantém o último quadro visível até a próxima imagem chegar da rede.
@@ -148,7 +176,7 @@
     dir=e.clientX >= downX ? 'right' : 'left';
     const candidate=cardUnderPet();
     // A caixa institucional é sólida: o pet nunca atravessa a área das marcas no arraste.
-    if(candidate === logosPlatform) foot = Math.min(foot, surface(logosPlatform));
+    if(intersectsLogos(x)) foot = Math.min(foot, surface(logosPlatform));
     if(candidate !== hoverTarget){releaseHover();hoverTarget=candidate;if(candidate)candidate.classList.add('unapi-pet-platform--target');}
     setAnim('parado'); draw();
   });
@@ -199,15 +227,25 @@
     draw();
   },{passive:true});
 
-  // A área da caixa das logos já existe na primeira pintura: comece sobre ela,
-  // evitando que a mascote surja sobre os logotipos na carga inicial.
-  if (logosPlatform && canStand(logosPlatform, x) && foot > surface(logosPlatform)) {
-    foot = surface(logosPlatform);
-    support = logosPlatform;
+  // Em telas largas, a entrada começa ao lado da caixa com um salto automático;
+  // em telas estreitas, a capivara já aparece sobre a borda para não cobrir logos.
+  if (logosPlatform && available(logosPlatform)) {
+    const r = logosPlatform.getBoundingClientRect();
+    const rightOutside = r.right + width()/2 + 18;
+    const leftOutside = r.left - width()/2 - 18;
+    if (!reducedMotion.matches && rightOutside < innerWidth-width()/2-6) {
+      x = rightOutside;
+      automaticJump(performance.now()+450, r.right-width()/2-22);
+    } else if (!reducedMotion.matches && leftOutside > width()/2+6) {
+      x = leftOutside;
+      automaticJump(performance.now()+450, r.left+width()/2+22);
+    } else if (intersectsLogos(x) && foot > surface(logosPlatform)) {
+      foot = surface(logosPlatform); support = logosPlatform;
+    }
   }
 
   function walk(dt,now) {
-    if (reducedMotion.matches) return false;
+    if (reducedMotion.matches || hop) return false;
     let destination = x;
     if(mode==='follow') {
       destination=lastPointerX == null ? x : adjustedX(lastPointerX);
@@ -242,7 +280,15 @@
     if(moving){
       const speed=(mode==='follow'?175:104);
       const step=clamp(d,-speed*dt,speed*dt);
-      x=adjustedX(x+step);dir=step<0?'left':'right';
+      const nextX=adjustedX(x+step);
+      // Começa a subir antes que a silhueta cruze a lateral da caixa.
+      if (!support && intersectsLogos(nextX) && !intersectsLogos(x)
+          && foot > surface(logosPlatform)+1
+          && automaticJump(now,nextX+Math.sign(step)*width()*.60)) {
+        dir=step<0?'left':'right';
+        return true;
+      }
+      x=nextX;dir=step<0?'left':'right';
     }
     return moving;
   }
@@ -251,9 +297,26 @@
     if(!paused && !dragging) {
       if(hop){
         const t=clamp((now-hop.start)/hop.length,0,1);
-        const ease=1-Math.pow(1-t,3);
-        foot=hop.from+(surface(hop.el)-hop.from)*ease-17*Math.sin(Math.PI*t);
-        if(t===1){support=hop.el;hop=null;foot=surface(support);vy=0;}
+        if (hop.automatic) {
+          // Primeiro eleva o corpo FORA da caixa; só então avança sobre ela.
+          const apex=surface(hop.el)-30;
+          if(t<.46) {
+            const u=t/.46, ease=u*u*(3-2*u);
+            x=hop.fromX;
+            foot=hop.from+(apex-hop.from)*ease;
+          } else {
+            const u=(t-.46)/.54, ease=u*u*(3-2*u);
+            x=hop.fromX+(hop.toX-hop.fromX)*ease;
+            foot=apex+(surface(hop.el)-apex)*ease;
+          }
+        } else {
+          const ease=1-Math.pow(1-t,3);
+          foot=hop.from+(surface(hop.el)-hop.from)*ease-17*Math.sin(Math.PI*t);
+        }
+        if(t===1){
+          support=hop.el;hop=null;foot=surface(support);vy=0;
+          nextWalkTarget=x;nextDecision=now+2200;
+        }
       }
       if(support && !hop) {
         if(canStand(support,x)) foot=surface(support);
