@@ -1,0 +1,24 @@
+/* A camada só captura eventos diretamente sobre a mascote e os controles. */
+.unapi-pet {
+  position: fixed;
+  left: 0; top: 0;
+  width: 110px; height: calc(110px * 260 / 210);
+  z-index: 30;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  will-change: transform;
+  outline: none;
+}
+.unapi-pet:focus-visible { outline: 3px solid #e2b623; outline-offset: 4px; border-radius: 20px; }
+.unapi-pet--dragging { cursor: grabbing; z-index: 45; }
+.unapi-pet__sprite { display:block; width:100%; height:100%; object-fit:contain; pointer-events:none; -webkit-user-drag:none; filter:drop-shadow(0 2px 2px rgba(39,22,31,.28)); }
+.unapi-pet__shadow { position:absolute; bottom: 1px; left:25%; width:50%; height:8px; border-radius:50%; background:rgba(46,21,45,.17); filter:blur(4px); pointer-events:none; z-index:-1; }
+.unapi-pet--airborne .unapi-pet__shadow { opacity:.3; }
+.unapi-pet-controls { position:fixed; z-index:31; right: 12px; bottom: 10px; display:flex; align-items:center; gap:4px; border:1px solid rgba(92,44,105,.22); border-radius:999px; padding:4px; background:rgba(255,248,225,.94); box-shadow:0 3px 14px rgba(47,22,51,.13); backdrop-filter:blur(8px); }
+.unapi-pet-controls button { color:#4b2358; background:transparent; border:0; border-radius:999px; padding:7px 10px; font:700 12px/1.15 "Atkinson Hyperlegible",system-ui,sans-serif; cursor:pointer; white-space:nowrap; }
+.unapi-pet-controls button:hover,.unapi-pet-controls button:focus-visible,.unapi-pet-controls button[aria-pressed="true"] { background:#542a58; color:#fff8dc; outline:0; }
+.home-option.unapi-pet-platform--target { outline:3px dashed #6e286f; outline-offset:4px; box-shadow:0 0 0 8px rgba(221,182,34,.18),0 20px 48px rgba(63,23,72,.23); }
+@media(max-width:680px){.unapi-pet{width:84px;height:104px}.unapi-pet-controls{right:6px;bottom:6px}.unapi-pet-controls button{font-size:11px;padding:7px 8px}}
+@media(prefers-reduced-motion:reduce){.unapi-pet-controls{backdrop-filter:none}}
