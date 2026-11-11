@@ -22,3 +22,9 @@
 .home-option.unapi-pet-platform--target { outline:3px dashed #6e286f; outline-offset:4px; box-shadow:0 0 0 8px rgba(221,182,34,.18),0 20px 48px rgba(63,23,72,.23); }
 @media(max-width:680px){.unapi-pet{width:84px;height:104px}.unapi-pet-controls{right:6px;bottom:6px}.unapi-pet-controls button{font-size:11px;padding:7px 8px}}
 @media(prefers-reduced-motion:reduce){.unapi-pet-controls{backdrop-filter:none}}
+
+/* Destaque apenas do contorno; não modifica, encobre nem desloca as logos. */
+.home-page .institutional-footer.unapi-pet-platform--target {
+  outline: 2px dashed #7b2f88;
+  outline-offset: 3px;
+}
