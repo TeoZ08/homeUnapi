@@ -117,7 +117,7 @@ function registrationModalPage() {
       <aside class="login-card faded">
         <h2>Acesse sua conta com</h2>
         <div class="login-method">▣ Número do CPF</div>
-        <input class="gov-input" type="text" placeholder="Digite seu CPF" autocomplete="off" />
+        <input class="gov-input" type="text" placeholder="Digite seu CPF" inputmode="numeric" autocomplete="off" maxlength="14" />
         <button type="button" class="primary-action login-submit" data-action="next">Avançar</button>
       </aside>
       <section class="registration-modal" aria-label="Opções de cadastro">
@@ -327,7 +327,7 @@ function renderStep() {
   mockupElement.innerHTML = step.mockup;
   indicatorElement.textContent = `Passo ${currentStep + 1} de ${steps.length}`;
   previousButton.disabled = currentStep === 0;
-  nextButton.textContent = currentStep === steps.length - 1 ? "Voltar para Ferramentas" : "Próximo";
+  nextButton.textContent = currentStep === steps.length - 1 ? "Voltar às atividades" : "Próximo";
   prepareEditableMockup();
 }
 

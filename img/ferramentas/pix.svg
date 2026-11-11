@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="pix-training-title pix-training-desc">
+  <title id="pix-training-title">Banco UnAPI</title>
+  <desc id="pix-training-desc">Duas fitas em forma de seta se encontram e formam a letra U.</desc>
+
+  <path
+    fill="#ffffff"
+    d="m82 32 39 41h-17v53c0 29 13 49 40 64l-25 33c-41-24-64-55-64-97V73H43l39-41Z"
+  />
+  <path
+    fill="#ddb622"
+    d="m174 32 39 41h-12v53c0 42-23 73-64 97l-25-33c27-15 40-35 40-64V73h-17l39-41Z"
+  />
+</svg>

@@ -354,7 +354,7 @@ function renderSignatureStep({ focusHeading = false } = {}) {
   );
   signaturePrevious.disabled = signatureCurrentStep === 0;
   signatureNext.textContent =
-    signatureCurrentStep === signatureSteps.length - 1 ? "Voltar para Ferramentas" : "Próximo";
+    signatureCurrentStep === signatureSteps.length - 1 ? "Voltar às atividades" : "Próximo";
 
   if (focusHeading) {
     signatureTitle.setAttribute("tabindex", "-1");

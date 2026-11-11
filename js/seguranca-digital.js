@@ -541,7 +541,7 @@ function renderFinal() {
       <div class="challenge-action-row">
         <button type="button" class="challenge-action" data-action="restart-all">Refazer desafios</button>
         <button type="button" class="challenge-action secondary" data-action="back-selection">Rever apenas um cenário</button>
-        <a class="challenge-action secondary" href="../ferramentas/">Voltar para Ferramentas</a>
+        <a class="challenge-action secondary" href="../ferramentas/">Voltar às atividades</a>
       </div>
     </section>
   `, "Desafio Antigolpe concluído. Pare, confira, decida.");

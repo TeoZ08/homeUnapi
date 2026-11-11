@@ -98,6 +98,8 @@
   border: 3px dashed rgba(84, 42, 88, 0.4);
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.5);
+  padding: 0;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
@@ -109,6 +111,7 @@
 
 .drop-zone.filled {
   opacity: 0;
+  pointer-events: none;
 }
 
 .leaf {
@@ -121,12 +124,18 @@
   transition: transform 0.1s, background-color 0.3s, left 0.15s, top 0.15s;
   z-index: 10;
   border: 2px solid rgba(255, 255, 255, 0.4);
+  padding: 0;
+  touch-action: none;
 }
 
 .leaf:active {
   cursor: grabbing;
   transform: scale(1.15);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.leaf.dragging {
+  transition: transform 0.1s, background-color 0.3s;
 }
 
 .leaf.purple {
@@ -140,6 +149,12 @@
 .leaf.snapped {
   cursor: default;
   box-shadow: none;
+}
+
+.leaf.selected {
+  outline: 4px solid #ffffff;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 7px var(--unapi-roxo-escuro);
 }
 
 #success-message {
@@ -184,6 +199,157 @@
 .btn-restart:hover {
   background-color: rgba(84, 42, 88, 0.85);
   transform: translateY(-2px);
+}
+
+.touch-leaf-controls {
+  width: min(100%, 440px);
+  margin-top: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid rgba(84, 42, 88, 0.22);
+  border-radius: 16px;
+  background: rgba(255, 248, 220, 0.98);
+}
+
+.touch-leaf-controls[hidden] {
+  display: none !important;
+}
+
+.touch-leaf-controls p {
+  min-height: 46px;
+  margin-bottom: var(--space-3);
+  color: var(--unapi-roxo-escuro);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.touch-leaf-controls > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.touch-leaf-controls button {
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 2px solid var(--unapi-roxo);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--unapi-roxo);
+  cursor: pointer;
+  font: 900 15px/1.2 var(--unapi-fonte);
+}
+
+.touch-leaf-controls button:first-child,
+.touch-leaf-controls button:last-child {
+  background: var(--unapi-roxo);
+  color: #ffffff;
+}
+
+.touch-leaf-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.mouse-page[data-mouse-mode="touch"] .game-scale-area {
+  max-width: 440px;
+}
+
+.mouse-page[data-mouse-mode="touch"] #game-board {
+  width: 100%;
+  height: 580px;
+  transform: none;
+  touch-action: pan-y;
+}
+
+.mouse-page[data-mouse-mode="touch"] .trunk-img {
+  bottom: 128px;
+  height: min(300px, calc((100vw - 28px) * 0.706));
+}
+
+.mouse-page[data-mouse-mode="touch"] .leaves-base {
+  bottom: 0;
+  width: calc(100% - 12px);
+  height: 132px;
+  border-radius: 16px;
+}
+
+.mouse-page[data-mouse-mode="touch"] .drop-zone,
+.mouse-page[data-mouse-mode="touch"] .leaf {
+  width: 56px;
+  height: 56px;
+}
+
+.mouse-page[data-mouse-mode="touch"] #zone1 {
+  top: 12px;
+  left: calc(14% - 28px);
+}
+
+.mouse-page[data-mouse-mode="touch"] #zone2 {
+  top: 80px;
+  left: calc(28% - 28px);
+}
+
+.mouse-page[data-mouse-mode="touch"] #zone3 {
+  top: 12px;
+  left: calc(42% - 28px);
+}
+
+.mouse-page[data-mouse-mode="touch"] #zone4 {
+  top: 80px;
+  left: calc(58% - 28px);
+}
+
+.mouse-page[data-mouse-mode="touch"] #zone5 {
+  top: 12px;
+  left: calc(72% - 28px);
+}
+
+.mouse-page[data-mouse-mode="touch"] #zone6 {
+  top: 80px;
+  left: calc(86% - 28px);
+}
+
+.mouse-page[data-mouse-mode="touch"] #leaf1,
+.mouse-page[data-mouse-mode="touch"] #leaf2,
+.mouse-page[data-mouse-mode="touch"] #leaf3 {
+  top: auto;
+  bottom: 70px;
+}
+
+.mouse-page[data-mouse-mode="touch"] #leaf4,
+.mouse-page[data-mouse-mode="touch"] #leaf5,
+.mouse-page[data-mouse-mode="touch"] #leaf6 {
+  top: auto;
+  bottom: 10px;
+}
+
+.mouse-page[data-mouse-mode="touch"] #leaf1,
+.mouse-page[data-mouse-mode="touch"] #leaf4 {
+  left: calc(24% - 28px);
+}
+
+.mouse-page[data-mouse-mode="touch"] #leaf2,
+.mouse-page[data-mouse-mode="touch"] #leaf5 {
+  left: calc(50% - 28px);
+}
+
+.mouse-page[data-mouse-mode="touch"] #leaf3,
+.mouse-page[data-mouse-mode="touch"] #leaf6 {
+  left: calc(76% - 28px);
+}
+
+.mouse-page[data-mouse-mode="touch"] #success-message {
+  width: calc(100% - 32px);
+  padding: var(--space-6) var(--space-4);
+}
+
+.mouse-page[data-mouse-mode="touch"] #success-message h2 {
+  font-size: 34px;
+}
+
+.mouse-page[data-mouse-mode="touch"] #success-message p {
+  font-size: 18px;
 }
 
 #zone1 {
@@ -276,15 +442,54 @@
 }
 
 @media (max-width: 680px) {
+  .mouse-page {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
   .header-panel {
     width: 100%;
   }
 
+  .mouse-page[data-mouse-mode="desktop"] .game-scale-area {
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: var(--space-3);
+  }
+
   .tool-page .logos-footer {
-    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
+    gap: 14px 12px;
   }
 
   .tool-page .logos-footer img {
     max-width: 105px;
+  }
+}
+
+@media (max-width: 360px) {
+  .mouse-page[data-mouse-mode="touch"] #game-board {
+    height: 550px;
+  }
+
+  .mouse-page[data-mouse-mode="touch"] .trunk-img {
+    bottom: 126px;
+    height: calc((100vw - 28px) * 0.706);
+  }
+}
+
+@media (orientation: landscape) and (max-height: 560px) and (pointer: coarse) {
+  .mouse-page[data-mouse-mode="touch"] #game-board {
+    height: 530px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drop-zone,
+  .leaf {
+    transition: none;
   }
 }

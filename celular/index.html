@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="Pratique configurações e recursos do celular em um ambiente educativo da UnAPI UFMS." />
+  <title>Celular na Prática — UnAPI UFMS</title>
+  <link rel="icon" href="../img/favicon-unapi.webp?v=2" type="image/webp" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/celular.css" />
+  <link rel="stylesheet" href="../css/celular-modulos.css" />
+  <link rel="stylesheet" href="../css/celular-expansao.css" />
+  <script src="../js/celular-expansao.js" defer></script>
+  <script src="../js/celular-modulos.js" defer></script>
+  <script src="../js/celular.js" defer></script>
+</head>
+<body class="celular-page portal-page">
+  <a class="celular-skip" href="#phone-screen">Ir para o celular simulado</a>
+  <main class="page-shell celular-shell">
+    <header class="topbar" aria-label="Cabeçalho do portal">
+      <div class="brand brand-with-mark">
+        <img class="brand-mark" src="../img/unapi-marca.webp" alt="UnAPI UFMS" width="1024" height="1024" />
+        <div class="brand-copy"><small>Oficinas de informática</small><strong>Celular na Prática</strong></div>
+      </div>
+      <nav class="topnav" aria-label="Navegação da página">
+        <a class="nav-action nav-action--back" href="../ferramentas/">Atividades</a>
+        <a class="nav-action nav-action--quiet nav-action--home" href="../">Início</a>
+      </nav>
+    </header>
+    <section class="celular-workspace" aria-labelledby="celular-heading">
+      <aside class="celular-guide" aria-label="Orientações da atividade">
+        <div class="celular-guide-heading">
+          <span class="celular-kicker">UnAPI · Oficina de informática</span>
+          <h1 id="celular-heading">Celular na Prática</h1>
+          <p>Descubra. Toque. Experimente.</p>
+        </div>
+        <div class="celular-mode" role="group" aria-label="Modo de utilização">
+          <button id="guided-mode" type="button" class="is-current" aria-pressed="true">Prática guiada</button>
+          <button id="free-mode" type="button" aria-pressed="false">Explorar livremente</button>
+        </div>
+        <section id="guide-content" class="celular-lesson" aria-labelledby="mission-title">
+          <div class="celular-lesson-top">
+            <span id="mission-count">Atividade 1 de 2</span>
+            <span id="mission-progress-text">0 de 2 concluídas</span>
+          </div>
+          <div class="celular-progress-track" role="progressbar" aria-label="Atividades concluídas" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0" id="mission-progress"><span id="mission-progress-bar"></span></div>
+          <p id="mission-context" class="celular-situation"></p>
+          <h2 id="mission-title"></h2>
+          <p id="mission-description" class="celular-instruction"></p>
+          <p id="mission-feedback" class="celular-feedback" role="status" aria-live="polite"></p>
+          <div id="hint-box" class="celular-hint" hidden></div>
+          <div class="celular-guide-actions">
+            <button id="hint-button" class="celular-secondary" type="button">Quero uma dica</button>
+            <button id="route-button" class="celular-linkbutton" type="button">Mostrar o caminho</button>
+          </div>
+          <div class="celular-lesson-footer">
+            <button id="reset-mission" class="celular-linkbutton" type="button">↻ Recomeçar atividade</button>
+            <button id="next-mission" class="celular-primary" type="button" disabled>Próxima atividade →</button>
+          </div>
+        </section>
+        <div id="free-content" class="celular-free" hidden>
+          <h2>Escolha uma função</h2>
+          <div id="module-picker" class="mod-library-grid" role="group" aria-label="Escolha o tema da prática"></div>
+        </div>
+        <div class="celular-guide-foot">
+          <button id="reset-all" class="celular-reset" type="button">↻ Reiniciar tudo</button>
+        </div>
+      </aside>
+      <section class="celular-simulator" aria-label="Simulação interativa de smartphone">
+        <div class="celular-device">
+          <div class="celular-screen" id="phone-screen" role="region" aria-label="Tela do celular simulado" tabindex="-1"></div>
+          <nav class="celular-device-nav" aria-label="Navegação do celular">
+            <button id="phone-back" type="button" aria-label="Voltar à tela anterior"><span class="android-back-icon" aria-hidden="true"></span></button>
+            <button id="phone-home" type="button" aria-label="Ir para tela inicial"><span class="android-home-icon" aria-hidden="true"></span></button>
+            <button id="phone-apps" type="button" aria-label="Ver aplicativos"><span class="android-apps-icon" aria-hidden="true"></span></button>
+          </nav>
+        </div>
+
+      </section>
+    </section>
+
+  </main>
+  <p class="celular-sr-only" id="celular-announcement" aria-live="polite" aria-atomic="true"></p>
+  <noscript>Ative o JavaScript para utilizar o simulador educativo.</noscript>
+</body>
+</html>

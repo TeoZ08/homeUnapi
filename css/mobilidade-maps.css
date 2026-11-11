@@ -542,7 +542,7 @@
   text-decoration: none;
 }
 
-@media (max-width: 560px) {
+@media (max-width: 560px), (orientation: landscape) and (max-height: 560px) and (pointer: coarse) {
   .maps-simulator-page[data-mobility-screen="directions"] .simulator-tools {
     top: 248px;
   }
@@ -970,7 +970,7 @@
   height: 37px;
 }
 
-@media (max-width: 560px) {
+@media (max-width: 560px), (orientation: landscape) and (max-height: 560px) and (pointer: coarse) {
   .maps-place-layout {
     grid-template-rows: minmax(305px, 54%) minmax(0, 1fr);
   }
@@ -1008,7 +1008,7 @@
   }
 }
 
-@media (max-width: 560px) and (max-height: 700px) {
+@media (max-width: 560px) and (max-height: 700px), (orientation: landscape) and (max-height: 560px) and (pointer: coarse) {
   .maps-place-layout {
     grid-template-rows: minmax(225px, 45%) minmax(0, 1fr);
   }
@@ -1112,7 +1112,7 @@
   font-size: 17px;
 }
 
-@media (max-width: 560px) {
+@media (max-width: 560px), (orientation: landscape) and (max-height: 560px) and (pointer: coarse) {
   .maps-route-layout {
     grid-template-rows: minmax(300px, 45%) minmax(0, 1fr);
   }
@@ -1129,5 +1129,495 @@
 
   .maps-route-layout {
     grid-template-rows: minmax(235px, 40%) minmax(0, 1fr);
+  }
+}
+
+/* Transporte público: resultados e itinerário inspirados no fluxo do Google Maps. */
+.line-badge {
+  min-width: 38px;
+  min-height: 25px;
+  padding: 3px 7px;
+  border-radius: 4px;
+  color: var(--line-text, #fff);
+  background: var(--line-color, var(--maps-blue));
+  font: 800 13px/1 Arial, sans-serif;
+  letter-spacing: 0.01em;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+}
+
+.maps-transit-results {
+  grid-template-rows: minmax(245px, 38%) minmax(0, 1fr);
+}
+
+.transit-map-chip {
+  min-width: 88px;
+  text-align: center;
+}
+
+.maps-transit-routes {
+  padding-bottom: 12px;
+}
+
+.transit-departure-trigger {
+  min-height: 44px;
+  margin-top: 2px;
+  padding: 5px 8px 5px 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 0;
+  border-radius: 7px;
+  color: var(--maps-blue-dark);
+  background: transparent;
+  font: 600 12px/1 Arial, sans-serif;
+}
+
+.transit-departure-trigger:hover,
+.transit-departure-trigger:focus-visible {
+  background: var(--maps-blue-soft);
+}
+
+.transit-departure-trigger .ui-icon {
+  width: 17px;
+  height: 17px;
+}
+
+.transit-schedule-menu {
+  position: absolute;
+  z-index: 20;
+  top: 72px;
+  left: 16px;
+  right: 16px;
+  padding: 9px;
+  display: grid;
+  gap: 4px;
+  border: 1px solid var(--maps-border);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(60, 64, 67, 0.24);
+}
+
+.transit-schedule-menu > strong {
+  padding: 7px 9px 5px;
+  color: #202124;
+  font-size: 14px;
+}
+
+.transit-schedule-menu button {
+  min-height: 44px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 0;
+  border-radius: 8px;
+  color: #3c4043;
+  background: transparent;
+  font: 600 14px/1 Arial, sans-serif;
+  text-align: left;
+}
+
+.transit-schedule-menu button:hover,
+.transit-schedule-menu button:focus-visible,
+.transit-schedule-menu button[aria-pressed="true"] {
+  color: var(--maps-blue-dark);
+  background: var(--maps-blue-soft);
+}
+
+.maps-transit-routes .filter-icon {
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+}
+
+.maps-transit-endpoints {
+  min-height: 38px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 20px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 5px;
+  color: var(--maps-gray);
+  font-size: 11px;
+}
+
+.maps-transit-endpoints > span:not(:last-child) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.maps-transit-endpoints .ui-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.maps-transit-endpoints small {
+  padding: 3px 6px;
+  border-radius: 999px;
+  color: #5f6368;
+  background: #f1f3f4;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.maps-route-layout .routes-scroll {
+  min-height: 0;
+}
+
+.maps-route-layout .maps-transit-route {
+  position: relative;
+  min-height: 116px;
+  padding: 11px 36px 11px 15px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "time time"
+    "flow flow"
+    "meta meta";
+  gap: 7px;
+  align-content: center;
+  border-left: 4px solid transparent;
+  text-align: left;
+}
+
+.maps-route-layout .maps-transit-route.selected {
+  border-left-color: var(--maps-blue);
+  background: #f7faff;
+}
+
+.transit-card-time {
+  grid-area: time;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.transit-card-time strong {
+  color: #202124;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.transit-card-time small {
+  color: var(--maps-gray);
+  font-size: 13px;
+}
+
+.transit-card-flow,
+.transit-overview-flow {
+  grid-area: flow;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  overflow: hidden;
+}
+
+.transit-flow-walk {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: #3c4043;
+}
+
+.transit-flow-walk .ui-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.transit-flow-walk small {
+  color: var(--maps-gray);
+  font-size: 11px;
+}
+
+.transit-flow-arrow {
+  color: #80868b;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.transit-card-meta {
+  grid-area: meta;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.transit-card-meta strong {
+  color: #188038;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.transit-card-meta small {
+  color: var(--maps-gray);
+  font-size: 12px;
+}
+
+.transit-route-check {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--maps-blue);
+  font-size: 13px;
+  opacity: 0;
+  transform: translateY(-50%) scale(0.8);
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+
+.maps-transit-route.selected .transit-route-check {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+.maps-transit-details {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+}
+
+.transit-trip-overview {
+  padding: 12px 16px 11px;
+  border-bottom: 1px solid var(--maps-border);
+}
+
+.transit-trip-overview > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.transit-trip-overview > div strong {
+  color: #202124;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.transit-trip-overview > div span {
+  color: var(--maps-gray);
+  font-size: 14px;
+}
+
+.transit-overview-flow {
+  margin-top: 8px;
+}
+
+.transit-trip-overview > p {
+  margin-top: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #188038;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.transit-trip-overview > p small {
+  padding: 3px 7px;
+  border-radius: 999px;
+  color: #5f6368;
+  background: #f1f3f4;
+  font-size: 9px;
+  text-transform: uppercase;
+}
+
+.transit-timeline-scroll {
+  padding: 0 14px 12px;
+  overscroll-behavior: contain;
+}
+
+.transit-timeline {
+  list-style: none;
+}
+
+.transit-timeline-step {
+  position: relative;
+  min-height: 72px;
+  padding: 12px 0;
+  display: grid;
+  grid-template-columns: 44px 34px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+}
+
+.transit-timeline-step::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 68px;
+  top: 45px;
+  bottom: -14px;
+  width: 4px;
+  border-radius: 999px;
+  background: #aecbfa;
+}
+
+.transit-timeline-step.is-bus::after {
+  background: var(--maps-blue);
+}
+
+.transit-timeline-step:last-child::after {
+  display: none;
+}
+
+.transit-timeline-step time {
+  padding-top: 6px;
+  color: #3c4043;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.transit-timeline-node {
+  position: relative;
+  z-index: 1;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #bdc1c6;
+  border-radius: 50%;
+  color: #3c4043;
+  background: #fff;
+}
+
+.transit-timeline-node .ui-icon {
+  width: 21px;
+  height: 21px;
+}
+
+.is-bus .transit-timeline-node {
+  color: #fff;
+  border-color: var(--maps-blue);
+  background: var(--maps-blue);
+}
+
+.is-destination .transit-timeline-node {
+  color: #fff;
+  border-color: #d93025;
+  background: #d93025;
+}
+
+.transit-step-content {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+  padding-bottom: 3px;
+}
+
+.transit-step-content > strong {
+  color: #202124;
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.transit-step-content > small {
+  color: var(--maps-gray);
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.transit-line-direction {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #3c4043;
+  font-size: 13px;
+}
+
+.transit-line-direction > span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.transit-live-time {
+  width: fit-content;
+  padding: 4px 7px;
+  border-radius: 999px;
+  color: #137333;
+  background: #e6f4ea;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.transit-details-actions {
+  padding: 9px 14px max(11px, env(safe-area-inset-bottom));
+  grid-template-columns: 1fr;
+  border-top: 1px solid var(--maps-border);
+  background: #fff;
+}
+
+.transit-journey-sheet .journey-instruction > span {
+  background: var(--journey-color, var(--maps-blue));
+}
+
+.transit-journey-layout {
+  grid-template-rows: minmax(420px, 68%) minmax(0, 1fr);
+}
+
+.transit-journey-sheet .journey-next {
+  min-height: 25px;
+  display: flex;
+  align-items: center;
+  color: var(--maps-blue-dark);
+}
+
+.transit-journey-sheet .journey-instruction h1 {
+  font-size: 19px;
+  line-height: 1.15;
+}
+
+.transit-journey-sheet .journey-actions {
+  grid-template-columns: 1fr;
+}
+
+.transit-complete .arrival-pin > span {
+  color: #fff;
+  background: var(--maps-blue);
+}
+
+@media (max-height: 700px) {
+  .maps-transit-results {
+    grid-template-rows: minmax(205px, 36%) minmax(0, 1fr);
+  }
+
+  .maps-route-layout .maps-transit-route {
+    min-height: 108px;
+  }
+
+  .transit-trip-overview {
+    padding-block: 9px;
+  }
+
+  .transit-timeline-step {
+    min-height: 66px;
+    padding-block: 9px;
+  }
+
+  .transit-journey-layout {
+    grid-template-rows: minmax(300px, 56%) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px), (orientation: landscape) and (max-height: 560px) and (pointer: coarse) {
+  .maps-simulator-page[data-mobility-screen="details"] .simulator-tools {
+    top: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .transit-route-check {
+    transition: none;
   }
 }

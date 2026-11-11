@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 144" role="img" aria-labelledby="banco-unapi-title banco-unapi-desc">
+  <title id="banco-unapi-title">Banco UnAPI</title>
+  <desc id="banco-unapi-desc">Duas fitas em forma de seta se encontram e formam a letra U.</desc>
+
+  <g transform="translate(8 8)">
+    <rect width="128" height="128" rx="30" fill="#542a58" />
+    <path
+      fill="#fff8dc"
+      d="M41 15 61 36h-9v37c0 15 7 25 21 33l-13 17C39 111 27 95 27 73V36h-6l20-21Z"
+    />
+    <path
+      fill="#ddb622"
+      d="M87 15 107 36h-6v37c0 22-12 38-33 50l-13-17c14-8 21-18 21-33V36h-9l20-21Z"
+    />
+  </g>
+
+  <g fill="#542a58" font-family="Atkinson Hyperlegible, Segoe UI, Arial, sans-serif">
+    <text x="164" y="52" font-size="23" font-weight="800" letter-spacing="3.4">BANCO</text>
+    <text x="160" y="108" font-size="54" font-weight="800" letter-spacing="-1.5">UnAPI</text>
+  </g>
+  <rect x="162" y="120" width="82" height="6" rx="3" fill="#ddb622" />
+</svg>

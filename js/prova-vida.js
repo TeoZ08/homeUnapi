@@ -334,7 +334,7 @@ function renderStep({ focusHeading = false } = {}) {
     `Etapa ${currentStep + 1} de ${steps.length}`
   );
   previousButton.disabled = currentStep === 0;
-  nextButton.textContent = currentStep === steps.length - 1 ? "Voltar para Ferramentas" : "Próximo";
+  nextButton.textContent = currentStep === steps.length - 1 ? "Voltar às atividades" : "Próximo";
 
   if (focusHeading) {
     titleElement.setAttribute("tabindex", "-1");

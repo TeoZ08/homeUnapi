@@ -1,15 +1,1 @@
-.env
-.env.*
-!.env.example
-node_modules/
-dist/
-build/
-.venv/
-venv/
-__pycache__/
-*.pyc
-.DS_Store
-*.db
-*.sqlite
-*.sqlite3
 .interface-design/

@@ -2,6 +2,20 @@
   position: relative;
 }
 
+.keyboard-mode-panel {
+  width: 100%;
+}
+
+.keyboard-mode-panel[hidden] {
+  display: none !important;
+}
+
+.keyboard-desktop-practice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .logo-watermark {
   width: 100%;
   max-width: 900px;
@@ -23,6 +37,15 @@
   margin-bottom: 30px;
   z-index: 2;
   position: relative;
+}
+
+.input-container label {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--unapi-roxo-escuro);
+  font-size: 16px;
+  font-weight: 800;
+  text-align: center;
 }
 
 #practice-input {
@@ -98,7 +121,7 @@
   transition: background-color 0.1s, transform 0.1s, border-bottom-width 0.1s, opacity 0.3s, filter 0.3s;
   user-select: none;
   line-height: 1.2;
-  cursor: pointer;
+  cursor: default;
   position: relative;
 }
 
@@ -246,6 +269,171 @@
   z-index: 1;
 }
 
+.keyboard-touch-practice {
+  max-width: 720px;
+  margin: var(--space-6) auto 0;
+}
+
+.touch-practice-heading {
+  margin-bottom: var(--space-5);
+  text-align: center;
+}
+
+.touch-practice-heading > span {
+  display: inline-flex;
+  margin-bottom: var(--space-2);
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(221, 182, 34, 0.24);
+  color: var(--unapi-roxo-escuro);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.touch-practice-heading h1 {
+  color: var(--unapi-roxo-escuro);
+  font-size: clamp(30px, 7vw, 46px);
+  line-height: 1.02;
+}
+
+.touch-practice-heading p {
+  max-width: 580px;
+  margin: var(--space-3) auto 0;
+  color: var(--unapi-roxo);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.touch-practice-card {
+  padding: clamp(20px, 5vw, 34px);
+  border: 2px solid rgba(84, 42, 88, 0.28);
+  border-radius: var(--unapi-borda);
+  background: rgba(255, 248, 220, 0.98);
+  box-shadow: 8px 8px 0 rgba(84, 42, 88, 0.12);
+}
+
+.touch-step {
+  color: var(--unapi-roxo);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.touch-target {
+  margin: var(--space-3) 0 var(--space-5);
+  padding: var(--space-5);
+  border-left: 5px solid var(--unapi-amarelo);
+  background: rgba(221, 182, 34, 0.14);
+  color: var(--unapi-roxo-escuro);
+  font-size: clamp(28px, 8vw, 42px);
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.touch-practice-card label {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--unapi-roxo-escuro);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+#touch-practice-input {
+  width: 100%;
+  min-height: 64px;
+  padding: 14px 16px;
+  border: 3px solid var(--unapi-roxo);
+  border-radius: 12px;
+  background: #ffffff;
+  color: #231426;
+  font: 700 22px/1.3 var(--unapi-fonte);
+}
+
+#touch-practice-input[aria-invalid="true"] {
+  border-color: #a73737;
+}
+
+.touch-feedback {
+  min-height: 48px;
+  margin-top: var(--space-3);
+  color: var(--unapi-roxo);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.touch-feedback.is-correct {
+  color: #176d42;
+}
+
+.touch-feedback.has-error {
+  color: #8d2d2d;
+}
+
+.touch-progress {
+  height: 12px;
+  margin: var(--space-3) 0 var(--space-5);
+  overflow: hidden;
+  border: 1px solid rgba(84, 42, 88, 0.2);
+  border-radius: 999px;
+  background: rgba(84, 42, 88, 0.09);
+}
+
+.touch-progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--unapi-amarelo);
+  transition: width 0.24s ease;
+}
+
+.touch-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: var(--space-3);
+}
+
+.touch-button {
+  min-height: 54px;
+  padding: 12px 16px;
+  border: 2px solid var(--unapi-roxo);
+  border-radius: 12px;
+  cursor: pointer;
+  font: 900 16px/1.2 var(--unapi-fonte);
+}
+
+.touch-button.primary {
+  background: var(--unapi-roxo);
+  color: #ffffff;
+}
+
+.touch-button.secondary {
+  background: transparent;
+  color: var(--unapi-roxo);
+}
+
+.touch-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.touch-tip {
+  margin-top: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  gap: var(--space-2);
+  border-radius: 14px;
+  border: 1px solid rgba(84, 42, 88, 0.2);
+  background: var(--unapi-fundo);
+  color: var(--unapi-roxo-escuro);
+  font-size: 16px;
+  line-height: 1.45;
+}
+
 .btn-mode {
   min-height: 44px;
   padding: 10px 20px;
@@ -362,11 +550,61 @@
 }
 
 @media (max-width: 720px) {
+  .keyboard-page {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .keyboard-page[data-keyboard-mode="desktop"] .logo-watermark {
+    height: 96px;
+  }
+
+  .keyboard-page[data-keyboard-mode="desktop"] .keyboard-scale-area {
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: var(--space-2) 0 var(--space-3);
+  }
+
+  .touch-practice-heading {
+    text-align: left;
+  }
+
+  .touch-practice-heading p {
+    margin-left: 0;
+  }
+
+  .touch-practice-card {
+    padding: var(--space-5);
+    box-shadow: 5px 5px 0 rgba(84, 42, 88, 0.12);
+  }
+
+  .touch-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .touch-actions .primary {
+    grid-row: 1;
+  }
+
+  .touch-tip {
+    flex-direction: column;
+  }
+
   .tool-page .logos-footer {
-    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
+    gap: 14px 12px;
   }
 
   .tool-page .logos-footer img {
     max-width: 105px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .touch-progress span {
+    transition: none;
   }
 }

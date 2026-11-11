@@ -8,23 +8,55 @@
     <link rel="stylesheet" href="../css/base.css" />
     <link rel="stylesheet" href="../css/teclado.css" />
   </head>
-  <body class="tool-page keyboard-page">
+  <body class="tool-page keyboard-page" data-keyboard-mode="touch">
+    <section class="device-gate" data-device-gate aria-label="Escolha do dispositivo">
+      <div class="device-gate-card" role="dialog" aria-modal="true" aria-labelledby="device-gate-title" aria-describedby="device-gate-description" tabindex="-1">
+        <span class="device-gate-kicker">Antes de começar</span>
+        <h1 id="device-gate-title">Como você vai praticar?</h1>
+        <p class="device-gate-intro" id="device-gate-description">Escolha o aparelho que está usando agora. O exercício será preparado para ele.</p>
+
+        <div class="device-gate-options">
+          <button class="device-choice" type="button" data-device-choice="touch" aria-pressed="false">
+            <span class="device-recommendation" data-device-recommendation hidden>Recomendado para esta tela</span>
+            <span class="device-selected" data-device-selected hidden>Selecionado</span>
+            <span class="device-choice-title">Estou no celular</span>
+            <span class="device-choice-copy">Use o teclado que aparece na tela para completar frases.</span>
+          </button>
+          <button class="device-choice" type="button" data-device-choice="desktop" aria-pressed="false">
+            <span class="device-recommendation" data-device-recommendation hidden>Recomendado para esta tela</span>
+            <span class="device-selected" data-device-selected hidden>Selecionado</span>
+            <span class="device-choice-title">Estou no computador</span>
+            <span class="device-choice-copy">Use o teclado físico e conheça as famílias de teclas.</span>
+          </button>
+        </div>
+
+        <p class="device-gate-note">A escolha fica guardada somente enquanto esta aba estiver aberta. Você poderá trocar depois.</p>
+      </div>
+    </section>
+
     <header class="activity-masthead">
       <div class="activity-masthead-copy"><small>Oficinas de informática</small><strong>Treino de Teclado</strong></div>
       <nav class="activity-nav" aria-label="Saída da atividade">
-        <a class="activity-nav-back" href="../ferramentas/">← Voltar para Ferramentas</a>
-        <a class="activity-nav-home" href="../">Início</a>
+        <a class="nav-action nav-action--back nav-action--activities" href="../ferramentas/">Atividades</a>
+        <a class="nav-action nav-action--quiet nav-action--home" href="../">Início</a>
       </nav>
     </header>
 
+    <div class="device-mode-summary" aria-label="Dispositivo escolhido">
+      <span>Praticando no <strong data-device-current>celular</strong></span>
+      <button type="button" data-device-change>Trocar dispositivo</button>
+    </div>
+
+    <section class="keyboard-mode-panel keyboard-desktop-practice" data-keyboard-panel="desktop" aria-label="Prática com teclado de computador" hidden>
     <div class="logo-watermark"></div>
 
     <div class="input-container">
-      <input type="text" id="practice-input" placeholder="Digite:" autocomplete="off" spellcheck="false" />
+      <label for="practice-input">Digite para localizar as teclas no teclado abaixo</label>
+      <input type="text" id="practice-input" placeholder="Comece a digitar" autocomplete="off" spellcheck="false" />
     </div>
 
     <div class="keyboard-scale-area">
-      <div class="keyboard-board" id="keyboard-container">
+      <div class="keyboard-board" id="keyboard-container" role="img" aria-label="Representação visual de um teclado de computador ABNT2">
         <div class="main-block">
           <div class="row">
             <div class="key esc" data-key="Escape" data-family="comandos">Esc</div><div class="spacer"></div>
@@ -75,9 +107,9 @@
     </div>
 
     <div id="controls-wrapper">
-      <button id="btn-fullscreen" class="btn-mode">🖥️ Tela Cheia</button>
-      <button id="toggle-families" class="btn-mode">Ver Famílias</button>
-      <div id="family-menu" class="hidden">
+      <button type="button" id="btn-fullscreen" class="btn-mode">Tela cheia</button>
+      <button type="button" id="toggle-families" class="btn-mode" aria-expanded="false" aria-controls="family-menu">Ver famílias</button>
+      <div id="family-menu" class="hidden" aria-label="Famílias de teclas">
         <span class="menu-label">Destacar:</span>
         <button type="button" data-family-button="escrita">Letras</button>
         <button type="button" data-family-button="numeros">Números</button>
@@ -86,16 +118,58 @@
         <button type="button" id="clear-highlights" class="btn-clear">Limpar</button>
       </div>
     </div>
+    </section>
+
+    <section class="keyboard-mode-panel keyboard-touch-practice" data-keyboard-panel="touch" aria-labelledby="touch-practice-title">
+      <header class="touch-practice-heading">
+        <span>Modo celular</span>
+        <h1 id="touch-practice-title">Pratique com o teclado do seu celular</h1>
+        <p>Leia a frase, toque no campo e digite usando o teclado que aparece na tela.</p>
+      </header>
+
+      <div class="touch-practice-card">
+        <p class="touch-step" id="touch-step">Frase 1 de 5</p>
+        <p class="touch-target" id="touch-target">Bom dia!</p>
+
+        <label for="touch-practice-input">Digite a frase acima</label>
+        <input
+          type="text"
+          id="touch-practice-input"
+          autocomplete="off"
+          autocapitalize="sentences"
+          enterkeyhint="next"
+          spellcheck="false"
+          aria-describedby="touch-target touch-feedback"
+        />
+
+        <p id="touch-feedback" class="touch-feedback" aria-live="polite">Comece quando estiver pronto(a).</p>
+
+        <div class="touch-progress" role="progressbar" aria-label="Progresso das frases" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0">
+          <span></span>
+        </div>
+
+        <div class="touch-actions">
+          <button type="button" id="touch-clear" class="touch-button secondary">Limpar</button>
+          <button type="button" id="touch-next" class="touch-button primary" disabled>Próxima frase</button>
+        </div>
+      </div>
+
+      <aside class="touch-tip" aria-label="Dica de digitação">
+        <strong>Dica:</strong>
+        <span>Use a barra de espaço para separar palavras e a tecla apagar para corrigir.</span>
+      </aside>
+    </section>
 
     <footer class="logos-footer" aria-label="Logos institucionais">
-      <img src="../img/ufms.webp" alt="UFMS" />
-      <img src="../img/unapi.webp" alt="UnAPI" />
-      <img src="../img/gov-federal.webp" alt="Governo Federal" />
-      <img src="../img/facom.webp" alt="FACOM" />
-      <img src="../img/pet-sistemas.webp" alt="PET Sistemas" />
-      <img src="../img/pet-computacao.webp" alt="PET Computação" />
+      <img src="../img/ufms.webp" alt="UFMS" width="415" height="600" loading="lazy" decoding="async" />
+      <img src="../img/unapi.webp" alt="UnAPI" width="545" height="458" loading="lazy" decoding="async" />
+      <img src="../img/gov-federal.webp" alt="Governo Federal" width="600" height="289" loading="lazy" decoding="async" />
+      <img src="../img/facom.webp" alt="FACOM" width="600" height="573" loading="lazy" decoding="async" />
+      <img src="../img/pet-sistemas.webp" alt="PET Sistemas" width="600" height="283" loading="lazy" decoding="async" />
+      <img src="../img/pet-computacao.webp" alt="PET Computação" width="600" height="400" loading="lazy" decoding="async" />
     </footer>
 
+    <script src="../js/device-mode.js" defer></script>
     <script src="../js/teclado.js" defer></script>
   </body>
 </html>

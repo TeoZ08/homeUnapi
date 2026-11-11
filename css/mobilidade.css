@@ -643,7 +643,7 @@
   border-radius: 0;
 }
 
-@media (max-width: 560px) {
+@media (max-width: 560px), (orientation: landscape) and (max-height: 560px) and (pointer: coarse) {
   .mobility-simulator-page {
     min-height: 100dvh;
     padding: 0;
@@ -1144,7 +1144,7 @@
   background: #7b1fa2;
 }
 
-@media (max-width: 560px) {
+@media (max-width: 560px), (orientation: landscape) and (max-height: 560px) and (pointer: coarse) {
   .planner-heading,
   .maps-planner-title {
     padding-top: max(16px, env(safe-area-inset-top));

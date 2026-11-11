@@ -1,0 +1,267 @@
+/* Celular na Prática · identidade institucional UnAPI */
+.celular-page{background:var(--unapi-fundo)}
+.celular-shell{--shell-max-width:none;--shell-padding:0;--shell-gap:0}
+.celular-skip{position:absolute;left:12px;top:-80px;background:#fff;z-index:1001;padding:12px}
+.celular-skip:focus{top:10px}
+.celular-workspace{flex:1;display:grid;grid-template-columns:minmax(340px,440px) minmax(410px,1fr);gap:clamp(30px,5vw,94px);align-items:center;justify-content:center;padding:26px clamp(24px,5vw,76px) 30px;background:linear-gradient(120deg,rgba(255,248,220,.94),rgba(255,248,220,.82)),url("../img/background-unapi.svg") center/cover}
+.celular-guide{width:100%;max-width:440px;align-self:center}
+.celular-guide-heading{margin-bottom:22px}
+.celular-kicker{color:var(--unapi-roxo);font-size:13px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.celular-guide h1{font:750 clamp(34px,3vw,46px)/1.04 var(--unapi-fonte-display);letter-spacing:-.045em;color:var(--unapi-roxo-escuro);margin:9px 0 12px}
+.celular-guide-heading>p{font-size:18px;line-height:1.4;max-width:40ch}
+.celular-mode{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:0 0 15px;background:rgba(84,42,88,.075);padding:5px;border-radius:13px}
+.celular-mode button{border:0;border-radius:10px;min-height:50px;padding:9px 12px;background:transparent;color:var(--unapi-roxo);font:700 16px/1.2 var(--unapi-fonte);cursor:pointer}
+.celular-mode button.is-current{background:var(--unapi-roxo);color:#fff}
+.celular-lesson,.celular-free{background:#fffcf1;border:1px solid rgba(84,42,88,.22);border-radius:16px;padding:22px 22px 20px}
+.celular-lesson-top{display:flex;justify-content:space-between;gap:10px;font-size:13px;font-weight:800;color:#59445e}
+.celular-progress-track{height:8px;background:#e7dcca;border-radius:10px;overflow:hidden;margin:12px 0 18px}
+.celular-progress-track>span{display:block;height:100%;width:0;background:var(--unapi-roxo);transition:width .25s ease}
+.celular-situation{font-size:16px;line-height:1.35;color:#56445b;margin-bottom:10px}
+.celular-lesson h2,.celular-free h2{font:750 clamp(25px,2.2vw,31px)/1.1 var(--unapi-fonte-display);color:var(--unapi-roxo-escuro);margin-bottom:9px}
+.celular-instruction,.celular-free>p{font-size:18px;line-height:1.42}
+.celular-feedback{min-height:42px;font-size:16px;line-height:1.35;color:#58435f;margin:14px 0 0}
+.celular-feedback.is-success{background:#e5f3e8;color:#164c2b;padding:10px 12px;border-radius:8px;font-weight:800}
+.celular-hint{background:#f5ebc3;border-left:4px solid #b09119;padding:12px 14px;border-radius:7px;margin:14px 0 0;font-size:16px;line-height:1.38}
+.celular-guide-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:15px 0 0}
+.celular-guide button{font-family:var(--unapi-fonte);cursor:pointer}
+.celular-secondary,.celular-primary{border-radius:10px;min-height:48px;padding:10px 16px;font-size:16px;font-weight:800}
+.celular-secondary{border:2px solid var(--unapi-roxo);background:transparent;color:var(--unapi-roxo-escuro)}
+.celular-primary{border:2px solid var(--unapi-roxo);background:var(--unapi-roxo);color:#fff}
+.celular-primary:disabled{opacity:.43;cursor:not-allowed}
+.celular-linkbutton,.celular-reset{border:0;background:transparent;color:var(--unapi-roxo);font-size:15px;font-weight:800;text-decoration:underline;text-underline-offset:3px;padding:10px 2px;min-height:44px}
+.celular-lesson-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px solid rgba(84,42,88,.14);padding-top:15px;margin-top:17px}
+.celular-guide-foot{font-size:14px;line-height:1.4;color:#5b4d5e;padding:15px 3px 0}
+.celular-guide-foot .celular-reset{margin-top:4px}
+.celular-free-tip{margin-top:16px;padding:15px;background:#f7edcf;border-radius:9px}
+.celular-simulator{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0}
+.celular-device{width:min(100%,408px);height:clamp(510px,calc(100dvh - 177px),690px);display:flex;flex-direction:column;padding:9px 9px 0;background:#29222e;border:2px solid #211d26;border-radius:37px;box-shadow:0 15px 35px rgba(45,28,47,.20);overflow:hidden}
+.celular-screen{--ui-font:16px;display:flex;flex-direction:column;flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;border-radius:27px 27px 0 0;background:#f7f7f9;color:#20202a;font-family:var(--unapi-fonte);scrollbar-color:#c2b9c7 transparent;scrollbar-width:thin}
+.celular-screen button,.celular-screen input{font-family:inherit}
+.celular-screen button{cursor:pointer}
+.celular-status{height:41px;min-height:41px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 21px 4px;background:#faf9fd;font-size:13px;font-weight:900;color:#272131;position:sticky;top:0;z-index:5}
+.celular-status button{height:34px;min-width:58px;padding:3px 4px;display:flex;align-items:center;gap:5px;border:0;background:transparent;color:#272131}
+.celular-status svg{width:17px;height:17px;stroke:currentColor}
+.celular-status-icons{display:flex;align-items:center;gap:5px}
+.celular-status-icons .is-off{opacity:.3}
+.celular-status-battery{border:2px solid #302c35;border-radius:3px;width:22px;height:11px;display:inline-flex;align-items:center;padding:2px;position:relative}
+.celular-status-battery:after{content:"";width:2px;height:5px;background:#302c35;position:absolute;right:-5px;border-radius:2px}
+.celular-status-battery i{height:5px;width:75%;background:#302c35;display:block}
+.celular-phone-body{flex:1;display:flex;flex-direction:column}
+.celular-home-view{flex:1;background:linear-gradient(160deg,#eee5f5 0%,#f9f5f8 63%,#fff8e6 100%);padding:26px 18px 18px}
+.celular-home-heading{margin:12px 5px 36px}
+.celular-home-heading small{font-size:14px;color:#4d4053}
+.celular-home-heading h2{font-size:calc(var(--ui-font) * 1.65);line-height:1.17;margin-top:8px;font-weight:800;color:#29202d}
+.celular-home-heading p{font-size:var(--ui-font);margin-top:6px;color:#544d57}
+.celular-app-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 16px;padding:0 8px}
+.celular-app{border:0;background:none;color:#272331;display:flex;flex-direction:column;gap:8px;align-items:center;min-height:90px;padding:5px 0;font-size:var(--ui-font);line-height:1.17;font-weight:700}
+.celular-app-symbol{width:55px;height:55px;display:grid;place-items:center;border-radius:17px;color:#fff;background:#665376;box-shadow:0 2px 7px rgba(38,23,55,.14)}
+.celular-app-symbol svg{height:29px;width:29px;stroke-width:2}
+.celular-app--settings .celular-app-symbol{background:#586071}
+.celular-app--messages .celular-app-symbol{background:#36816a}
+.celular-app--clock .celular-app-symbol{background:#555a9a}
+.celular-app--gallery .celular-app-symbol{background:#ae657a}
+.celular-app--all .celular-app-symbol{background:#6c5279}
+.celular-home-tip{margin:40px 6px 0;padding:13px 15px;border-radius:13px;background:rgba(255,255,255,.81);font-size:var(--ui-font);line-height:1.38;color:#3b3344}
+.celular-section{flex:1;background:#f6f6f9;padding:8px 15px 26px}
+.celular-subhead{display:flex;align-items:center;gap:8px;min-height:61px}
+.celular-subhead h2{font-size:calc(var(--ui-font) * 1.55);line-height:1.15;color:#24222e;font-weight:900}
+.celular-subhead .celular-back{width:46px;height:46px;flex:none;border:0;background:transparent;border-radius:50%;font-size:30px;display:grid;place-items:center;color:#29232d}
+.celular-settings-search{width:100%;padding:14px 15px;min-height:52px;border:1px solid #d3d0d9;border-radius:15px;background:#ecebf1;color:#23202d;font-size:var(--ui-font);margin:8px 0 15px}
+.celular-settings-label{font-size:13px;color:#615968;font-weight:800;text-transform:uppercase;letter-spacing:.055em;margin:5px 6px 10px}
+.celular-settings-list{overflow:hidden;border:1px solid #e4e1e8;border-radius:16px;background:#fff}
+.celular-setting-row{width:100%;min-height:73px;display:flex;align-items:center;text-align:left;gap:13px;padding:11px 14px;border:0;border-bottom:1px solid #eeebf0;background:#fff;color:#25232d}
+.celular-setting-row:last-child{border-bottom:0}
+.celular-setting-row:hover,.celular-setting-row:focus-visible{background:#f5eff8}
+.celular-setting-icon{width:43px;height:43px;border-radius:12px;background:#efeaf4;color:#56466d;display:grid;place-items:center;flex:none}
+.celular-setting-icon svg{width:24px;height:24px}
+.celular-setting-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.celular-setting-text strong{font-size:var(--ui-font);line-height:1.22}
+.celular-setting-text small{font-size:calc(var(--ui-font) * .85);color:#655e6b;line-height:1.2}
+.celular-row-chevron{font-size:23px;color:#625968}
+.celular-setting-card{margin:12px 0 16px;padding:17px 17px 19px;background:#fff;border:1px solid #e4e1e8;border-radius:16px}
+.celular-setting-card h3{font-size:calc(var(--ui-font) * 1.08);font-weight:900;margin-bottom:6px}
+.celular-setting-card>p{font-size:calc(var(--ui-font) * .91);line-height:1.35;color:#5b5562;margin:0 0 14px}
+.celular-setting-line{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.celular-setting-line strong{font-size:var(--ui-font)}
+.celular-setting-line span{font-size:calc(var(--ui-font) * .90)}
+.celular-font-tools{display:flex;align-items:center;gap:12px;justify-content:center}
+.celular-font-tools button{min-width:55px;height:51px;border-radius:12px;border:1px solid #7a657f;background:#f8f3fa;color:#412949;font-size:25px;font-weight:900}
+.celular-font-tools button:disabled{opacity:.4;cursor:not-allowed}
+.celular-font-tools output{min-width:82px;text-align:center;font-size:var(--ui-font);font-weight:900}
+.celular-font-preview{margin-top:16px;padding:14px;border-radius:12px;background:#f4f1f6;color:#272331;font-size:var(--ui-font);line-height:1.36}
+.celular-font-preview small{font-size:13px;display:block;margin-bottom:6px;color:#564f5f}
+.celular-phone-slider{width:100%;height:36px;accent-color:#5b3770;cursor:pointer}
+.celular-control-row{display:flex;gap:15px;align-items:center;justify-content:space-between;padding:15px 14px;background:#fff;border:1px solid #e4e1e8;border-radius:14px;margin:10px 0}
+.celular-control-row strong{display:block;font-size:var(--ui-font)}
+.celular-control-row small{display:block;font-size:calc(var(--ui-font) * .85);color:#696373;margin-top:3px}
+.celular-switch{display:inline-flex;align-items:center;justify-content:center;min-width:78px;min-height:47px;padding:8px 10px;border-radius:100px;border:2px solid #6f6775;background:#e5e2e8;color:#39333e;font-size:14px;font-weight:900}
+.celular-switch[aria-pressed="true"]{color:#fff;background:#54365f;border-color:#54365f}
+.celular-sample-note{font-size:var(--ui-font);line-height:1.4;margin:16px 3px;color:#403a49}
+.celular-simple-app{padding:16px;background:#fff;border-radius:13px;margin-top:15px;line-height:1.45;font-size:var(--ui-font)}
+.celular-simple-app strong{display:block;margin-bottom:8px}
+.celular-empty{color:#524b5b;font-size:var(--ui-font);padding:16px 6px}
+.celular-device-nav{height:62px;flex:none;display:flex;align-items:center;justify-content:space-around;gap:6px;padding:2px 12px 7px;color:#fff}
+.celular-device-nav button{min-width:88px;min-height:50px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0;border:0;background:transparent;color:#fdf9fb;cursor:pointer}
+.celular-device-nav button>span:first-child{font-size:30px;line-height:1}
+.celular-device-nav small{font:700 11px/1.3 var(--unapi-fonte)}
+.celular-home-indicator{width:45px;height:5px;border-radius:8px;background:#fff;margin:14px 0 9px}
+.celular-sim-note{margin-top:10px;color:#57435a;text-align:center;font-size:14px;font-weight:700}
+.celular-shell>.institutional-footer{border:0;border-radius:0;box-shadow:none;padding:12px 24px;background:#fff8dc}
+.celular-shell>.institutional-footer .logos-footer img{max-height:31px}
+.celular-shell>.institutional-footer .footer-note{display:none}
+.celular-sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.celular-page button:focus-visible,.celular-page a:focus-visible,.celular-page input:focus-visible{outline:3px solid #b0870b;outline-offset:3px}
+@media(max-width:900px){
+ .celular-workspace{grid-template-columns:minmax(0,1fr);gap:23px;padding:22px 18px 28px}
+ .celular-guide{max-width:700px;margin:auto}
+ .celular-simulator{align-self:start}
+ .celular-device{height:620px;max-height:none}
+}
+@media(max-width:540px){
+ .celular-workspace{padding:20px 11px 28px}
+ .celular-guide-heading{margin-bottom:16px}
+ .celular-guide h1{font-size:34px}
+ .celular-guide-heading>p{font-size:17px}
+ .celular-lesson,.celular-free{padding:17px 14px}
+ .celular-lesson-footer{align-items:stretch}
+ .celular-lesson-footer button{flex:1}
+ .celular-device{width:min(100%,400px);height:600px;min-height:500px}
+ .celular-mode button{font-size:14px}
+ .celular-device-nav button{min-width:70px}
+}
+@media(prefers-reduced-motion:reduce){.celular-progress-track>span{transition:none}}
+
+/* V2 — Interface imersiva de laboratório, sem rolagem da página. */
+@media (min-width: 901px) {
+  html:has(.celular-page), .celular-page { height:100%; overflow:hidden; }
+  .celular-shell { height:100dvh; min-height:0; overflow:hidden; }
+  .celular-page .topbar { height:68px; min-height:68px; padding-block:5px; flex:none; }
+  .celular-page .brand-mark { height:47px; width:47px; }
+  .celular-page .brand small { font-size:11px; }
+  .celular-page .brand strong { font-size:21px; }
+  .celular-workspace { flex:1 1 auto; height:auto; min-height:0; grid-template-columns:minmax(350px,445px) minmax(360px,1fr); gap:clamp(36px,5vw,90px); padding:13px clamp(24px,6vw,110px); }
+  .celular-guide { align-self:center; max-height:100%; }
+  .celular-simulator { height:100%; min-height:0; }
+  .celular-device { height:min(100%,740px); width:min(435px,calc((100dvh - 94px)*.554)); flex:none; }
+  .celular-guide-heading { margin-bottom:16px; }
+  .celular-guide h1 { font-size:clamp(34px,3vw,42px); margin:7px 0; }
+  .celular-guide-heading>p { font-size:16px; }
+  .celular-lesson { padding:19px 22px; }
+  .celular-lesson h2 { font-size:clamp(27px,2.35vw,32px); margin-bottom:10px; }
+  .celular-progress-track { margin:9px 0 15px; }
+  .celular-guide-foot { padding:7px 0 0; }
+}
+.celular-page .topbar::before,.celular-page .topbar::after{animation:none}
+.celular-page .topbar{border-bottom:1px solid rgba(84,42,88,.15);box-shadow:0 1px 8px rgba(50,28,54,.04)}
+.celular-workspace{background:linear-gradient(125deg,rgba(255,248,220,.95),rgba(255,248,220,.91)),url("../img/background-unapi.svg") center/cover}
+.celular-lesson,.celular-free{background:rgba(255,253,246,.96);border:1px solid rgba(84,42,88,.16);box-shadow:0 8px 30px rgba(53,33,52,.06);border-radius:18px}
+.celular-situation{font-size:14px;letter-spacing:.03em;font-weight:800;text-transform:uppercase;color:#7b617b;margin-bottom:8px}
+.celular-instruction{font-size:18px;line-height:1.35}
+.celular-feedback{min-height:0;margin-top:10px}
+.celular-feedback:empty{display:none}
+.celular-guide-actions{margin-top:16px}
+.celular-secondary,.celular-primary{min-height:46px}
+.celular-guide-foot .celular-reset{font-size:14px;text-decoration:none;color:#59405a}
+.celular-hint{margin-top:10px;padding:9px 12px;font-size:15px}
+
+/* Aparelho — moldura, vidro e barra de navegação Android. */
+.celular-device{position:relative;overflow:visible;padding:7px 7px 0;background:#1d1e24;border:3px solid #121318;border-radius:44px;box-shadow:0 3px 0 #42434c inset,0 20px 45px rgba(25,23,32,.24),0 3px 10px rgba(25,23,32,.13)}
+.celular-device::before,.celular-device::after{content:"";position:absolute;right:-6px;width:4px;background:#474850;border:1px solid #202127;border-radius:0 3px 3px 0;pointer-events:none}
+.celular-device::before{top:135px;height:64px}
+.celular-device::after{top:226px;height:42px}
+.celular-screen{border-radius:35px 35px 0 0;background:#f8f7fb;color:#26242e;scrollbar-width:thin}
+.celular-status{position:sticky;top:0;height:36px;min-height:36px;background:#f8f7fb;padding:2px 19px 0;border-radius:35px 35px 0 0;color:#262431;isolation:isolate}
+.celular-status button{min-width:64px;gap:5px;font-size:13px}
+.celular-status-caret{font-weight:500;color:#61606d}
+.celular-camera-cutout{position:absolute;top:10px;left:calc(50% - 5px);height:10px;width:10px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#17212d 0 2px,#05070b 3px 5px);box-shadow:0 0 0 2px #d4d2d7;pointer-events:none}
+.celular-status-icons{gap:5px}
+.celular-status-icons svg{width:16px;height:16px}
+.celular-signal{width:14px;height:13px;background:linear-gradient(to top,#3c3948 0 100%) bottom left/3px 4px no-repeat,linear-gradient(to top,#3c3948 0 100%) bottom center/3px 8px no-repeat,linear-gradient(to top,#3c3948 0 100%) bottom right/3px 12px no-repeat}
+.celular-status-battery{width:20px}
+.celular-device-nav{height:52px;min-height:52px;padding:3px 19px 8px;background:#f8f7fb;border-radius:0 0 35px 35px;color:#262431}
+.celular-device-nav button{min-width:66px;min-height:44px;gap:0;color:#262431;border-radius:12px}
+.celular-device-nav button:hover{background:#eae7ef}
+.celular-device-nav small,.celular-device-nav button>span:first-child{font-size:initial}
+.android-back-icon{width:11px;height:11px;display:block;border-left:2.5px solid #383240;border-bottom:2.5px solid #383240;transform:rotate(45deg);margin-left:8px}
+.android-home-icon{width:42px;height:5px;border-radius:5px;background:#292432;display:block;margin:0}
+.android-apps-icon{width:17px;height:17px;border:2.5px solid #383240;border-radius:4px;display:block}
+.celular-phone-body{min-height:0;animation:celular-screen-enter .19s ease-out both}
+@keyframes celular-screen-enter{from{opacity:.84;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.celular-page .celular-device button:active .celular-app-symbol{transform:scale(.92)}
+.celular-app-symbol{transition:transform .16s ease,box-shadow .16s ease}
+.celular-app:focus-visible .celular-app-symbol{outline:3px solid #542a58;outline-offset:4px}
+
+/* Launcher Android — conteúdo útil, fundo sóbrio, aplicações com alvos amplos. */
+.celular-home-view{padding:24px 22px 17px;display:flex;flex-direction:column;background:radial-gradient(ellipse at 12% 23%,rgba(238,208,224,.9),transparent 53%),radial-gradient(ellipse at 83% 55%,rgba(185,207,236,.85),transparent 58%),linear-gradient(165deg,#f8e1df,#e0e0f2 62%,#e2d9e7);color:#252432}
+.celular-home-heading{display:flex;flex-direction:column;margin:10px 0 0;gap:6px}
+.celular-home-date{font-size:15px;text-transform:capitalize;font-weight:650;color:#3b3547}
+.celular-home-clock{font-size:clamp(56px,6vw,72px);font-weight:400;line-height:1.05;letter-spacing:-.06em}
+.celular-home-weather{font-size:14px;color:#51445a}
+.celular-home-bottom{margin-top:auto}
+.celular-home-view .celular-app-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px 7px;margin:0 0 20px;padding:0 2px}
+.celular-app{font-size:calc(var(--ui-font) * .88);line-height:1.12;min-height:91px;gap:7px;text-align:center;padding:3px 1px;word-break:normal;color:#292631}
+.celular-app-symbol{width:57px;height:57px;border-radius:18px;box-shadow:0 3px 9px rgba(25,27,39,.16);background:#6a6283}
+.celular-app--settings .celular-app-symbol{background:linear-gradient(145deg,#6f7583,#444d5c)}
+.celular-app--messages .celular-app-symbol{background:linear-gradient(145deg,#3cbb8a,#218867)}
+.celular-app--clock .celular-app-symbol{background:linear-gradient(145deg,#6583d0,#494d92)}
+.celular-app--gallery .celular-app-symbol{background:linear-gradient(145deg,#e0a0b2,#a44b76)}
+.celular-app--apps .celular-app-symbol{background:linear-gradient(145deg,#737486,#404152)}
+.celular-search-widget{height:45px;display:flex;align-items:center;gap:12px;padding:0 15px;width:100%;border:1px solid rgba(255,255,255,.7);border-radius:26px;background:rgba(255,255,255,.75);color:#484052;font-size:14px;font-weight:650;box-shadow:0 2px 8px rgba(54,37,70,.05)}
+.celular-search-widget svg{width:19px;height:19px}
+.celular-search-widget span:nth-child(2){flex:1;text-align:left}
+.celular-search-widget span:last-child{font-size:22px;font-weight:400}
+.celular-app-drawer{padding:26px 3px}
+.celular-app-drawer .celular-app-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:17px 9px}
+.celular-section{padding:12px 18px 24px;background:#f8f7fb}
+.celular-subhead{min-height:64px;margin-bottom:5px}
+.celular-subhead h2{font-size:calc(var(--ui-font) * 1.65);font-weight:800}
+.celular-settings-search{margin:7px 0 19px;background:#ebe8f0;border:0;border-radius:28px;min-height:51px;padding:13px 19px}
+.celular-settings-list{background:transparent;border:0}
+.celular-setting-row{padding:11px 6px;min-height:72px;background:transparent;border-bottom:1px solid #e5e2e9}
+.celular-setting-row:hover{background:#efebf3;border-radius:14px}
+.celular-setting-icon{width:47px;height:47px;border-radius:15px;background:#e7e1ee}
+.celular-setting-card{border:0;box-shadow:0 2px 10px rgba(27,22,36,.04);border-radius:22px;padding:17px}
+.celular-font-preview{background:#f0edf4}
+
+/* Ajustes rápidos com botões de estado — sem ações decorativas. */
+.celular-quick-date{font-size:15px;font-weight:700;text-transform:capitalize;margin:2px 0 24px;color:#64596b}
+.celular-quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.celular-quick-tile{display:grid;grid-template-columns:37px 1fr;grid-template-rows:1fr 1fr;column-gap:9px;text-align:left;align-items:center;padding:11px;border:0;min-height:90px;border-radius:18px;color:#4b3f55;background:#e6e1ec;font-family:inherit;font-size:var(--ui-font);font-weight:800}
+.celular-quick-tile[aria-pressed="true"]{background:#56416c;color:#fff}
+.celular-quick-tile small{grid-column:2;font-size:13px;font-weight:500}
+.celular-quick-icon{grid-row:1/3;width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.3)}
+.celular-quick-icon svg{width:22px;height:22px}
+.celular-quick-brightness{padding:14px 18px;margin:0 0 14px}
+.celular-quick-brightness .celular-setting-line{margin-bottom:10px}
+@media (min-width:901px) and (max-height:710px){
+  .celular-workspace{padding-top:8px;padding-bottom:8px}
+  .celular-guide-heading{margin-bottom:9px}
+  .celular-guide h1{font-size:33px}
+  .celular-mode{margin-bottom:9px}
+  .celular-mode button{min-height:45px}
+  .celular-lesson{padding:15px 20px}
+  .celular-guide-foot{padding:0}
+  .celular-guide-actions{margin-top:9px}
+  .celular-lesson-footer{margin-top:10px;padding-top:10px}
+}
+@media(max-width:900px){
+  .celular-page .topbar{min-height:70px}
+  .celular-workspace{gap:18px;padding:16px 16px 26px}
+  .celular-simulator{padding-bottom:10px}
+  .celular-device{width:min(100%,390px);height:min(660px,calc(100dvh - 100px))}
+  .celular-guide-heading p{font-size:16px}
+}
+@media(max-width:540px){
+  .celular-guide h1{font-size:30px}
+  .celular-guide-heading{margin-bottom:12px}
+  .celular-mode{margin-bottom:10px}
+  .celular-lesson{padding:15px 15px}
+  .celular-lesson h2{font-size:26px}
+  .celular-lesson-footer{margin-top:12px}
+  .celular-simulator{padding:2px 0 22px}
+  .celular-device{height:620px;max-width:360px}
+}
+@media(prefers-reduced-motion:reduce){
+  .celular-phone-body{animation:none}
+  .celular-app-symbol{transition:none}
+}

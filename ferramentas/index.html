@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ferramentas e Materiais - UnAPI UFMS</title>
+    <title>Atividades práticas - UnAPI UFMS</title>
     <link rel="icon" href="../img/favicon-unapi.webp?v=2" type="image/webp" />
     <link rel="stylesheet" href="../css/base.css" />
     <link rel="stylesheet" href="../css/ferramentas.css" />
@@ -14,14 +14,14 @@
         <div class="brand brand-with-mark">
           <img class="brand-mark" src="../img/unapi-marca.webp" alt="UnAPI UFMS" width="1024" height="1024" />
           <div class="brand-copy">
-            <small>Oficinas de informática</small>
-            <strong>Ferramentas e Materiais</strong>
+            <small>Materiais da oficina</small>
+            <strong>Atividades práticas</strong>
           </div>
         </div>
 
         <nav class="topnav" aria-label="Navegação da página">
-          <a class="nav-back" href="../">← Voltar ao início</a>
-          <a href="../videos/">Vídeos</a>
+          <a class="nav-action nav-action--back" href="../">Início</a>
+          <a class="nav-action nav-action--featured nav-action--videos" href="../videos/">Vídeos</a>
         </nav>
       </header>
 
@@ -33,7 +33,7 @@
         <div class="tools-grid">
           <a class="tool-row" href="../teclado/">
             <span class="tool-visual visual-keyboard" aria-hidden="true"><i>A</i><i>B</i><i>C</i><i class="key-space"></i></span>
-            <div><h2>Teclado</h2></div>
+            <div><span class="tool-category">Fundamentos</span><h2>Teclado</h2><p>Pratique no computador ou no celular.</p></div>
             <span class="row-action">Abrir <span aria-hidden="true">→</span></span>
           </a>
 
@@ -41,13 +41,13 @@
             <span class="tool-visual visual-mouse" aria-hidden="true">
               <img class="tool-cover-icon" src="../img/ferramentas/mouse.svg" alt="" />
             </span>
-            <div><h2>Mouse</h2></div>
+            <div><span class="tool-category">Fundamentos</span><h2>Mouse</h2><p>Treine arraste, seleção e gestos de toque.</p></div>
             <span class="row-action">Abrir <span aria-hidden="true">→</span></span>
           </a>
 
           <a class="tool-row" href="../gov/">
             <span class="tool-visual visual-gov" aria-hidden="true"><strong>gov.br</strong><i></i></span>
-            <div><h2>Conta gov.br</h2></div>
+            <div><span class="tool-category">Cidadania digital</span><h2>Conta gov.br</h2><p>Conheça o acesso e a criação de conta.</p></div>
             <span class="row-action">Abrir <span aria-hidden="true">→</span></span>
           </a>
 
@@ -55,7 +55,7 @@
             <span class="tool-visual visual-life" aria-hidden="true">
               <img class="tool-cover-icon" src="../img/ferramentas/prova-de-vida.svg" alt="" />
             </span>
-            <div><h2>Prova de Vida</h2></div>
+            <div><span class="tool-category">Cidadania digital</span><h2>Prova de Vida</h2><p>Veja as etapas sem câmera ou dados reais.</p></div>
             <span class="row-action">Abrir <span aria-hidden="true">→</span></span>
           </a>
 
@@ -63,7 +63,7 @@
             <span class="tool-visual visual-signature" aria-hidden="true">
               <img class="tool-cover-icon" src="../img/ferramentas/assinatura-eletronica.svg" alt="" />
             </span>
-            <div><h2>Assinatura eletrônica</h2></div>
+            <div><span class="tool-category">Cidadania digital</span><h2>Assinatura eletrônica</h2><p>Conheça o processo com um documento fictício.</p></div>
             <span class="row-action">Abrir <span aria-hidden="true">→</span></span>
           </a>
 
@@ -72,7 +72,7 @@
               <img class="tool-cover-icon" src="../img/ferramentas/antigolpe-monitor.svg" alt="" />
               <img class="tool-cover-icon" src="../img/ferramentas/antigolpe-celular.svg" alt="" />
             </span>
-            <div><h2>Desafio Antigolpe</h2></div>
+            <div><span class="tool-category">Segurança</span><h2>Desafio Antigolpe</h2><p>Aprenda a parar, conferir e decidir.</p></div>
             <span class="row-action">Abrir <span aria-hidden="true">→</span></span>
           </a>
 
@@ -81,7 +81,23 @@
               <img class="tool-cover-icon" src="../img/ferramentas/mobilidade-transporte.svg" alt="" />
               <img class="tool-cover-icon" src="../img/ferramentas/mobilidade-carro.svg" alt="" />
             </span>
-            <div><h2>Mobilidade</h2></div>
+            <div><span class="tool-category">Vida prática</span><h2>Mobilidade</h2><p>Pratique corridas e rotas pelo celular.</p></div>
+            <span class="row-action">Abrir <span aria-hidden="true">→</span></span>
+          </a>
+
+          <a class="tool-row" href="../pix/">
+            <span class="tool-visual visual-pix" aria-hidden="true">
+              <img class="tool-cover-icon" src="../img/ferramentas/pix.svg" alt="" />
+            </span>
+            <div><span class="tool-category">Vida prática</span><h2>Banco UnAPI</h2><p>Pratique pagamentos, cartões e Pix, sem dinheiro real.</p></div>
+            <span class="row-action">Abrir <span aria-hidden="true">→</span></span>
+          </a>
+
+          <a class="tool-row" href="../celular/">
+            <span class="tool-visual visual-celular" aria-hidden="true">
+              <img class="tool-cover-icon" src="../img/ferramentas/celular.svg" alt="" />
+            </span>
+            <div><span class="tool-category">Vida prática</span><h2>Celular na Prática</h2><p>Aprenda a usar configurações e funções essenciais do celular.</p></div>
             <span class="row-action">Abrir <span aria-hidden="true">→</span></span>
           </a>
         </div>
@@ -89,12 +105,12 @@
 
       <footer class="institutional-footer" aria-label="Logos institucionais">
         <div class="logos-footer">
-          <img src="../img/ufms.webp" alt="UFMS" />
-          <img class="logo-unapi" src="../img/unapi.webp" alt="UnAPI" />
-          <img class="logo-gov" src="../img/gov-federal.webp" alt="Governo Federal" />
-          <img src="../img/facom.webp" alt="FACOM" />
-          <img src="../img/pet-sistemas.webp" alt="PET Sistemas" />
-          <img class="logo-pet-computacao" src="../img/pet-computacao.webp" alt="PET Computação" />
+          <img src="../img/ufms.webp" alt="UFMS" width="415" height="600" loading="lazy" decoding="async" />
+          <img class="logo-unapi" src="../img/unapi.webp" alt="UnAPI" width="545" height="458" loading="lazy" decoding="async" />
+          <img class="logo-gov" src="../img/gov-federal.webp" alt="Governo Federal" width="600" height="289" loading="lazy" decoding="async" />
+          <img src="../img/facom.webp" alt="FACOM" width="600" height="573" loading="lazy" decoding="async" />
+          <img src="../img/pet-sistemas.webp" alt="PET Sistemas" width="600" height="283" loading="lazy" decoding="async" />
+          <img class="logo-pet-computacao" src="../img/pet-computacao.webp" alt="PET Computação" width="600" height="400" loading="lazy" decoding="async" />
         </div>
         <div class="footer-note">Portal das Oficinas de Informática • UNAPI UFMS</div>
       </footer>

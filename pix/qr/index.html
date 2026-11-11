@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Banco UnAPI: experiência bancária interativa das oficinas da UnAPI UFMS." />
+    <title>Banco UnAPI · Dia a dia</title>
+    <link rel="icon" href="../../img/favicon-unapi.webp?v=2" type="image/webp" />
+    <link rel="stylesheet" href="../../css/base.css" />
+    <link rel="stylesheet" href="../../css/pix.css" />
+    <script src="../../js/vendor/qrcode-generator.js" defer></script>
+    <script src="../../js/pix-account.js" defer></script>
+    <script src="../../js/pix-qr.js" defer></script>
+    <script src="../../js/pix-daily.js" defer></script>
+    <script src="../../js/pix.js" defer></script>
+  </head>
+  <body class="pix-experience-page has-page-overlay">
+    <a class="pix-skip-link" href="#pix-app">Ir para o banco</a>
+    <main class="pix-experience-shell">
+      <aside class="pix-workshop-tools" aria-label="Contexto e controles da oficina">
+        <button class="pix-tools-toggle" type="button" aria-expanded="false" aria-controls="pix-experience-tools">
+          <span>Oficina UnAPI <span aria-hidden="true">·</span> Treinamento</span><span aria-hidden="true">⌄</span>
+        </button>
+        <div id="pix-experience-tools" class="pix-toolbar">
+          <section class="pix-panel pix-panel-intro" aria-labelledby="pix-panel-intro-title">
+            <div class="pix-institutional-signature"><img src="../../img/unapi-marca.webp" alt="UnAPI" /><img src="../../img/ufms.webp" alt="UFMS" /></div>
+            <span class="pix-kicker">Oficinas de informática</span>
+            <h2 id="pix-panel-intro-title">Banco UnAPI</h2>
+            <p class="pix-side-concept">Treine antes de fazer de verdade.</p>
+          </section>
+          <section class="pix-panel pix-panel-controls" aria-label="Orientações e controles da oficina">
+            <div class="pix-context-warning"><strong>Ambiente de treinamento</strong><p>Nenhum dinheiro será movimentado. Use apenas os dados fictícios da oficina. As informações desaparecem ao atualizar a página.</p></div>
+            <div id="pix-context-task" hidden></div>
+            <p id="pix-context-feedback" role="status" hidden></p>
+            <p id="pix-simulation-date" class="pix-simulation-date"></p>
+            <nav class="pix-side-actions" aria-label="Controles da oficina">
+              <a class="pix-tool-control" href="../../ferramentas/">← Voltar para Ferramentas</a>
+              <button id="pix-reset" class="pix-tool-control" type="button">↻ Recomeçar</button>
+              <button id="pix-fullscreen" class="pix-tool-control" type="button" aria-pressed="false"><span data-fullscreen-label>Abrir em tela cheia</span></button>
+              <button id="pix-workshop-mode" class="pix-tool-control" type="button">QR Codes da dinâmica</button>
+              <button id="pix-credit-receipt" class="pix-tool-control" type="button" hidden>Registrar recebimento na conta</button>
+              <button id="pix-advance-date" class="pix-tool-control" type="button" hidden>Simular data agendada</button>
+            </nav>
+            <details class="pix-side-guide"><summary>Cuidados antes de pagar</summary><p>Pare → Confira → Decida.</p><ol><li>Confira o destinatário.</li><li>Confira CPF/CNPJ quando disponível.</li><li>Confira o valor.</li><li>Só então confirme.</li></ol><a href="../../seguranca-digital/">Revisar segurança digital</a></details>
+          </section>
+        </div>
+      </aside>
+      <section id="pix-device" class="pix-device" aria-label="Banco UnAPI">
+        <div class="pix-device-screen"><div id="pix-app" class="pix-app" role="region" aria-label="Aplicativo Banco UnAPI" tabindex="-1"></div></div>
+      </section>
+      <p id="pix-announcement" class="pix-sr-only" aria-live="polite" aria-atomic="true"></p>
+      <noscript>Ative o JavaScript para abrir o Banco UnAPI.</noscript>
+    </main>
+  </body>
+</html>
