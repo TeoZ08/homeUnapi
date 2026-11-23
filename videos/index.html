@@ -27,19 +27,27 @@
           <header class="videos-heading" id="videos-title">
             <div class="videos-intro">
               <span class="videos-eyebrow">14 vídeos curtos para aprender</span>
-              <h1>Aprenda e revise no seu ritmo</h1>
-              <p class="videos-description">Escolha um assunto, toque no vídeo e assista no YouTube quantas vezes quiser. Os materiais são gratuitos.</p>
+              <h1>Aprenda com vídeos curtos</h1>
+              <p class="videos-description">Escolha um assunto e assista aos vídeos no seu ritmo.</p>
             </div>
-            <a class="videos-playlist" href="https://www.youtube.com/playlist?list=PLF6leiWlocOIIxOHDYEX3gH1piXiVQnA5" target="_blank" rel="noopener noreferrer">Ver a playlist completa <span aria-hidden="true">↗</span></a>
           </header>
 
-          <nav class="videos-jump" aria-label="Escolher um tema">
-            <span class="videos-jump-label">Ir para um tema:</span>
-            <a href="#informatica-basica">Informática básica</a>
-            <a href="#gov-br">Serviços digitais e Gov.br</a>
-            <a href="#celular-mobilidade">Celular e mobilidade</a>
-            <a href="#banco-pix">Banco, Pix e segurança</a>
+          <nav class="videos-jump" aria-label="Escolher assunto dos vídeos">
+            <span class="videos-jump-label">Escolha o assunto:</span>
+            <a href="#informatica-basica" data-video-topic="informatica-basica">
+              <span class="topic-label">Computador</span><small>2 vídeos</small>
+            </a>
+            <a href="#gov-br" data-video-topic="gov-br">
+              <span class="topic-label">Gov.br</span><small>4 vídeos</small>
+            </a>
+            <a href="#celular-mobilidade" data-video-topic="celular-mobilidade">
+              <span class="topic-label">Celular e transporte</span><small>3 vídeos</small>
+            </a>
+            <a href="#banco-pix" data-video-topic="banco-pix">
+              <span class="topic-label">Banco e Pix</span><small>5 vídeos</small>
+            </a>
           </nav>
+          <p class="videos-selection-status" role="status" aria-live="polite"></p>
 
       <section class="video-group" id="informatica-basica" aria-labelledby="informatica-basica-titulo">
         <header class="video-group-header">
@@ -247,6 +255,7 @@
         </div>
       </section>
 
+            <a class="videos-playlist" href="https://www.youtube.com/playlist?list=PLF6leiWlocOIIxOHDYEX3gH1piXiVQnA5" target="_blank" rel="noopener noreferrer">Ver a playlist completa <span aria-hidden="true">↗</span></a>
           <p class="videos-help">Dica: ao terminar um vídeo, use o botão <strong>Voltar</strong> do navegador para retornar a esta página.</p>
         </div>
       </div>
@@ -263,6 +272,7 @@
         <div class="footer-note">Portal das Oficinas de Informática • UnAPI UFMS</div>
       </footer>
     </main>
+    <script src="../js/videos-topics.js" defer></script>
     <script src="../js/portal-motion.js" defer></script>
   </body>
 </html>
